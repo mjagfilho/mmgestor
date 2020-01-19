@@ -1,0 +1,9 @@
+{
+  "mmGestorApp": {
+    "Sexo": {
+      "null": "",
+      "MACHO": "MACHO",
+      "FEMEA": "FEMEA"
+    }
+  }
+}

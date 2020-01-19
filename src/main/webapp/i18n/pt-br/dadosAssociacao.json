@@ -1,0 +1,30 @@
+{
+  "mmGestorApp": {
+    "dadosAssociacao": {
+      "home": {
+        "title": "Dados Associacaos",
+        "createLabel": "Criar novo Dados Associacao",
+        "createOrEditLabel": "Criar ou editar Dados Associacao",
+        "search": "Pesquisar por Dados Associacao",
+        "notFound": "Nenhum Dados Associacao encontrado"
+      },
+      "created": "Um novo Dados Associacao foi criado com o identificador {{ param }}",
+      "updated": "Um Dados Associacao foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Dados Associacao foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Dados Associacao {{ id }}?"
+      },
+      "detail": {
+        "title": "Dados Associacao"
+      },
+      "criador": "Criador",
+      "proprietario": "Proprietario",
+      "livro": "Livro",
+      "registro": "Registro",
+      "exameDNA": "Exame DNA",
+      "chip": "Chip",
+      "ehBloqueado": "Eh Bloqueado",
+      "animal": "Animal"
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "mmGestorApp": {
+    "animal": {
+      "home": {
+        "title": "Animals",
+        "createLabel": "Criar novo Animal",
+        "createOrEditLabel": "Criar ou editar Animal",
+        "search": "Pesquisar por Animal",
+        "notFound": "Nenhum Animal encontrado"
+      },
+      "created": "Um novo Animal foi criado com o identificador {{ param }}",
+      "updated": "Um Animal foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Animal foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Animal {{ id }}?"
+      },
+      "detail": {
+        "title": "Animal"
+      },
+      "nome": "Nome",
+      "dtNascimento": "Dt Nascimento",
+      "sexo": "Sexo",
+      "pelagem": "Pelagem",
+      "ehVivo": "Eh Vivo",
+      "dadosAssociacao": "Dados Associacao"
+    }
+  }
+}

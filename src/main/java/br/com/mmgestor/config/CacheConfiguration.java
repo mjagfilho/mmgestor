@@ -42,6 +42,15 @@ public class CacheConfiguration {
             createCache(cm, br.com.mmgestor.domain.User.class.getName());
             createCache(cm, br.com.mmgestor.domain.Authority.class.getName());
             createCache(cm, br.com.mmgestor.domain.User.class.getName() + ".authorities");
+            createCache(cm, br.com.mmgestor.domain.Usuario.class.getName());
+            createCache(cm, br.com.mmgestor.domain.Endereco.class.getName());
+            createCache(cm, br.com.mmgestor.domain.Responsavel.class.getName());
+            createCache(cm, br.com.mmgestor.domain.Haras.class.getName());
+            createCache(cm, br.com.mmgestor.domain.TipoLocal.class.getName());
+            createCache(cm, br.com.mmgestor.domain.Local.class.getName());
+            createCache(cm, br.com.mmgestor.domain.ClienteFornecedor.class.getName());
+            createCache(cm, br.com.mmgestor.domain.Animal.class.getName());
+            createCache(cm, br.com.mmgestor.domain.DadosAssociacao.class.getName());
             // jhipster-needle-ehcache-add-entry
         };
     }

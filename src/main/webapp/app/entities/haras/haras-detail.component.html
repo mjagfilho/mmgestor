@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="haras">
+            <h2><span jhiTranslate="mmGestorApp.haras.detail.title">Haras</span> {{haras.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mmGestorApp.haras.nome">Nome</span></dt>
+                <dd>
+                    <span>{{haras.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmGestorApp.haras.localidade">Localidade</span></dt>
+                <dd>
+                    <span>{{haras.localidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmGestorApp.haras.uf">Uf</span></dt>
+                <dd>
+                    <span>{{haras.uf}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmGestorApp.haras.responsavel">Responsavel</span></dt>
+                <dd>
+                    <div *ngIf="haras.responsavel">
+                        <a [routerLink]="['/responsavel', haras.responsavel?.id, 'view']">{{haras.responsavel?.id}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/haras', haras.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

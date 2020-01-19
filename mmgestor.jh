@@ -1,0 +1,104 @@
+entity Usuario {
+	email String required unique,
+	senha String required
+}
+
+entity Endereco {
+	cep Integer required,
+	logradouro String required,
+  	complemento String,
+  	bairro String required,
+  	localidade String required,
+  	uf String required
+}
+
+entity Responsavel {
+	cpf Long required unique,
+	nomeCompleto String required,
+    dtNascimento Instant
+}
+
+relationship OneToOne {
+	Responsavel{endereco required} to Endereco
+}
+
+relationship OneToOne {
+	Responsavel{usuario required} to Usuario
+}
+
+entity Haras {
+	nome String required,
+    localidade String required,
+    uf String required
+}
+
+relationship ManyToOne {
+	Haras{responsavel required} to Responsavel
+}
+
+entity TipoLocal {
+	nome String required unique,
+    descricao String
+}
+
+entity Local {
+	nome String required,
+    area BigDecimal required,
+    ehContigua Boolean required
+}
+
+relationship OneToOne {
+	Local{tipo required} to TipoLocal,
+    Local{endereco required} to Endereco
+}
+
+relationship ManyToOne {
+	Local{pai} to Local
+}
+
+entity ClienteFornecedor {
+	nome String required,
+    dtNascimento Instant,
+    cpf Long required,
+    nomeHaras String required,
+    localidadeHaras String required,
+    ufHaras String required
+}
+
+relationship OneToOne {
+	ClienteFornecedor{endereco required} to Endereco
+}
+
+enum Sexo {
+    MACHO, FEMEA
+}
+
+enum Pelagem {
+	BRANCA, ALAZA, CASTANHA, TORDILHA, AMARILHA, BAIA, PAMPA, ROSILHA, PRETA, LOBUNA
+}
+
+entity Animal {
+	nome String required unique,
+    dtNascimento Instant required,
+    sexo Sexo required,
+	pelagem Pelagem required,
+    ehVivo Boolean required
+}
+
+entity DadosAssociacao {
+	criador String,
+    proprietario String,
+    livro String,
+    registro String unique,
+    exameDNA String,
+    chip String unique,
+    ehBloqueado Boolean
+}
+
+relationship OneToOne {
+	Animal{dadosAssociacao} to DadosAssociacao{animal}
+}
+
+paginate * with pagination
+
+service all with serviceImpl

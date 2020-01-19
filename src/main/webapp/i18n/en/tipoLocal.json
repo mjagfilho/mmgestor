@@ -1,0 +1,24 @@
+{
+  "mmGestorApp": {
+    "tipoLocal": {
+      "home": {
+        "title": "Tipo Locals",
+        "createLabel": "Create a new Tipo Local",
+        "createOrEditLabel": "Create or edit a Tipo Local",
+        "search": "Search for Tipo Local",
+        "notFound": "No Tipo Locals found"
+      },
+      "created": "A new Tipo Local is created with identifier {{ param }}",
+      "updated": "A Tipo Local is updated with identifier {{ param }}",
+      "deleted": "A Tipo Local is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Tipo Local {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Local"
+      },
+      "nome": "Nome",
+      "descricao": "Descricao"
+    }
+  }
+}

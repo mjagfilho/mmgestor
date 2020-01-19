@@ -14,6 +14,20 @@
     <property name="uuidType" value="uuid" dbms="h2, postgresql"/>
 
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192831_added_entity_Usuario.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192832_added_entity_Endereco.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192833_added_entity_Responsavel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192834_added_entity_Haras.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192835_added_entity_TipoLocal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192836_added_entity_Local.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192837_added_entity_ClienteFornecedor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192838_added_entity_Animal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192839_added_entity_DadosAssociacao.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
+    <include file="config/liquibase/changelog/20200119192833_added_entity_constraints_Responsavel.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192834_added_entity_constraints_Haras.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192836_added_entity_constraints_Local.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192837_added_entity_constraints_ClienteFornecedor.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200119192838_added_entity_constraints_Animal.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

@@ -7,6 +7,15 @@
       "jhipster-needle-menu-add-element": "JHipster will add additional menu entries here (do not translate!)",
       "entities": {
         "main": "Entities",
+        "usuario": "Usuario",
+        "endereco": "Endereco",
+        "responsavel": "Responsavel",
+        "haras": "Haras",
+        "tipoLocal": "Tipo Local",
+        "local": "Local",
+        "clienteFornecedor": "Cliente Fornecedor",
+        "animal": "Animal",
+        "dadosAssociacao": "Dados Associacao",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

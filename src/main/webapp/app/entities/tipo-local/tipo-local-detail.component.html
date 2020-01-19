@@ -1,0 +1,31 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="tipoLocal">
+            <h2><span jhiTranslate="mmGestorApp.tipoLocal.detail.title">Tipo Local</span> {{tipoLocal.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mmGestorApp.tipoLocal.nome">Nome</span></dt>
+                <dd>
+                    <span>{{tipoLocal.nome}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmGestorApp.tipoLocal.descricao">Descricao</span></dt>
+                <dd>
+                    <span>{{tipoLocal.descricao}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/tipo-local', tipoLocal.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>
