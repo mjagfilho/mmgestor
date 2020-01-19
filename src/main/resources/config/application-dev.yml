@@ -53,9 +53,9 @@ spring:
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
   datasource:
     type: com.zaxxer.hikari.HikariDataSource
-    url: jdbc:postgresql://localhost:5432/MMGestor
-    username: MMGestor
-    password:
+    url: jdbc:postgresql://localhost:5432/mmgestor
+    username: mmgestor
+    password: MmG3st0r
     hikari:
       poolName: Hikari
       auto-commit: false
