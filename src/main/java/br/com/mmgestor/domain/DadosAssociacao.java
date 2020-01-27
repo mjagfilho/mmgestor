@@ -1,10 +1,17 @@
 package br.com.mmgestor.domain;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import javax.validation.constraints.*;
 
 import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
+import javax.persistence.SequenceGenerator;
+import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 /**
  * A DadosAssociacao.
@@ -29,14 +36,14 @@ public class DadosAssociacao implements Serializable {
     @Column(name = "livro")
     private String livro;
 
-    
+
     @Column(name = "registro", unique = true)
     private String registro;
 
     @Column(name = "exame_dna")
     private String exameDNA;
 
-    
+
     @Column(name = "chip", unique = true)
     private String chip;
 

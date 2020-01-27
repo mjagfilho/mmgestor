@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the Local entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface LocalRepository extends JpaRepository<Local, Long> {
 

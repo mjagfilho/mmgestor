@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the TipoLocal entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface TipoLocalRepository extends JpaRepository<TipoLocal, Long> {
 

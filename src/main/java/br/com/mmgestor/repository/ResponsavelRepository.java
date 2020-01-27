@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the Responsavel entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface ResponsavelRepository extends JpaRepository<Responsavel, Long> {
 
