@@ -1,72 +1,44 @@
-entity Usuario {
-	email String required unique,
-	senha String required
-}
+entity User(jhi_user)
 
 entity Endereco {
-	cep Integer required,
-	logradouro String required,
-  	complemento String,
-  	bairro String required,
-  	localidade String required,
-  	uf String required
+	cep String minlength(10) maxlength(10) pattern(/[0-9]{2}.[0-9]{3}-[0-9]{3}/) required
+	logradouro String required
+  	complemento String
+  	bairro String required
+  	localidade String required
+  	uf String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
 }
 
 entity Responsavel {
-	cpf Long required unique,
-	nomeCompleto String required,
+	cpf String minlength(14) maxlength(14) pattern(/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/) required unique
+	nomeCompleto String required
     dtNascimento Instant
 }
 
-relationship OneToOne {
-	Responsavel{endereco required} to Endereco
-}
-
-relationship OneToOne {
-	Responsavel{usuario required} to Usuario
-}
-
 entity Haras {
-	nome String required,
-    localidade String required,
-    uf String required
-}
-
-relationship ManyToOne {
-	Haras{responsavel required} to Responsavel
+	nome String required
+    localidade String required
+    uf String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
 }
 
 entity TipoLocal {
-	nome String required unique,
+	nome String required unique
     descricao String
 }
 
 entity Local {
-	nome String required,
-    area BigDecimal required,
+	nome String required
+    area BigDecimal required
     ehContigua Boolean required
 }
 
-relationship OneToOne {
-	Local{tipo required} to TipoLocal,
-    Local{endereco required} to Endereco
-}
-
-relationship ManyToOne {
-	Local{pai} to Local
-}
-
 entity ClienteFornecedor {
-	nome String required,
-    dtNascimento Instant,
-    cpf Long required,
-    nomeHaras String required,
-    localidadeHaras String required,
-    ufHaras String required
-}
-
-relationship OneToOne {
-	ClienteFornecedor{endereco required} to Endereco
+	nome String required
+    dtNascimento Instant
+    cpf String minlength(14) maxlength(14) pattern(/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/) required unique
+    nomeHaras String required
+    localidadeHaras String required
+    ufHaras String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
 }
 
 enum Sexo {
@@ -78,27 +50,37 @@ enum Pelagem {
 }
 
 entity Animal {
-	nome String required unique,
-    dtNascimento Instant required,
-    sexo Sexo required,
-	pelagem Pelagem required,
+	nome String required unique
+    dtNascimento Instant required
+    sexo Sexo required
+	pelagem Pelagem required
     ehVivo Boolean required
 }
 
 entity DadosAssociacao {
-	criador String,
-    proprietario String,
-    livro String,
-    registro String unique,
-    exameDNA String,
-    chip String unique,
+	criador String
+    proprietario String
+    livro String
+    registro String unique
+    exameDNA String
+    chip String unique
     ehBloqueado Boolean
 }
 
 relationship OneToOne {
-	Animal{dadosAssociacao} to DadosAssociacao{animal}
+	Responsavel{endereco required} to Endereco,
+    Responsavel{usuario required} to User,
+    Local{tipo required} to TipoLocal,
+    Local{endereco required} to Endereco,
+    ClienteFornecedor{endereco required} to Endereco,
+    Animal{dadosAssociacao} to DadosAssociacao{animal}
+}
+
+relationship ManyToOne {
+	Haras{responsavel required} to Responsavel,
+    Local{pai} to Local
 }
 
 paginate * with pagination
 
-service all with serviceImpl
+service all with serviceClass except User
