@@ -1,0 +1,60 @@
+{
+    "name": "Responsavel",
+    "fields": [
+        {
+            "fieldName": "cpf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "pattern",
+                "required",
+                "unique"
+            ],
+            "fieldValidateRulesMinlength": 14,
+            "fieldValidateRulesMaxlength": 14,
+            "fieldValidateRulesPattern": "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+        },
+        {
+            "fieldName": "nomeCompleto",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dtNascimento",
+            "fieldType": "Instant"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "endereco",
+            "otherEntityRelationshipName": "responsavel",
+            "relationshipValidateRules": "required",
+            "relationshipName": "endereco",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "user",
+            "otherEntityRelationshipName": "responsavel",
+            "relationshipValidateRules": "required",
+            "relationshipName": "usuario",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200127010043",
+    "entityTableName": "responsavel",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

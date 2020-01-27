@@ -1,0 +1,78 @@
+{
+    "name": "ClienteFornecedor",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "dtNascimento",
+            "fieldType": "Instant"
+        },
+        {
+            "fieldName": "cpf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "pattern",
+                "required",
+                "unique"
+            ],
+            "fieldValidateRulesMinlength": 14,
+            "fieldValidateRulesMaxlength": 14,
+            "fieldValidateRulesPattern": "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}"
+        },
+        {
+            "fieldName": "nomeHaras",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "localidadeHaras",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ufHaras",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "pattern",
+                "required"
+            ],
+            "fieldValidateRulesMinlength": 2,
+            "fieldValidateRulesMaxlength": 2,
+            "fieldValidateRulesPattern": "[A-Z]{2}"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "endereco",
+            "otherEntityRelationshipName": "clienteFornecedor",
+            "relationshipValidateRules": "required",
+            "relationshipName": "endereco",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200127010047",
+    "entityTableName": "cliente_fornecedor",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
