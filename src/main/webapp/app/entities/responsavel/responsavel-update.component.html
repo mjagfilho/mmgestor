@@ -12,7 +12,7 @@
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.responsavel.cpf" for="field_cpf">Cpf</label>
                     <input type="text" class="form-control" name="cpf" id="field_cpf"
-                           formControlName="cpf"/>
+                        formControlName="cpf" placeholder="999.999.999-99" [textMask]="{mask: cpfMask}" />
                     <div *ngIf="editForm.get('cpf')!.invalid && (editForm.get('cpf')!.dirty || editForm.get('cpf')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('cpf')?.errors?.required" jhiTranslate="entity.validation.required">

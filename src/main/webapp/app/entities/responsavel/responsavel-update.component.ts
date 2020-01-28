@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { CPF_MASK } from 'app/shared/constants/input.constants';
 
 import { IResponsavel, Responsavel } from 'app/shared/model/responsavel.model';
 import { ResponsavelService } from './responsavel.service';
@@ -22,6 +23,8 @@ type SelectableEntity = IEndereco | IUser;
   templateUrl: './responsavel-update.component.html'
 })
 export class ResponsavelUpdateComponent implements OnInit {
+  cpfMask = CPF_MASK;
+
   isSaving = false;
 
   enderecos: IEndereco[] = [];
