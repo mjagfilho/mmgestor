@@ -4,6 +4,7 @@ import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
 
 import { LoginService } from 'app/core/login/login.service';
+import { CPF_MASK } from 'app/shared/constants/input.constants';
 
 @Component({
   selector: 'jhi-login-modal',
@@ -14,6 +15,7 @@ export class LoginModalComponent implements AfterViewInit {
   username?: ElementRef;
 
   authenticationError = false;
+  cpfMask = CPF_MASK;
 
   loginForm = this.fb.group({
     username: [''],

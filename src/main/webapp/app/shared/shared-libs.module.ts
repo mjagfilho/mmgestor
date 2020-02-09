@@ -7,6 +7,8 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { TextMaskModule } from 'angular2-text-mask';
+
 @NgModule({
   exports: [
     FormsModule,
@@ -16,7 +18,8 @@ import { TranslateModule } from '@ngx-translate/core';
     InfiniteScrollModule,
     FontAwesomeModule,
     ReactiveFormsModule,
-    TranslateModule
+    TranslateModule,
+    TextMaskModule
   ]
 })
 export class MmgestorSharedLibsModule {}

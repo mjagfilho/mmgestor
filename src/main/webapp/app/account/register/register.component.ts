@@ -6,6 +6,7 @@ import { JhiLanguageService } from 'ng-jhipster';
 import { EMAIL_ALREADY_USED_TYPE, LOGIN_ALREADY_USED_TYPE } from 'app/shared/constants/error.constants';
 import { LoginModalService } from 'app/core/login/login-modal.service';
 import { RegisterService } from './register.service';
+import { CPF_MASK } from 'app/shared/constants/input.constants';
 
 @Component({
   selector: 'jhi-register',
@@ -21,8 +22,13 @@ export class RegisterComponent implements AfterViewInit {
   errorUserExists = false;
   success = false;
 
+  cpfMask = CPF_MASK;
+
   registerForm = this.fb.group({
-    login: ['', [Validators.required, Validators.minLength(1), Validators.maxLength(50), Validators.pattern('^[_.@A-Za-z0-9-]*$')]],
+    login: [
+      '',
+      [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$')]
+    ],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
     confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]

@@ -14,7 +14,7 @@
     "detail": {
       "title": "Usuário"
     },
-    "login": "Login",
+    "login": "CPF",
     "firstName": "Nome",
     "lastName": "Sobrenome",
     "email": "E-mail",
