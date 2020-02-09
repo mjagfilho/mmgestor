@@ -1,24 +1,23 @@
 entity User(jhi_user)
 
 entity Endereco {
-	cep String minlength(10) maxlength(10) pattern(/[0-9]{2}.[0-9]{3}-[0-9]{3}/) required
+	cep String minlength(10) maxlength(10) required pattern(/[0-9]{2}.[0-9]{3}-[0-9]{3}/)
 	logradouro String required
   	complemento String
   	bairro String required
   	localidade String required
-  	uf String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
+  	uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
-entity Responsavel {
-	cpf String minlength(14) maxlength(14) pattern(/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/) required unique
+entity Associado {
 	nomeCompleto String required
-    dtNascimento Instant
+    dtNascimento LocalDate
 }
 
 entity Haras {
 	nome String required
     localidade String required
-    uf String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
+    uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
 entity TipoLocal {
@@ -34,11 +33,11 @@ entity Local {
 
 entity ClienteFornecedor {
 	nome String required
-    dtNascimento Instant
-    cpf String minlength(14) maxlength(14) pattern(/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/) required unique
+    dtNascimento LocalDate
+    cpf String minlength(14) maxlength(14) required unique pattern(/[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}/)
     nomeHaras String required
     localidadeHaras String required
-    ufHaras String minlength(2) maxlength(2) pattern(/[A-Z]{2}/) required
+    ufHaras String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
 enum Sexo {
@@ -51,7 +50,7 @@ enum Pelagem {
 
 entity Animal {
 	nome String required unique
-    dtNascimento Instant required
+    dtNascimento LocalDate required
     sexo Sexo required
 	pelagem Pelagem required
     ehVivo Boolean required
@@ -68,8 +67,8 @@ entity DadosAssociacao {
 }
 
 relationship OneToOne {
-	Responsavel{endereco required} to Endereco,
-    Responsavel{usuario required} to User,
+	Associado{endereco required} to Endereco,
+    Associado{usuario required} to User,
     Local{tipo required} to TipoLocal,
     Local{endereco required} to Endereco,
     ClienteFornecedor{endereco required} to Endereco,
@@ -77,7 +76,7 @@ relationship OneToOne {
 }
 
 relationship ManyToOne {
-	Haras{responsavel required} to Responsavel,
+	Haras{responsavel required} to Associado,
     Local{pai} to Local
 }
 
