@@ -28,6 +28,13 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
+### Troubleshooting
+
+https://stackoverflow.com/questions/41019034/check-sum-error-in-jhipster-when-editing-an-existing-entity-generated-using-the
+
+./mvnw liquibase:clearCheckSums
+UPDATE databasechangelog SET md5sum = null
+
 ### PWA Support
 
 JHipster ships with PWA (Progressive Web App) support, and it's turned off by default. One of the main components of a PWA is a service worker.

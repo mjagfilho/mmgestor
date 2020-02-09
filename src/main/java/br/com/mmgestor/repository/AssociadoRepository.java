@@ -1,15 +1,15 @@
 package br.com.mmgestor.repository;
 
-import br.com.mmgestor.domain.Endereco;
+import br.com.mmgestor.domain.Associado;
 import org.springframework.data.jpa.repository.*;
 import org.springframework.stereotype.Repository;
 
 
 /**
- * Spring Data  repository for the Endereco entity.
+ * Spring Data  repository for the Associado entity.
  */
 @SuppressWarnings("unused")
 @Repository
-public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
+public interface AssociadoRepository extends JpaRepository<Associado, Long> {
 
 }

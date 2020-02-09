@@ -1,19 +1,13 @@
-import { IResponsavel } from 'app/shared/model/responsavel.model';
+import { IAssociado } from 'app/shared/model/associado.model';
 
 export interface IHaras {
   id?: number;
   nome?: string;
   localidade?: string;
   uf?: string;
-  responsavel?: IResponsavel;
+  responsavel?: IAssociado;
 }
 
 export class Haras implements IHaras {
-  constructor(
-    public id?: number,
-    public nome?: string,
-    public localidade?: string,
-    public uf?: string,
-    public responsavel?: IResponsavel
-  ) {}
+  constructor(public id?: number, public nome?: string, public localidade?: string, public uf?: string, public responsavel?: IAssociado) {}
 }

@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the Haras entity.
  */
+@SuppressWarnings("unused")
 @Repository
 public interface HarasRepository extends JpaRepository<Haras, Long> {
 

@@ -12,7 +12,7 @@
                                  baseTableName="haras"
                                  constraintName="fk_haras_responsavel_id"
                                  referencedColumnNames="id"
-                                 referencedTableName="responsavel"/>
+                                 referencedTableName="associado"/>
 
     </changeSet>
 </databaseChangeLog>

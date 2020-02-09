@@ -52,7 +52,7 @@ export class AnimalService {
 
   protected convertDateFromClient(animal: IAnimal): IAnimal {
     const copy: IAnimal = Object.assign({}, animal, {
-      dtNascimento: animal.dtNascimento && animal.dtNascimento.isValid() ? animal.dtNascimento.toJSON() : undefined
+      dtNascimento: animal.dtNascimento && animal.dtNascimento.isValid() ? animal.dtNascimento.format(DATE_FORMAT) : undefined
     });
     return copy;
   }

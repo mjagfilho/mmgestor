@@ -22,11 +22,13 @@
     <include file="config/liquibase/changelog/20200127010047_added_entity_ClienteFornecedor.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010048_added_entity_Animal.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010049_added_entity_DadosAssociacao.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200209000952_added_entity_Associado.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20200127010043_added_entity_constraints_Responsavel.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010044_added_entity_constraints_Haras.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010046_added_entity_constraints_Local.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010047_added_entity_constraints_ClienteFornecedor.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20200127010048_added_entity_constraints_Animal.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20200209000952_added_entity_constraints_Associado.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

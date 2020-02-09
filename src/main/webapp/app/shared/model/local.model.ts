@@ -1,6 +1,5 @@
-import { ITipoLocal } from 'app/shared/model/tipo-local.model';
 import { IEndereco } from 'app/shared/model/endereco.model';
-import { ILocal } from 'app/shared/model/local.model';
+import { ITipoLocal } from 'app/shared/model/tipo-local.model';
 
 export interface ILocal {
   id?: number;

@@ -4,20 +4,20 @@ import { HttpHeaders, HttpResponse } from '@angular/common/http';
 import { ActivatedRoute, Data } from '@angular/router';
 
 import { MmgestorTestModule } from '../../../test.module';
-import { ResponsavelComponent } from 'app/entities/responsavel/responsavel.component';
-import { ResponsavelService } from 'app/entities/responsavel/responsavel.service';
-import { Responsavel } from 'app/shared/model/responsavel.model';
+import { AssociadoComponent } from 'app/entities/associado/associado.component';
+import { AssociadoService } from 'app/entities/associado/associado.service';
+import { Associado } from 'app/shared/model/associado.model';
 
 describe('Component Tests', () => {
-  describe('Responsavel Management Component', () => {
-    let comp: ResponsavelComponent;
-    let fixture: ComponentFixture<ResponsavelComponent>;
-    let service: ResponsavelService;
+  describe('Associado Management Component', () => {
+    let comp: AssociadoComponent;
+    let fixture: ComponentFixture<AssociadoComponent>;
+    let service: AssociadoService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
-        declarations: [ResponsavelComponent],
+        declarations: [AssociadoComponent],
         providers: [
           {
             provide: ActivatedRoute,
@@ -36,12 +36,12 @@ describe('Component Tests', () => {
           }
         ]
       })
-        .overrideTemplate(ResponsavelComponent, '')
+        .overrideTemplate(AssociadoComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ResponsavelComponent);
+      fixture = TestBed.createComponent(AssociadoComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ResponsavelService);
+      service = fixture.debugElement.injector.get(AssociadoService);
     });
 
     it('Should call load all on init', () => {
@@ -50,7 +50,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Responsavel(123)],
+            body: [new Associado(123)],
             headers
           })
         )
@@ -61,7 +61,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.responsavels && comp.responsavels[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.associados && comp.associados[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should load a page', () => {
@@ -70,7 +70,7 @@ describe('Component Tests', () => {
       spyOn(service, 'query').and.returnValue(
         of(
           new HttpResponse({
-            body: [new Responsavel(123)],
+            body: [new Associado(123)],
             headers
           })
         )
@@ -81,7 +81,7 @@ describe('Component Tests', () => {
 
       // THEN
       expect(service.query).toHaveBeenCalled();
-      expect(comp.responsavels && comp.responsavels[0]).toEqual(jasmine.objectContaining({ id: 123 }));
+      expect(comp.associados && comp.associados[0]).toEqual(jasmine.objectContaining({ id: 123 }));
     });
 
     it('should calculate the sort attribute for an id', () => {

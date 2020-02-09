@@ -6,11 +6,9 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { CPF_MASK } from 'app/shared/constants/input.constants';
 
-import { IResponsavel, Responsavel } from 'app/shared/model/responsavel.model';
-import { ResponsavelService } from './responsavel.service';
+import { IAssociado, Associado } from 'app/shared/model/associado.model';
+import { AssociadoService } from './associado.service';
 import { IEndereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from 'app/entities/endereco/endereco.service';
 import { IUser } from 'app/core/user/user.model';
@@ -19,24 +17,19 @@ import { UserService } from 'app/core/user/user.service';
 type SelectableEntity = IEndereco | IUser;
 
 @Component({
-  selector: 'jhi-responsavel-update',
-  templateUrl: './responsavel-update.component.html'
+  selector: 'jhi-associado-update',
+  templateUrl: './associado-update.component.html'
 })
-export class ResponsavelUpdateComponent implements OnInit {
-  cpfMask = CPF_MASK;
-
+export class AssociadoUpdateComponent implements OnInit {
   isSaving = false;
 
   enderecos: IEndereco[] = [];
 
   users: IUser[] = [];
+  dtNascimentoDp: any;
 
   editForm = this.fb.group({
     id: [],
-    cpf: [
-      null,
-      [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern('[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}')]
-    ],
     nomeCompleto: [null, [Validators.required]],
     dtNascimento: [],
     endereco: [null, Validators.required],
@@ -44,7 +37,7 @@ export class ResponsavelUpdateComponent implements OnInit {
   });
 
   constructor(
-    protected responsavelService: ResponsavelService,
+    protected associadoService: AssociadoService,
     protected enderecoService: EnderecoService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
@@ -52,22 +45,22 @@ export class ResponsavelUpdateComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ responsavel }) => {
-      this.updateForm(responsavel);
+    this.activatedRoute.data.subscribe(({ associado }) => {
+      this.updateForm(associado);
 
       this.enderecoService
-        .query({ filter: 'responsavel-is-null' })
+        .query({ filter: 'associado-is-null' })
         .pipe(
           map((res: HttpResponse<IEndereco[]>) => {
             return res.body ? res.body : [];
           })
         )
         .subscribe((resBody: IEndereco[]) => {
-          if (!responsavel.endereco || !responsavel.endereco.id) {
+          if (!associado.endereco || !associado.endereco.id) {
             this.enderecos = resBody;
           } else {
             this.enderecoService
-              .find(responsavel.endereco.id)
+              .find(associado.endereco.id)
               .pipe(
                 map((subRes: HttpResponse<IEndereco>) => {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
@@ -90,14 +83,13 @@ export class ResponsavelUpdateComponent implements OnInit {
     });
   }
 
-  updateForm(responsavel: IResponsavel): void {
+  updateForm(associado: IAssociado): void {
     this.editForm.patchValue({
-      id: responsavel.id,
-      cpf: responsavel.cpf,
-      nomeCompleto: responsavel.nomeCompleto,
-      dtNascimento: responsavel.dtNascimento != null ? responsavel.dtNascimento.format(DATE_TIME_FORMAT) : null,
-      endereco: responsavel.endereco,
-      usuario: responsavel.usuario
+      id: associado.id,
+      nomeCompleto: associado.nomeCompleto,
+      dtNascimento: associado.dtNascimento,
+      endereco: associado.endereco,
+      usuario: associado.usuario
     });
   }
 
@@ -107,30 +99,26 @@ export class ResponsavelUpdateComponent implements OnInit {
 
   save(): void {
     this.isSaving = true;
-    const responsavel = this.createFromForm();
-    if (responsavel.id !== undefined) {
-      this.subscribeToSaveResponse(this.responsavelService.update(responsavel));
+    const associado = this.createFromForm();
+    if (associado.id !== undefined) {
+      this.subscribeToSaveResponse(this.associadoService.update(associado));
     } else {
-      this.subscribeToSaveResponse(this.responsavelService.create(responsavel));
+      this.subscribeToSaveResponse(this.associadoService.create(associado));
     }
   }
 
-  private createFromForm(): IResponsavel {
+  private createFromForm(): IAssociado {
     return {
-      ...new Responsavel(),
+      ...new Associado(),
       id: this.editForm.get(['id'])!.value,
-      cpf: this.editForm.get(['cpf'])!.value,
       nomeCompleto: this.editForm.get(['nomeCompleto'])!.value,
-      dtNascimento:
-        this.editForm.get(['dtNascimento'])!.value != null
-          ? moment(this.editForm.get(['dtNascimento'])!.value, DATE_TIME_FORMAT)
-          : undefined,
+      dtNascimento: this.editForm.get(['dtNascimento'])!.value,
       endereco: this.editForm.get(['endereco'])!.value,
       usuario: this.editForm.get(['usuario'])!.value
     };
   }
 
-  protected subscribeToSaveResponse(result: Observable<HttpResponse<IResponsavel>>): void {
+  protected subscribeToSaveResponse(result: Observable<HttpResponse<IAssociado>>): void {
     result.subscribe(
       () => this.onSaveSuccess(),
       () => this.onSaveError()

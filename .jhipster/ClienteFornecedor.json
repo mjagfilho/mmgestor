@@ -10,7 +10,7 @@
         },
         {
             "fieldName": "dtNascimento",
-            "fieldType": "Instant"
+            "fieldType": "LocalDate"
         },
         {
             "fieldName": "cpf",
@@ -18,9 +18,9 @@
             "fieldValidateRules": [
                 "minlength",
                 "maxlength",
-                "pattern",
                 "required",
-                "unique"
+                "unique",
+                "pattern"
             ],
             "fieldValidateRulesMinlength": 14,
             "fieldValidateRulesMaxlength": 14,
@@ -46,8 +46,8 @@
             "fieldValidateRules": [
                 "minlength",
                 "maxlength",
-                "pattern",
-                "required"
+                "required",
+                "pattern"
             ],
             "fieldValidateRulesMinlength": 2,
             "fieldValidateRulesMaxlength": 2,

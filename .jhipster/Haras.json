@@ -21,8 +21,8 @@
             "fieldValidateRules": [
                 "minlength",
                 "maxlength",
-                "pattern",
-                "required"
+                "required",
+                "pattern"
             ],
             "fieldValidateRulesMinlength": 2,
             "fieldValidateRulesMaxlength": 2,
@@ -32,7 +32,7 @@
     "relationships": [
         {
             "relationshipType": "many-to-one",
-            "otherEntityName": "responsavel",
+            "otherEntityName": "associado",
             "otherEntityRelationshipName": "haras",
             "relationshipValidateRules": "required",
             "relationshipName": "responsavel",

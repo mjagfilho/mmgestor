@@ -1,17 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { EnderecoService } from 'app/entities/endereco/endereco.service';
+import { ClienteFornecedor, IClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
+import { IEndereco } from 'app/shared/model/endereco.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-
-import { IClienteFornecedor, ClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
 import { ClienteFornecedorService } from './cliente-fornecedor.service';
-import { IEndereco } from 'app/shared/model/endereco.model';
-import { EnderecoService } from 'app/entities/endereco/endereco.service';
 
 @Component({
   selector: 'jhi-cliente-fornecedor-update',
@@ -21,6 +18,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
   isSaving = false;
 
   enderecos: IEndereco[] = [];
+  dtNascimentoDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -77,7 +75,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: clienteFornecedor.id,
       nome: clienteFornecedor.nome,
-      dtNascimento: clienteFornecedor.dtNascimento != null ? clienteFornecedor.dtNascimento.format(DATE_TIME_FORMAT) : null,
+      dtNascimento: clienteFornecedor.dtNascimento,
       cpf: clienteFornecedor.cpf,
       nomeHaras: clienteFornecedor.nomeHaras,
       localidadeHaras: clienteFornecedor.localidadeHaras,
@@ -105,10 +103,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
       ...new ClienteFornecedor(),
       id: this.editForm.get(['id'])!.value,
       nome: this.editForm.get(['nome'])!.value,
-      dtNascimento:
-        this.editForm.get(['dtNascimento'])!.value != null
-          ? moment(this.editForm.get(['dtNascimento'])!.value, DATE_TIME_FORMAT)
-          : undefined,
+      dtNascimento: this.editForm.get(['dtNascimento'])!.value,
       cpf: this.editForm.get(['cpf'])!.value,
       nomeHaras: this.editForm.get(['nomeHaras'])!.value,
       localidadeHaras: this.editForm.get(['localidadeHaras'])!.value,

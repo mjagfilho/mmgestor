@@ -34,7 +34,7 @@
                 <td>{{haras.uf}}</td>
                 <td>
                     <div *ngIf="haras.responsavel">
-                        <a [routerLink]="['/responsavel', haras.responsavel?.id, 'view' ]" >{{haras.responsavel?.id}}</a>
+                        <a [routerLink]="['/associado', haras.responsavel?.id, 'view' ]" >{{haras.responsavel?.id}}</a>
                     </div>
                 </td>
                 <td class="text-right">

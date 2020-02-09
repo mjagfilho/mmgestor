@@ -9,10 +9,6 @@ import { RouterModule } from '@angular/router';
         loadChildren: () => import('./endereco/endereco.module').then(m => m.MmgestorEnderecoModule)
       },
       {
-        path: 'responsavel',
-        loadChildren: () => import('./responsavel/responsavel.module').then(m => m.MmgestorResponsavelModule)
-      },
-      {
         path: 'haras',
         loadChildren: () => import('./haras/haras.module').then(m => m.MmgestorHarasModule)
       },
@@ -35,6 +31,10 @@ import { RouterModule } from '@angular/router';
       {
         path: 'dados-associacao',
         loadChildren: () => import('./dados-associacao/dados-associacao.module').then(m => m.MmgestorDadosAssociacaoModule)
+      },
+      {
+        path: 'associado',
+        loadChildren: () => import('./associado/associado.module').then(m => m.MmgestorAssociadoModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

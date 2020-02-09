@@ -5,18 +5,18 @@ import { Subscription } from 'rxjs';
 import { JhiEventManager } from 'ng-jhipster';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 
-import { IResponsavel } from 'app/shared/model/responsavel.model';
+import { IAssociado } from 'app/shared/model/associado.model';
 
 import { ITEMS_PER_PAGE } from 'app/shared/constants/pagination.constants';
-import { ResponsavelService } from './responsavel.service';
-import { ResponsavelDeleteDialogComponent } from './responsavel-delete-dialog.component';
+import { AssociadoService } from './associado.service';
+import { AssociadoDeleteDialogComponent } from './associado-delete-dialog.component';
 
 @Component({
-  selector: 'jhi-responsavel',
-  templateUrl: './responsavel.component.html'
+  selector: 'jhi-associado',
+  templateUrl: './associado.component.html'
 })
-export class ResponsavelComponent implements OnInit, OnDestroy {
-  responsavels?: IResponsavel[];
+export class AssociadoComponent implements OnInit, OnDestroy {
+  associados?: IAssociado[];
   eventSubscriber?: Subscription;
   totalItems = 0;
   itemsPerPage = ITEMS_PER_PAGE;
@@ -26,7 +26,7 @@ export class ResponsavelComponent implements OnInit, OnDestroy {
   ngbPaginationPage = 1;
 
   constructor(
-    protected responsavelService: ResponsavelService,
+    protected associadoService: AssociadoService,
     protected activatedRoute: ActivatedRoute,
     protected router: Router,
     protected eventManager: JhiEventManager,
@@ -35,14 +35,14 @@ export class ResponsavelComponent implements OnInit, OnDestroy {
 
   loadPage(page?: number): void {
     const pageToLoad: number = page ? page : this.page;
-    this.responsavelService
+    this.associadoService
       .query({
         page: pageToLoad - 1,
         size: this.itemsPerPage,
         sort: this.sort()
       })
       .subscribe(
-        (res: HttpResponse<IResponsavel[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
+        (res: HttpResponse<IAssociado[]>) => this.onSuccess(res.body, res.headers, pageToLoad),
         () => this.onError()
       );
   }
@@ -55,7 +55,7 @@ export class ResponsavelComponent implements OnInit, OnDestroy {
       this.ngbPaginationPage = data.pagingParams.page;
       this.loadPage();
     });
-    this.registerChangeInResponsavels();
+    this.registerChangeInAssociados();
   }
 
   ngOnDestroy(): void {
@@ -64,18 +64,18 @@ export class ResponsavelComponent implements OnInit, OnDestroy {
     }
   }
 
-  trackId(index: number, item: IResponsavel): number {
+  trackId(index: number, item: IAssociado): number {
     // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
     return item.id!;
   }
 
-  registerChangeInResponsavels(): void {
-    this.eventSubscriber = this.eventManager.subscribe('responsavelListModification', () => this.loadPage());
+  registerChangeInAssociados(): void {
+    this.eventSubscriber = this.eventManager.subscribe('associadoListModification', () => this.loadPage());
   }
 
-  delete(responsavel: IResponsavel): void {
-    const modalRef = this.modalService.open(ResponsavelDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
-    modalRef.componentInstance.responsavel = responsavel;
+  delete(associado: IAssociado): void {
+    const modalRef = this.modalService.open(AssociadoDeleteDialogComponent, { size: 'lg', backdrop: 'static' });
+    modalRef.componentInstance.associado = associado;
   }
 
   sort(): string[] {
@@ -86,17 +86,17 @@ export class ResponsavelComponent implements OnInit, OnDestroy {
     return result;
   }
 
-  protected onSuccess(data: IResponsavel[] | null, headers: HttpHeaders, page: number): void {
+  protected onSuccess(data: IAssociado[] | null, headers: HttpHeaders, page: number): void {
     this.totalItems = Number(headers.get('X-Total-Count'));
     this.page = page;
-    this.router.navigate(['/responsavel'], {
+    this.router.navigate(['/associado'], {
       queryParams: {
         page: this.page,
         size: this.itemsPerPage,
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.responsavels = data ? data : [];
+    this.associados = data ? data : [];
   }
 
   protected onError(): void {

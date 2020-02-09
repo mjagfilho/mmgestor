@@ -2,7 +2,7 @@ package br.com.mmgestor.web.rest;
 
 import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.Haras;
-import br.com.mmgestor.domain.Responsavel;
+import br.com.mmgestor.domain.Associado;
 import br.com.mmgestor.repository.HarasRepository;
 import br.com.mmgestor.service.HarasService;
 import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
@@ -93,15 +93,15 @@ public class HarasResourceIT {
             .localidade(DEFAULT_LOCALIDADE)
             .uf(DEFAULT_UF);
         // Add required entity
-        Responsavel responsavel;
-        if (TestUtil.findAll(em, Responsavel.class).isEmpty()) {
-            responsavel = ResponsavelResourceIT.createEntity(em);
-            em.persist(responsavel);
+        Associado associado;
+        if (TestUtil.findAll(em, Associado.class).isEmpty()) {
+            associado = AssociadoResourceIT.createEntity(em);
+            em.persist(associado);
             em.flush();
         } else {
-            responsavel = TestUtil.findAll(em, Responsavel.class).get(0);
+            associado = TestUtil.findAll(em, Associado.class).get(0);
         }
-        haras.setResponsavel(responsavel);
+        haras.setResponsavel(associado);
         return haras;
     }
     /**
@@ -116,15 +116,15 @@ public class HarasResourceIT {
             .localidade(UPDATED_LOCALIDADE)
             .uf(UPDATED_UF);
         // Add required entity
-        Responsavel responsavel;
-        if (TestUtil.findAll(em, Responsavel.class).isEmpty()) {
-            responsavel = ResponsavelResourceIT.createUpdatedEntity(em);
-            em.persist(responsavel);
+        Associado associado;
+        if (TestUtil.findAll(em, Associado.class).isEmpty()) {
+            associado = AssociadoResourceIT.createUpdatedEntity(em);
+            em.persist(associado);
             em.flush();
         } else {
-            responsavel = TestUtil.findAll(em, Responsavel.class).get(0);
+            associado = TestUtil.findAll(em, Associado.class).get(0);
         }
-        haras.setResponsavel(responsavel);
+        haras.setResponsavel(associado);
         return haras;
     }
 

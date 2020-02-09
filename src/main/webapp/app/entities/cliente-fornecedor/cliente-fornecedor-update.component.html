@@ -22,8 +22,11 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.clienteFornecedor.dtNascimento" for="field_dtNascimento">Dt Nascimento</label>
-                    <div class="d-flex">
-                        <input id="field_dtNascimento" type="datetime-local" class="form-control" name="dtNascimento" formControlName="dtNascimento" placeholder="YYYY-MM-DD HH:mm"/>
+                    <div class="input-group">
+                        <input id="field_dtNascimento" type="text" class="form-control" name="dtNascimento" ngbDatepicker  #dtNascimentoDp="ngbDatepicker" formControlName="dtNascimento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dtNascimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
                     </div>
                 </div>
                 <div class="form-group">

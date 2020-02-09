@@ -11,7 +11,7 @@
         },
         {
             "fieldName": "dtNascimento",
-            "fieldType": "Instant",
+            "fieldType": "LocalDate",
             "fieldValidateRules": [
                 "required"
             ]

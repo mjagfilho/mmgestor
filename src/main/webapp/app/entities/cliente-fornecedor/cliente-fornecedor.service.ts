@@ -53,7 +53,9 @@ export class ClienteFornecedorService {
   protected convertDateFromClient(clienteFornecedor: IClienteFornecedor): IClienteFornecedor {
     const copy: IClienteFornecedor = Object.assign({}, clienteFornecedor, {
       dtNascimento:
-        clienteFornecedor.dtNascimento && clienteFornecedor.dtNascimento.isValid() ? clienteFornecedor.dtNascimento.toJSON() : undefined
+        clienteFornecedor.dtNascimento && clienteFornecedor.dtNascimento.isValid()
+          ? clienteFornecedor.dtNascimento.format(DATE_FORMAT)
+          : undefined
     });
     return copy;
   }

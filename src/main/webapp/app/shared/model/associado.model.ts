@@ -2,19 +2,17 @@ import { Moment } from 'moment';
 import { IEndereco } from 'app/shared/model/endereco.model';
 import { IUser } from 'app/core/user/user.model';
 
-export interface IResponsavel {
+export interface IAssociado {
   id?: number;
-  cpf?: string;
   nomeCompleto?: string;
   dtNascimento?: Moment;
   endereco?: IEndereco;
   usuario?: IUser;
 }
 
-export class Responsavel implements IResponsavel {
+export class Associado implements IAssociado {
   constructor(
     public id?: number,
-    public cpf?: string,
     public nomeCompleto?: string,
     public dtNascimento?: Moment,
     public endereco?: IEndereco,

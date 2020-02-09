@@ -2,7 +2,7 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { AnimalService } from 'app/entities/animal/animal.service';
 import { IAnimal, Animal } from 'app/shared/model/animal.model';
 import { Sexo } from 'app/shared/model/enumerations/sexo.model';
@@ -33,7 +33,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -51,7 +51,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -74,7 +74,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             nome: 'BBBBBB',
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT),
+            dtNascimento: currentDate.format(DATE_FORMAT),
             sexo: 'BBBBBB',
             pelagem: 'BBBBBB',
             ehVivo: true
@@ -101,7 +101,7 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             nome: 'BBBBBB',
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT),
+            dtNascimento: currentDate.format(DATE_FORMAT),
             sexo: 'BBBBBB',
             pelagem: 'BBBBBB',
             ehVivo: true

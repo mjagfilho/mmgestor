@@ -15,6 +15,7 @@
         "clienteFornecedor": "Cliente Fornecedor",
         "animal": "Animal",
         "dadosAssociacao": "Dados Associacao",
+        "associado": "Associado",
         "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
       },
       "account": {

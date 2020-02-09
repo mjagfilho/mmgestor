@@ -22,17 +22,16 @@
                 </div>
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.animal.dtNascimento" for="field_dtNascimento">Dt Nascimento</label>
-                    <div class="d-flex">
-                        <input id="field_dtNascimento" type="datetime-local" class="form-control" name="dtNascimento" formControlName="dtNascimento" placeholder="YYYY-MM-DD HH:mm"/>
+                    <div class="input-group">
+                        <input id="field_dtNascimento" type="text" class="form-control" name="dtNascimento" ngbDatepicker  #dtNascimentoDp="ngbDatepicker" formControlName="dtNascimento"/>
+                        <span class="input-group-append">
+                            <button type="button" class="btn btn-secondary" (click)="dtNascimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                        </span>
                     </div>
                     <div *ngIf="editForm.get('dtNascimento')!.invalid && (editForm.get('dtNascimento')!.dirty || editForm.get('dtNascimento')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('dtNascimento')?.errors?.required" jhiTranslate="entity.validation.required">
                         This field is required.
-                        </small>
-                        <small class="form-text text-danger"
-                            [hidden]="!editForm.get('dtNascimento')?.errors?.ZonedDateTimelocal" jhiTranslate="entity.validation.ZonedDateTimelocal">
-                            This field should be a date and time.
                         </small>
                     </div>
                 </div>

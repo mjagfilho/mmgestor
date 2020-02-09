@@ -21,8 +21,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
 import javax.persistence.EntityManager;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.time.LocalDate;
+import java.time.ZoneId;
 import java.util.List;
 
 import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
@@ -40,8 +40,8 @@ public class ClienteFornecedorResourceIT {
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
     private static final String UPDATED_NOME = "BBBBBBBBBB";
 
-    private static final Instant DEFAULT_DT_NASCIMENTO = Instant.ofEpochMilli(0L);
-    private static final Instant UPDATED_DT_NASCIMENTO = Instant.now().truncatedTo(ChronoUnit.MILLIS);
+    private static final LocalDate DEFAULT_DT_NASCIMENTO = LocalDate.ofEpochDay(0L);
+    private static final LocalDate UPDATED_DT_NASCIMENTO = LocalDate.now(ZoneId.systemDefault());
 
     private static final String DEFAULT_CPF = "513!386z028-98";
     private static final String UPDATED_CPF = "989c503e404-05";

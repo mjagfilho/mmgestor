@@ -6,23 +6,23 @@ import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
-import { IResponsavel, Responsavel } from 'app/shared/model/responsavel.model';
-import { ResponsavelService } from './responsavel.service';
-import { ResponsavelComponent } from './responsavel.component';
-import { ResponsavelDetailComponent } from './responsavel-detail.component';
-import { ResponsavelUpdateComponent } from './responsavel-update.component';
+import { IAssociado, Associado } from 'app/shared/model/associado.model';
+import { AssociadoService } from './associado.service';
+import { AssociadoComponent } from './associado.component';
+import { AssociadoDetailComponent } from './associado-detail.component';
+import { AssociadoUpdateComponent } from './associado-update.component';
 
 @Injectable({ providedIn: 'root' })
-export class ResponsavelResolve implements Resolve<IResponsavel> {
-  constructor(private service: ResponsavelService, private router: Router) {}
+export class AssociadoResolve implements Resolve<IAssociado> {
+  constructor(private service: AssociadoService, private router: Router) {}
 
-  resolve(route: ActivatedRouteSnapshot): Observable<IResponsavel> | Observable<never> {
+  resolve(route: ActivatedRouteSnapshot): Observable<IAssociado> | Observable<never> {
     const id = route.params['id'];
     if (id) {
       return this.service.find(id).pipe(
-        flatMap((responsavel: HttpResponse<Responsavel>) => {
-          if (responsavel.body) {
-            return of(responsavel.body);
+        flatMap((associado: HttpResponse<Associado>) => {
+          if (associado.body) {
+            return of(associado.body);
           } else {
             this.router.navigate(['404']);
             return EMPTY;
@@ -30,57 +30,57 @@ export class ResponsavelResolve implements Resolve<IResponsavel> {
         })
       );
     }
-    return of(new Responsavel());
+    return of(new Associado());
   }
 }
 
-export const responsavelRoute: Routes = [
+export const associadoRoute: Routes = [
   {
     path: '',
-    component: ResponsavelComponent,
+    component: AssociadoComponent,
     resolve: {
       pagingParams: JhiResolvePagingParams
     },
     data: {
       authorities: ['ROLE_USER'],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.responsavel.home.title'
+      pageTitle: 'mmgestorApp.associado.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/view',
-    component: ResponsavelDetailComponent,
+    component: AssociadoDetailComponent,
     resolve: {
-      responsavel: ResponsavelResolve
+      associado: AssociadoResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.responsavel.home.title'
+      pageTitle: 'mmgestorApp.associado.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: 'new',
-    component: ResponsavelUpdateComponent,
+    component: AssociadoUpdateComponent,
     resolve: {
-      responsavel: ResponsavelResolve
+      associado: AssociadoResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.responsavel.home.title'
+      pageTitle: 'mmgestorApp.associado.home.title'
     },
     canActivate: [UserRouteAccessService]
   },
   {
     path: ':id/edit',
-    component: ResponsavelUpdateComponent,
+    component: AssociadoUpdateComponent,
     resolve: {
-      responsavel: ResponsavelResolve
+      associado: AssociadoResolve
     },
     data: {
       authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.responsavel.home.title'
+      pageTitle: 'mmgestorApp.associado.home.title'
     },
     canActivate: [UserRouteAccessService]
   }

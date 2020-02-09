@@ -6,27 +6,27 @@ import { JhiEventManager } from 'ng-jhipster';
 import { MmgestorTestModule } from '../../../test.module';
 import { MockEventManager } from '../../../helpers/mock-event-manager.service';
 import { MockActiveModal } from '../../../helpers/mock-active-modal.service';
-import { ResponsavelDeleteDialogComponent } from 'app/entities/responsavel/responsavel-delete-dialog.component';
-import { ResponsavelService } from 'app/entities/responsavel/responsavel.service';
+import { AssociadoDeleteDialogComponent } from 'app/entities/associado/associado-delete-dialog.component';
+import { AssociadoService } from 'app/entities/associado/associado.service';
 
 describe('Component Tests', () => {
-  describe('Responsavel Management Delete Component', () => {
-    let comp: ResponsavelDeleteDialogComponent;
-    let fixture: ComponentFixture<ResponsavelDeleteDialogComponent>;
-    let service: ResponsavelService;
+  describe('Associado Management Delete Component', () => {
+    let comp: AssociadoDeleteDialogComponent;
+    let fixture: ComponentFixture<AssociadoDeleteDialogComponent>;
+    let service: AssociadoService;
     let mockEventManager: MockEventManager;
     let mockActiveModal: MockActiveModal;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
-        declarations: [ResponsavelDeleteDialogComponent]
+        declarations: [AssociadoDeleteDialogComponent]
       })
-        .overrideTemplate(ResponsavelDeleteDialogComponent, '')
+        .overrideTemplate(AssociadoDeleteDialogComponent, '')
         .compileComponents();
-      fixture = TestBed.createComponent(ResponsavelDeleteDialogComponent);
+      fixture = TestBed.createComponent(AssociadoDeleteDialogComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ResponsavelService);
+      service = fixture.debugElement.injector.get(AssociadoService);
       mockEventManager = TestBed.get(JhiEventManager);
       mockActiveModal = TestBed.get(NgbActiveModal);
     });

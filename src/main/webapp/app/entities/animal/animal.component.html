@@ -32,7 +32,7 @@
             <tr *ngFor="let animal of animals ;trackBy: trackId">
                 <td><a [routerLink]="['/animal', animal.id, 'view' ]">{{animal.id}}</a></td>
                 <td>{{animal.nome}}</td>
-                <td>{{animal.dtNascimento | date:'medium'}}</td>
+                <td>{{animal.dtNascimento | date:'mediumDate'}}</td>
                 <td jhiTranslate="{{'mmgestorApp.Sexo.' + animal.sexo}}">{{animal.sexo}}</td>
                 <td jhiTranslate="{{'mmgestorApp.Pelagem.' + animal.pelagem}}">{{animal.pelagem}}</td>
                 <td>{{animal.ehVivo}}</td>

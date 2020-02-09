@@ -59,7 +59,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.haras.responsavel" for="field_responsavel">Responsavel</label>
                     <select class="form-control" id="field_responsavel" name="responsavel" formControlName="responsavel">
                         <option *ngIf="!editForm.get('responsavel')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="responsavelOption.id === editForm.get('responsavel')!.value?.id ? editForm.get('responsavel')!.value : responsavelOption" *ngFor="let responsavelOption of responsavels; trackBy: trackById">{{responsavelOption.id}}</option>
+                        <option [ngValue]="associadoOption.id === editForm.get('responsavel')!.value?.id ? editForm.get('responsavel')!.value : associadoOption" *ngFor="let associadoOption of associados; trackBy: trackById">{{associadoOption.id}}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('responsavel')!.invalid && (editForm.get('responsavel')!.dirty || editForm.get('responsavel')!.touched)">

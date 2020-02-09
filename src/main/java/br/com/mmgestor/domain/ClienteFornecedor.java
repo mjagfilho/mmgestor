@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 /**
  * A ClienteFornecedor.
@@ -25,7 +25,7 @@ public class ClienteFornecedor implements Serializable {
     private String nome;
 
     @Column(name = "dt_nascimento")
-    private Instant dtNascimento;
+    private LocalDate dtNascimento;
 
     @NotNull
     @Size(min = 14, max = 14)
@@ -74,16 +74,16 @@ public class ClienteFornecedor implements Serializable {
         this.nome = nome;
     }
 
-    public Instant getDtNascimento() {
+    public LocalDate getDtNascimento() {
         return dtNascimento;
     }
 
-    public ClienteFornecedor dtNascimento(Instant dtNascimento) {
+    public ClienteFornecedor dtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
         return this;
     }
 
-    public void setDtNascimento(Instant dtNascimento) {
+    public void setDtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 

@@ -4,34 +4,34 @@ import { FormBuilder } from '@angular/forms';
 import { of } from 'rxjs';
 
 import { MmgestorTestModule } from '../../../test.module';
-import { ResponsavelUpdateComponent } from 'app/entities/responsavel/responsavel-update.component';
-import { ResponsavelService } from 'app/entities/responsavel/responsavel.service';
-import { Responsavel } from 'app/shared/model/responsavel.model';
+import { AssociadoUpdateComponent } from 'app/entities/associado/associado-update.component';
+import { AssociadoService } from 'app/entities/associado/associado.service';
+import { Associado } from 'app/shared/model/associado.model';
 
 describe('Component Tests', () => {
-  describe('Responsavel Management Update Component', () => {
-    let comp: ResponsavelUpdateComponent;
-    let fixture: ComponentFixture<ResponsavelUpdateComponent>;
-    let service: ResponsavelService;
+  describe('Associado Management Update Component', () => {
+    let comp: AssociadoUpdateComponent;
+    let fixture: ComponentFixture<AssociadoUpdateComponent>;
+    let service: AssociadoService;
 
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
-        declarations: [ResponsavelUpdateComponent],
+        declarations: [AssociadoUpdateComponent],
         providers: [FormBuilder]
       })
-        .overrideTemplate(ResponsavelUpdateComponent, '')
+        .overrideTemplate(AssociadoUpdateComponent, '')
         .compileComponents();
 
-      fixture = TestBed.createComponent(ResponsavelUpdateComponent);
+      fixture = TestBed.createComponent(AssociadoUpdateComponent);
       comp = fixture.componentInstance;
-      service = fixture.debugElement.injector.get(ResponsavelService);
+      service = fixture.debugElement.injector.get(AssociadoService);
     });
 
     describe('save', () => {
       it('Should call update service on save for existing entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Responsavel(123);
+        const entity = new Associado(123);
         spyOn(service, 'update').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN
@@ -45,7 +45,7 @@ describe('Component Tests', () => {
 
       it('Should call create service on save for new entity', fakeAsync(() => {
         // GIVEN
-        const entity = new Responsavel();
+        const entity = new Associado();
         spyOn(service, 'create').and.returnValue(of(new HttpResponse({ body: entity })));
         comp.updateForm(entity);
         // WHEN

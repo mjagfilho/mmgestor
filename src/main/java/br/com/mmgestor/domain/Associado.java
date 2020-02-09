@@ -4,14 +4,14 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 /**
- * A Responsavel.
+ * A Associado.
  */
 @Entity
-@Table(name = "responsavel")
-public class Responsavel implements Serializable {
+@Table(name = "associado")
+public class Associado implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
@@ -21,17 +21,11 @@ public class Responsavel implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 14, max = 14)
-    @Pattern(regexp = "[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}")
-    @Column(name = "cpf", length = 14, nullable = false, unique = true)
-    private String cpf;
-
-    @NotNull
     @Column(name = "nome_completo", nullable = false)
     private String nomeCompleto;
 
     @Column(name = "dt_nascimento")
-    private Instant dtNascimento;
+    private LocalDate dtNascimento;
 
     @OneToOne(optional = false)
     @NotNull
@@ -52,24 +46,11 @@ public class Responsavel implements Serializable {
         this.id = id;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public Responsavel cpf(String cpf) {
-        this.cpf = cpf;
-        return this;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public String getNomeCompleto() {
         return nomeCompleto;
     }
 
-    public Responsavel nomeCompleto(String nomeCompleto) {
+    public Associado nomeCompleto(String nomeCompleto) {
         this.nomeCompleto = nomeCompleto;
         return this;
     }
@@ -78,16 +59,16 @@ public class Responsavel implements Serializable {
         this.nomeCompleto = nomeCompleto;
     }
 
-    public Instant getDtNascimento() {
+    public LocalDate getDtNascimento() {
         return dtNascimento;
     }
 
-    public Responsavel dtNascimento(Instant dtNascimento) {
+    public Associado dtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
         return this;
     }
 
-    public void setDtNascimento(Instant dtNascimento) {
+    public void setDtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
@@ -95,7 +76,7 @@ public class Responsavel implements Serializable {
         return endereco;
     }
 
-    public Responsavel endereco(Endereco endereco) {
+    public Associado endereco(Endereco endereco) {
         this.endereco = endereco;
         return this;
     }
@@ -108,7 +89,7 @@ public class Responsavel implements Serializable {
         return usuario;
     }
 
-    public Responsavel usuario(User user) {
+    public Associado usuario(User user) {
         this.usuario = user;
         return this;
     }
@@ -123,10 +104,10 @@ public class Responsavel implements Serializable {
         if (this == o) {
             return true;
         }
-        if (!(o instanceof Responsavel)) {
+        if (!(o instanceof Associado)) {
             return false;
         }
-        return id != null && id.equals(((Responsavel) o).id);
+        return id != null && id.equals(((Associado) o).id);
     }
 
     @Override
@@ -136,9 +117,8 @@ public class Responsavel implements Serializable {
 
     @Override
     public String toString() {
-        return "Responsavel{" +
+        return "Associado{" +
             "id=" + getId() +
-            ", cpf='" + getCpf() + "'" +
             ", nomeCompleto='" + getNomeCompleto() + "'" +
             ", dtNascimento='" + getDtNascimento() + "'" +
             "}";

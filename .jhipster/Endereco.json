@@ -7,8 +7,8 @@
             "fieldValidateRules": [
                 "minlength",
                 "maxlength",
-                "pattern",
-                "required"
+                "required",
+                "pattern"
             ],
             "fieldValidateRulesMinlength": 10,
             "fieldValidateRulesMaxlength": 10,
@@ -45,8 +45,8 @@
             "fieldValidateRules": [
                 "minlength",
                 "maxlength",
-                "pattern",
-                "required"
+                "required",
+                "pattern"
             ],
             "fieldValidateRulesMinlength": 2,
             "fieldValidateRulesMaxlength": 2,

@@ -33,7 +33,7 @@
             <tr *ngFor="let clienteFornecedor of clienteFornecedors ;trackBy: trackId">
                 <td><a [routerLink]="['/cliente-fornecedor', clienteFornecedor.id, 'view' ]">{{clienteFornecedor.id}}</a></td>
                 <td>{{clienteFornecedor.nome}}</td>
-                <td>{{clienteFornecedor.dtNascimento | date:'medium'}}</td>
+                <td>{{clienteFornecedor.dtNascimento | date:'mediumDate'}}</td>
                 <td>{{clienteFornecedor.cpf}}</td>
                 <td>{{clienteFornecedor.nomeHaras}}</td>
                 <td>{{clienteFornecedor.localidadeHaras}}</td>

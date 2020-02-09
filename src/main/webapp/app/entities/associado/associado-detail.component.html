@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="associado">
+            <h2><span jhiTranslate="mmgestorApp.associado.detail.title">Associado</span> {{associado.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mmgestorApp.associado.nomeCompleto">Nome Completo</span></dt>
+                <dd>
+                    <span>{{associado.nomeCompleto}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.dtNascimento">Dt Nascimento</span></dt>
+                <dd>
+                    <span>{{associado.dtNascimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.endereco">Endereco</span></dt>
+                <dd>
+                    <div *ngIf="associado.endereco">
+                        <a [routerLink]="['/endereco', associado.endereco?.id, 'view']">{{associado.endereco?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.usuario">Usuario</span></dt>
+                <dd>
+                    {{associado.usuario?.id}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/associado', associado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

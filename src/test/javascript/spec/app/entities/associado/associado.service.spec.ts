@@ -2,17 +2,17 @@ import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
 import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
-import { ResponsavelService } from 'app/entities/responsavel/responsavel.service';
-import { IResponsavel, Responsavel } from 'app/shared/model/responsavel.model';
+import { DATE_FORMAT } from 'app/shared/constants/input.constants';
+import { AssociadoService } from 'app/entities/associado/associado.service';
+import { IAssociado, Associado } from 'app/shared/model/associado.model';
 
 describe('Service Tests', () => {
-  describe('Responsavel Service', () => {
+  describe('Associado Service', () => {
     let injector: TestBed;
-    let service: ResponsavelService;
+    let service: AssociadoService;
     let httpMock: HttpTestingController;
-    let elemDefault: IResponsavel;
-    let expectedResult: IResponsavel | IResponsavel[] | boolean | null;
+    let elemDefault: IAssociado;
+    let expectedResult: IAssociado | IAssociado[] | boolean | null;
     let currentDate: moment.Moment;
     beforeEach(() => {
       TestBed.configureTestingModule({
@@ -20,18 +20,18 @@ describe('Service Tests', () => {
       });
       expectedResult = null;
       injector = getTestBed();
-      service = injector.get(ResponsavelService);
+      service = injector.get(AssociadoService);
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Responsavel(0, 'AAAAAAA', 'AAAAAAA', currentDate);
+      elemDefault = new Associado(0, 'AAAAAAA', currentDate);
     });
 
     describe('Service methods', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -45,11 +45,11 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(elemDefault);
       });
 
-      it('should create a Responsavel', () => {
+      it('should create a Associado', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
           returnedFromService
         );
         service
-          .create(new Responsavel())
+          .create(new Associado())
           .pipe(take(1))
           .subscribe(resp => (expectedResult = resp.body));
         const req = httpMock.expectOne({ method: 'POST' });
@@ -68,12 +68,11 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should update a Responsavel', () => {
+      it('should update a Associado', () => {
         const returnedFromService = Object.assign(
           {
-            cpf: 'BBBBBB',
             nomeCompleto: 'BBBBBB',
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -93,12 +92,11 @@ describe('Service Tests', () => {
         expect(expectedResult).toMatchObject(expected);
       });
 
-      it('should return a list of Responsavel', () => {
+      it('should return a list of Associado', () => {
         const returnedFromService = Object.assign(
           {
-            cpf: 'BBBBBB',
             nomeCompleto: 'BBBBBB',
-            dtNascimento: currentDate.format(DATE_TIME_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
         );
@@ -121,7 +119,7 @@ describe('Service Tests', () => {
         expect(expectedResult).toContainEqual(expected);
       });
 
-      it('should delete a Responsavel', () => {
+      it('should delete a Associado', () => {
         service.delete(123).subscribe(resp => (expectedResult = resp.ok));
 
         const req = httpMock.expectOne({ method: 'DELETE' });

@@ -6,7 +6,6 @@ import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
-import { DATE_TIME_FORMAT } from 'app/shared/constants/input.constants';
 
 import { IAnimal, Animal } from 'app/shared/model/animal.model';
 import { AnimalService } from './animal.service';
@@ -21,6 +20,7 @@ export class AnimalUpdateComponent implements OnInit {
   isSaving = false;
 
   dadosassociacaos: IDadosAssociacao[] = [];
+  dtNascimentoDp: any;
 
   editForm = this.fb.group({
     id: [],
@@ -73,7 +73,7 @@ export class AnimalUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: animal.id,
       nome: animal.nome,
-      dtNascimento: animal.dtNascimento != null ? animal.dtNascimento.format(DATE_TIME_FORMAT) : null,
+      dtNascimento: animal.dtNascimento,
       sexo: animal.sexo,
       pelagem: animal.pelagem,
       ehVivo: animal.ehVivo,
@@ -100,10 +100,7 @@ export class AnimalUpdateComponent implements OnInit {
       ...new Animal(),
       id: this.editForm.get(['id'])!.value,
       nome: this.editForm.get(['nome'])!.value,
-      dtNascimento:
-        this.editForm.get(['dtNascimento'])!.value != null
-          ? moment(this.editForm.get(['dtNascimento'])!.value, DATE_TIME_FORMAT)
-          : undefined,
+      dtNascimento: this.editForm.get(['dtNascimento'])!.value,
       sexo: this.editForm.get(['sexo'])!.value,
       pelagem: this.editForm.get(['pelagem'])!.value,
       ehVivo: this.editForm.get(['ehVivo'])!.value,

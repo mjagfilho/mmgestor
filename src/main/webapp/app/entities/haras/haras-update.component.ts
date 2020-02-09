@@ -8,8 +8,8 @@ import { map } from 'rxjs/operators';
 
 import { IHaras, Haras } from 'app/shared/model/haras.model';
 import { HarasService } from './haras.service';
-import { IResponsavel } from 'app/shared/model/responsavel.model';
-import { ResponsavelService } from 'app/entities/responsavel/responsavel.service';
+import { IAssociado } from 'app/shared/model/associado.model';
+import { AssociadoService } from 'app/entities/associado/associado.service';
 
 @Component({
   selector: 'jhi-haras-update',
@@ -18,7 +18,7 @@ import { ResponsavelService } from 'app/entities/responsavel/responsavel.service
 export class HarasUpdateComponent implements OnInit {
   isSaving = false;
 
-  responsavels: IResponsavel[] = [];
+  associados: IAssociado[] = [];
 
   editForm = this.fb.group({
     id: [],
@@ -30,7 +30,7 @@ export class HarasUpdateComponent implements OnInit {
 
   constructor(
     protected harasService: HarasService,
-    protected responsavelService: ResponsavelService,
+    protected associadoService: AssociadoService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -39,14 +39,14 @@ export class HarasUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ haras }) => {
       this.updateForm(haras);
 
-      this.responsavelService
+      this.associadoService
         .query()
         .pipe(
-          map((res: HttpResponse<IResponsavel[]>) => {
+          map((res: HttpResponse<IAssociado[]>) => {
             return res.body ? res.body : [];
           })
         )
-        .subscribe((resBody: IResponsavel[]) => (this.responsavels = resBody));
+        .subscribe((resBody: IAssociado[]) => (this.associados = resBody));
     });
   }
 
@@ -101,7 +101,7 @@ export class HarasUpdateComponent implements OnInit {
     this.isSaving = false;
   }
 
-  trackById(index: number, item: IResponsavel): any {
+  trackById(index: number, item: IAssociado): any {
     return item.id;
   }
 }

@@ -8,41 +8,41 @@ import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
-import { IResponsavel } from 'app/shared/model/responsavel.model';
+import { IAssociado } from 'app/shared/model/associado.model';
 
-type EntityResponseType = HttpResponse<IResponsavel>;
-type EntityArrayResponseType = HttpResponse<IResponsavel[]>;
+type EntityResponseType = HttpResponse<IAssociado>;
+type EntityArrayResponseType = HttpResponse<IAssociado[]>;
 
 @Injectable({ providedIn: 'root' })
-export class ResponsavelService {
-  public resourceUrl = SERVER_API_URL + 'api/responsavels';
+export class AssociadoService {
+  public resourceUrl = SERVER_API_URL + 'api/associados';
 
   constructor(protected http: HttpClient) {}
 
-  create(responsavel: IResponsavel): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(responsavel);
+  create(associado: IAssociado): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(associado);
     return this.http
-      .post<IResponsavel>(this.resourceUrl, copy, { observe: 'response' })
+      .post<IAssociado>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
-  update(responsavel: IResponsavel): Observable<EntityResponseType> {
-    const copy = this.convertDateFromClient(responsavel);
+  update(associado: IAssociado): Observable<EntityResponseType> {
+    const copy = this.convertDateFromClient(associado);
     return this.http
-      .put<IResponsavel>(this.resourceUrl, copy, { observe: 'response' })
+      .put<IAssociado>(this.resourceUrl, copy, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   find(id: number): Observable<EntityResponseType> {
     return this.http
-      .get<IResponsavel>(`${this.resourceUrl}/${id}`, { observe: 'response' })
+      .get<IAssociado>(`${this.resourceUrl}/${id}`, { observe: 'response' })
       .pipe(map((res: EntityResponseType) => this.convertDateFromServer(res)));
   }
 
   query(req?: any): Observable<EntityArrayResponseType> {
     const options = createRequestOption(req);
     return this.http
-      .get<IResponsavel[]>(this.resourceUrl, { params: options, observe: 'response' })
+      .get<IAssociado[]>(this.resourceUrl, { params: options, observe: 'response' })
       .pipe(map((res: EntityArrayResponseType) => this.convertDateArrayFromServer(res)));
   }
 
@@ -50,9 +50,9 @@ export class ResponsavelService {
     return this.http.delete(`${this.resourceUrl}/${id}`, { observe: 'response' });
   }
 
-  protected convertDateFromClient(responsavel: IResponsavel): IResponsavel {
-    const copy: IResponsavel = Object.assign({}, responsavel, {
-      dtNascimento: responsavel.dtNascimento && responsavel.dtNascimento.isValid() ? responsavel.dtNascimento.toJSON() : undefined
+  protected convertDateFromClient(associado: IAssociado): IAssociado {
+    const copy: IAssociado = Object.assign({}, associado, {
+      dtNascimento: associado.dtNascimento && associado.dtNascimento.isValid() ? associado.dtNascimento.format(DATE_FORMAT) : undefined
     });
     return copy;
   }
@@ -66,8 +66,8 @@ export class ResponsavelService {
 
   protected convertDateArrayFromServer(res: EntityArrayResponseType): EntityArrayResponseType {
     if (res.body) {
-      res.body.forEach((responsavel: IResponsavel) => {
-        responsavel.dtNascimento = responsavel.dtNascimento ? moment(responsavel.dtNascimento) : undefined;
+      res.body.forEach((associado: IAssociado) => {
+        associado.dtNascimento = associado.dtNascimento ? moment(associado.dtNascimento) : undefined;
       });
     }
     return res;

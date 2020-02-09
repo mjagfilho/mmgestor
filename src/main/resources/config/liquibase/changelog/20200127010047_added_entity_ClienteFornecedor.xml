@@ -18,7 +18,7 @@
             <column name="nome" type="varchar(255)">
                 <constraints nullable="false" />
             </column>
-            <column name="dt_nascimento" type="datetime">
+            <column name="dt_nascimento" type="date">
                 <constraints nullable="true" />
             </column>
             <column name="cpf" type="varchar(14)">
@@ -38,7 +38,6 @@
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
-        <dropDefaultValue tableName="cliente_fornecedor" columnName="dt_nascimento" columnDataType="datetime"/>
     </changeSet>
 
     <changeSet id="20200127010047-1-relations" author="jhipster">
@@ -61,7 +60,7 @@
                   tableName="cliente_fornecedor">
             <column name="id" type="numeric"/>
             <column name="nome" type="string"/>
-            <column name="dt_nascimento" type="datetime"/>
+            <column name="dt_nascimento" type="date"/>
             <column name="cpf" type="string"/>
             <column name="nome_haras" type="string"/>
             <column name="localidade_haras" type="string"/>

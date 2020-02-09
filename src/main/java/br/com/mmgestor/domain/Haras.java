@@ -37,7 +37,7 @@ public class Haras implements Serializable {
     @ManyToOne(optional = false)
     @NotNull
     @JsonIgnoreProperties("haras")
-    private Responsavel responsavel;
+    private Associado responsavel;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -87,17 +87,17 @@ public class Haras implements Serializable {
         this.uf = uf;
     }
 
-    public Responsavel getResponsavel() {
+    public Associado getResponsavel() {
         return responsavel;
     }
 
-    public Haras responsavel(Responsavel responsavel) {
-        this.responsavel = responsavel;
+    public Haras responsavel(Associado associado) {
+        this.responsavel = associado;
         return this;
     }
 
-    public void setResponsavel(Responsavel responsavel) {
-        this.responsavel = responsavel;
+    public void setResponsavel(Associado associado) {
+        this.responsavel = associado;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 

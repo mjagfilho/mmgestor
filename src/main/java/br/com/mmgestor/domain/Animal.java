@@ -4,7 +4,7 @@ import javax.persistence.*;
 import javax.validation.constraints.*;
 
 import java.io.Serializable;
-import java.time.Instant;
+import java.time.LocalDate;
 
 import br.com.mmgestor.domain.enumeration.Sexo;
 
@@ -30,7 +30,7 @@ public class Animal implements Serializable {
 
     @NotNull
     @Column(name = "dt_nascimento", nullable = false)
-    private Instant dtNascimento;
+    private LocalDate dtNascimento;
 
     @NotNull
     @Enumerated(EnumType.STRING)
@@ -72,16 +72,16 @@ public class Animal implements Serializable {
         this.nome = nome;
     }
 
-    public Instant getDtNascimento() {
+    public LocalDate getDtNascimento() {
         return dtNascimento;
     }
 
-    public Animal dtNascimento(Instant dtNascimento) {
+    public Animal dtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
         return this;
     }
 
-    public void setDtNascimento(Instant dtNascimento) {
+    public void setDtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
     }
 
