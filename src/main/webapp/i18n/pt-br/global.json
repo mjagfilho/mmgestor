@@ -8,7 +8,6 @@
       "entities": {
         "main": "Entidades",
         "endereco": "Endereco",
-        "responsavel": "Responsavel",
         "haras": "Haras",
         "tipoLocal": "Tipo Local",
         "local": "Local",
