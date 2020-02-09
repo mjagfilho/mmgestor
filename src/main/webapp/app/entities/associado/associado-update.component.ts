@@ -1,18 +1,16 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as moment from 'moment';
-
-import { IAssociado, Associado } from 'app/shared/model/associado.model';
-import { AssociadoService } from './associado.service';
-import { IEndereco } from 'app/shared/model/endereco.model';
-import { EnderecoService } from 'app/entities/endereco/endereco.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
+import { EnderecoService } from 'app/entities/endereco/endereco.service';
+import { Associado, IAssociado } from 'app/shared/model/associado.model';
+import { IEndereco } from 'app/shared/model/endereco.model';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+import { AssociadoService } from './associado.service';
 
 type SelectableEntity = IEndereco | IUser;
 
@@ -30,7 +28,6 @@ export class AssociadoUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    nomeCompleto: [null, [Validators.required]],
     dtNascimento: [],
     endereco: [null, Validators.required],
     usuario: [null, Validators.required]
@@ -86,7 +83,6 @@ export class AssociadoUpdateComponent implements OnInit {
   updateForm(associado: IAssociado): void {
     this.editForm.patchValue({
       id: associado.id,
-      nomeCompleto: associado.nomeCompleto,
       dtNascimento: associado.dtNascimento,
       endereco: associado.endereco,
       usuario: associado.usuario
@@ -111,7 +107,6 @@ export class AssociadoUpdateComponent implements OnInit {
     return {
       ...new Associado(),
       id: this.editForm.get(['id'])!.value,
-      nomeCompleto: this.editForm.get(['nomeCompleto'])!.value,
       dtNascimento: this.editForm.get(['dtNascimento'])!.value,
       endereco: this.editForm.get(['endereco'])!.value,
       usuario: this.editForm.get(['usuario'])!.value

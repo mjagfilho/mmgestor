@@ -1,12 +1,20 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.Local;
-import br.com.mmgestor.domain.TipoLocal;
-import br.com.mmgestor.domain.Endereco;
-import br.com.mmgestor.repository.LocalRepository;
-import br.com.mmgestor.service.LocalService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.math.BigDecimal;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -21,15 +29,13 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.math.BigDecimal;
-import java.util.List;
-
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.Endereco;
+import br.com.mmgestor.domain.Local;
+import br.com.mmgestor.domain.TipoLocal;
+import br.com.mmgestor.repository.LocalRepository;
+import br.com.mmgestor.service.LocalService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link LocalResource} REST controller.
@@ -264,7 +270,7 @@ public class LocalResourceIT {
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.intValue())))
             .andExpect(jsonPath("$.[*].ehContigua").value(hasItem(DEFAULT_EH_CONTIGUA.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getLocal() throws Exception {

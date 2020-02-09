@@ -38,9 +38,6 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = MmgestorApp.class)
 public class AssociadoResourceIT {
 
-    private static final String DEFAULT_NOME_COMPLETO = "AAAAAAAAAA";
-    private static final String UPDATED_NOME_COMPLETO = "BBBBBBBBBB";
-
     private static final LocalDate DEFAULT_DT_NASCIMENTO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DT_NASCIMENTO = LocalDate.now(ZoneId.systemDefault());
 
@@ -89,7 +86,6 @@ public class AssociadoResourceIT {
      */
     public static Associado createEntity(EntityManager em) {
         Associado associado = new Associado()
-            .nomeCompleto(DEFAULT_NOME_COMPLETO)
             .dtNascimento(DEFAULT_DT_NASCIMENTO);
         // Add required entity
         Endereco endereco;
@@ -116,7 +112,6 @@ public class AssociadoResourceIT {
      */
     public static Associado createUpdatedEntity(EntityManager em) {
         Associado associado = new Associado()
-            .nomeCompleto(UPDATED_NOME_COMPLETO)
             .dtNascimento(UPDATED_DT_NASCIMENTO);
         // Add required entity
         Endereco endereco;
@@ -156,7 +151,6 @@ public class AssociadoResourceIT {
         List<Associado> associadoList = associadoRepository.findAll();
         assertThat(associadoList).hasSize(databaseSizeBeforeCreate + 1);
         Associado testAssociado = associadoList.get(associadoList.size() - 1);
-        assertThat(testAssociado.getNomeCompleto()).isEqualTo(DEFAULT_NOME_COMPLETO);
         assertThat(testAssociado.getDtNascimento()).isEqualTo(DEFAULT_DT_NASCIMENTO);
     }
 
@@ -182,24 +176,6 @@ public class AssociadoResourceIT {
 
     @Test
     @Transactional
-    public void checkNomeCompletoIsRequired() throws Exception {
-        int databaseSizeBeforeTest = associadoRepository.findAll().size();
-        // set the field null
-        associado.setNomeCompleto(null);
-
-        // Create the Associado, which fails.
-
-        restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
-            .content(TestUtil.convertObjectToJsonBytes(associado)))
-            .andExpect(status().isBadRequest());
-
-        List<Associado> associadoList = associadoRepository.findAll();
-        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
-    }
-
-    @Test
-    @Transactional
     public void getAllAssociados() throws Exception {
         // Initialize the database
         associadoRepository.saveAndFlush(associado);
@@ -209,7 +185,6 @@ public class AssociadoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associado.getId().intValue())))
-            .andExpect(jsonPath("$.[*].nomeCompleto").value(hasItem(DEFAULT_NOME_COMPLETO)))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())));
     }
     
@@ -224,7 +199,6 @@ public class AssociadoResourceIT {
             .andExpect(status().isOk())
             .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(associado.getId().intValue()))
-            .andExpect(jsonPath("$.nomeCompleto").value(DEFAULT_NOME_COMPLETO))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()));
     }
 
@@ -249,7 +223,6 @@ public class AssociadoResourceIT {
         // Disconnect from session so that the updates on updatedAssociado are not directly saved in db
         em.detach(updatedAssociado);
         updatedAssociado
-            .nomeCompleto(UPDATED_NOME_COMPLETO)
             .dtNascimento(UPDATED_DT_NASCIMENTO);
 
         restAssociadoMockMvc.perform(put("/api/associados")
@@ -261,7 +234,6 @@ public class AssociadoResourceIT {
         List<Associado> associadoList = associadoRepository.findAll();
         assertThat(associadoList).hasSize(databaseSizeBeforeUpdate);
         Associado testAssociado = associadoList.get(associadoList.size() - 1);
-        assertThat(testAssociado.getNomeCompleto()).isEqualTo(UPDATED_NOME_COMPLETO);
         assertThat(testAssociado.getDtNascimento()).isEqualTo(UPDATED_DT_NASCIMENTO);
     }
 

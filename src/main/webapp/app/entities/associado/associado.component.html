@@ -19,7 +19,6 @@
             <thead>
             <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
             <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="nomeCompleto"><span jhiTranslate="mmgestorApp.associado.nomeCompleto">Nome Completo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="dtNascimento"><span jhiTranslate="mmgestorApp.associado.dtNascimento">Dt Nascimento</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="endereco.id"><span jhiTranslate="mmgestorApp.associado.endereco">Endereco</span> <fa-icon [icon]="'sort'"></fa-icon></th>
             <th scope="col"  jhiSortBy="usuario.id"><span jhiTranslate="mmgestorApp.associado.usuario">Usuario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
@@ -29,7 +28,6 @@
             <tbody>
             <tr *ngFor="let associado of associados ;trackBy: trackId">
                 <td><a [routerLink]="['/associado', associado.id, 'view' ]">{{associado.id}}</a></td>
-                <td>{{associado.nomeCompleto}}</td>
                 <td>{{associado.dtNascimento | date:'mediumDate'}}</td>
                 <td>
                     <div *ngIf="associado.endereco">

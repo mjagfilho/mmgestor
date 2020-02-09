@@ -2,13 +2,6 @@
     "name": "Associado",
     "fields": [
         {
-            "fieldName": "nomeCompleto",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
             "fieldName": "dtNascimento",
             "fieldType": "LocalDate"
         }
@@ -42,5 +35,7 @@
     "fluentMethods": true,
     "readOnly": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

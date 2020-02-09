@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Associado(0, 'AAAAAAA', currentDate);
+      elemDefault = new Associado(0, currentDate);
     });
 
     describe('Service methods', () => {
@@ -71,7 +71,6 @@ describe('Service Tests', () => {
       it('should update a Associado', () => {
         const returnedFromService = Object.assign(
           {
-            nomeCompleto: 'BBBBBB',
             dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault
@@ -95,7 +94,6 @@ describe('Service Tests', () => {
       it('should return a list of Associado', () => {
         const returnedFromService = Object.assign(
           {
-            nomeCompleto: 'BBBBBB',
             dtNascimento: currentDate.format(DATE_FORMAT)
           },
           elemDefault

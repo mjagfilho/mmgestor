@@ -20,10 +20,6 @@ public class Associado implements Serializable {
     @SequenceGenerator(name = "sequenceGenerator")
     private Long id;
 
-    @NotNull
-    @Column(name = "nome_completo", nullable = false)
-    private String nomeCompleto;
-
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
 
@@ -44,19 +40,6 @@ public class Associado implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public String getNomeCompleto() {
-        return nomeCompleto;
-    }
-
-    public Associado nomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
-        return this;
-    }
-
-    public void setNomeCompleto(String nomeCompleto) {
-        this.nomeCompleto = nomeCompleto;
     }
 
     public LocalDate getDtNascimento() {
@@ -119,7 +102,6 @@ public class Associado implements Serializable {
     public String toString() {
         return "Associado{" +
             "id=" + getId() +
-            ", nomeCompleto='" + getNomeCompleto() + "'" +
             ", dtNascimento='" + getDtNascimento() + "'" +
             "}";
     }

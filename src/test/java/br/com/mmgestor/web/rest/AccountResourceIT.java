@@ -1,21 +1,22 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.config.Constants;
-import br.com.mmgestor.domain.Authority;
-import br.com.mmgestor.domain.User;
-import br.com.mmgestor.repository.AuthorityRepository;
-import br.com.mmgestor.repository.UserRepository;
-import br.com.mmgestor.security.AuthoritiesConstants;
-import br.com.mmgestor.service.MailService;
-import br.com.mmgestor.service.UserService;
-import br.com.mmgestor.service.dto.PasswordChangeDTO;
-import br.com.mmgestor.service.dto.UserDTO;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
-import br.com.mmgestor.web.rest.vm.KeyAndPasswordVM;
-import br.com.mmgestor.web.rest.vm.ManagedUserVM;
-import org.apache.commons.lang3.RandomStringUtils;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.doNothing;
+import static org.mockito.Mockito.when;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
+import java.time.Instant;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Optional;
+import java.util.Set;
+
+import org.apache.commons.lang3.RandomStringUtils;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
@@ -30,15 +31,20 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.util.*;
-
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.doNothing;
-import static org.mockito.Mockito.when;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.config.Constants;
+import br.com.mmgestor.domain.Authority;
+import br.com.mmgestor.domain.User;
+import br.com.mmgestor.repository.AuthorityRepository;
+import br.com.mmgestor.repository.UserRepository;
+import br.com.mmgestor.security.AuthoritiesConstants;
+import br.com.mmgestor.service.MailService;
+import br.com.mmgestor.service.UserService;
+import br.com.mmgestor.service.dto.PasswordChangeDTO;
+import br.com.mmgestor.service.dto.UserDTO;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import br.com.mmgestor.web.rest.vm.KeyAndPasswordVM;
+import br.com.mmgestor.web.rest.vm.ManagedUserVM;
 
 /**
  * Integration tests for the {@link AccountResource} REST controller.

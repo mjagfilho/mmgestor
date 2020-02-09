@@ -1,11 +1,13 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.User;
-import br.com.mmgestor.repository.UserRepository;
-import br.com.mmgestor.security.jwt.TokenProvider;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
-import br.com.mmgestor.web.rest.vm.LoginVM;
+import static org.hamcrest.Matchers.isEmptyString;
+import static org.hamcrest.Matchers.not;
+import static org.hamcrest.Matchers.nullValue;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
-import static org.hamcrest.Matchers.nullValue;
-import static org.hamcrest.Matchers.isEmptyString;
-import static org.hamcrest.Matchers.not;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.User;
+import br.com.mmgestor.repository.UserRepository;
+import br.com.mmgestor.security.jwt.TokenProvider;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import br.com.mmgestor.web.rest.vm.LoginVM;
 
 /**
  * Integration tests for the {@link UserJWTController} REST controller.

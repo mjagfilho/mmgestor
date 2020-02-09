@@ -10,7 +10,6 @@ entity Endereco {
 }
 
 entity Associado {
-	nomeCompleto String required
     dtNascimento LocalDate
 }
 

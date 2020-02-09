@@ -1,7 +1,9 @@
 package br.com.mmgestor.domain;
 
-import org.junit.jupiter.api.Test;
 import static org.assertj.core.api.Assertions.assertThat;
+
+import org.junit.jupiter.api.Test;
+
 import br.com.mmgestor.web.rest.TestUtil;
 
 public class TipoLocalTest {

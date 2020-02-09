@@ -1,10 +1,19 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.DadosAssociacao;
-import br.com.mmgestor.repository.DadosAssociacaoRepository;
-import br.com.mmgestor.service.DadosAssociacaoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -19,14 +28,11 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.DadosAssociacao;
+import br.com.mmgestor.repository.DadosAssociacaoRepository;
+import br.com.mmgestor.service.DadosAssociacaoService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link DadosAssociacaoResource} REST controller.
@@ -195,7 +201,7 @@ public class DadosAssociacaoResourceIT {
             .andExpect(jsonPath("$.[*].chip").value(hasItem(DEFAULT_CHIP)))
             .andExpect(jsonPath("$.[*].ehBloqueado").value(hasItem(DEFAULT_EH_BLOQUEADO.booleanValue())));
     }
-    
+
     @Test
     @Transactional
     public void getDadosAssociacao() throws Exception {

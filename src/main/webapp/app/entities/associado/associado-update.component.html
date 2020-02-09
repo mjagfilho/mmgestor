@@ -10,17 +10,6 @@
                         readonly />
                 </div>
                 <div class="form-group">
-                    <label class="form-control-label" jhiTranslate="mmgestorApp.associado.nomeCompleto" for="field_nomeCompleto">Nome Completo</label>
-                    <input type="text" class="form-control" name="nomeCompleto" id="field_nomeCompleto"
-                           formControlName="nomeCompleto"/>
-                    <div *ngIf="editForm.get('nomeCompleto')!.invalid && (editForm.get('nomeCompleto')!.dirty || editForm.get('nomeCompleto')!.touched)">
-                        <small class="form-text text-danger"
-                               *ngIf="editForm.get('nomeCompleto')?.errors?.required" jhiTranslate="entity.validation.required">
-                        This field is required.
-                        </small>
-                    </div>
-                </div>
-                <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.dtNascimento" for="field_dtNascimento">Dt Nascimento</label>
                     <div class="input-group">
                         <input id="field_dtNascimento" type="text" class="form-control" name="dtNascimento" ngbDatepicker  #dtNascimentoDp="ngbDatepicker" formControlName="dtNascimento"/>

@@ -1,12 +1,15 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import io.github.jhipster.config.JHipsterProperties;
-import br.com.mmgestor.config.audit.AuditEventConverter;
-import br.com.mmgestor.domain.PersistentAuditEvent;
-import br.com.mmgestor.repository.PersistenceAuditEventRepository;
+import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.header;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-import br.com.mmgestor.service.AuditEventService;
+import java.time.Instant;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.MockitoAnnotations;
@@ -21,12 +24,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-
-import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.config.audit.AuditEventConverter;
+import br.com.mmgestor.domain.PersistentAuditEvent;
+import br.com.mmgestor.repository.PersistenceAuditEventRepository;
+import br.com.mmgestor.service.AuditEventService;
+import io.github.jhipster.config.JHipsterProperties;
 
 /**
  * Integration tests for the {@link AuditResource} REST controller.
