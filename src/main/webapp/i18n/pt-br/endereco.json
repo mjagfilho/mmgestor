@@ -2,26 +2,28 @@
   "mmgestorApp": {
     "endereco": {
       "home": {
-        "title": "Enderecos",
-        "createLabel": "Criar novo Endereco",
-        "createOrEditLabel": "Criar ou editar Endereco",
-        "notFound": "Nenhum Endereco encontrado"
+        "title": "Endereços",
+        "createLabel": "Criar novo Endereço",
+        "createOrEditLabel": "Criar ou editar Endereço",
+        "notFound": "Nenhum Endereço encontrado"
       },
-      "created": "Um novo Endereco foi criado com o identificador {{ param }}",
-      "updated": "Um Endereco foi atualizado com o identificador {{ param }}",
-      "deleted": "Um Endereco foi excluído com o identificador {{ param }}",
+      "created": "Um novo Endereço foi criado com o identificador {{ param }}",
+      "updated": "Um Endereço foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Endereço foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Endereco {{ id }}?"
+        "question": "Tem certeza de que deseja excluir Endereço {{ id }}?"
       },
       "detail": {
-        "title": "Endereco"
+        "title": "Endereço"
       },
-      "cep": "Cep",
+      "cep": "CEP",
+      "cep.placeholder": "99.999-99",
       "logradouro": "Logradouro",
       "complemento": "Complemento",
       "bairro": "Bairro",
       "localidade": "Localidade",
-      "uf": "Uf"
+      "uf": "UF",
+      "buscarCEP": "Consultar CEP"
     }
   }
 }

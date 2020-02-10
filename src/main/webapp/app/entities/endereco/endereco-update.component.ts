@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 
 import { IEndereco, Endereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from './endereco.service';
+import { CEP_MASK } from 'app/shared/constants/input.constants';
+import { NgxViacepService, Endereco as EnderecoViaCep, ErroCep, ErrorValues } from '@brunoc/ngx-viacep';
 
 @Component({
   selector: 'jhi-endereco-update',
@@ -14,6 +16,7 @@ import { EnderecoService } from './endereco.service';
 })
 export class EnderecoUpdateComponent implements OnInit {
   isSaving = false;
+  cepMask = CEP_MASK;
 
   editForm = this.fb.group({
     id: [],
@@ -28,7 +31,12 @@ export class EnderecoUpdateComponent implements OnInit {
     uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]]
   });
 
-  constructor(protected enderecoService: EnderecoService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
+  constructor(
+    protected enderecoService: EnderecoService,
+    protected activatedRoute: ActivatedRoute,
+    private fb: FormBuilder,
+    private viacep: NgxViacepService
+  ) {}
 
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ endereco }) => {
@@ -89,5 +97,27 @@ export class EnderecoUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
+  }
+
+  consultarCEP(): void {
+    this.viacep
+      .buscarPorCep('52041360')
+      .then((endereco: EnderecoViaCep) => {
+        // Endereço retornado :)
+        console.log(endereco);
+      })
+      .catch((error: ErroCep) => {
+        // Alguma coisa deu errado :/
+        console.log(error.message);
+        switch (error.getCode()) {
+          case ErrorValues.CEP_NAO_ENCONTRADO:
+            console.log('CEP não encontrado!');
+            break;
+          case ErrorValues.ERRO_SERVIDOR:
+            console.log('O serviço de consulta está enfrentando instabilidade');
+            break;
+          // Quaisquer outros erros contidos em ErrorValues podem ser tratados assim
+        }
+      });
   }
 }

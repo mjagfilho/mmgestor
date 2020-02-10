@@ -8,6 +8,7 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { TextMaskModule } from 'angular2-text-mask';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
 
 @NgModule({
   exports: [
@@ -19,7 +20,8 @@ import { TextMaskModule } from 'angular2-text-mask';
     FontAwesomeModule,
     ReactiveFormsModule,
     TranslateModule,
-    TextMaskModule
+    TextMaskModule,
+    NgxViacepModule
   ]
 })
 export class MmgestorSharedLibsModule {}
