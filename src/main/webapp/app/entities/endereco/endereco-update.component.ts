@@ -28,7 +28,8 @@ export class EnderecoUpdateComponent implements OnInit {
     complemento: [],
     bairro: [null, [Validators.required]],
     localidade: [null, [Validators.required]],
-    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]]
+    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
+    numero: [null, [Validators.required]]
   });
 
   constructor(
@@ -52,7 +53,8 @@ export class EnderecoUpdateComponent implements OnInit {
       complemento: endereco.complemento,
       bairro: endereco.bairro,
       localidade: endereco.localidade,
-      uf: endereco.uf
+      uf: endereco.uf,
+      numero: endereco.numero
     });
   }
 
@@ -79,7 +81,8 @@ export class EnderecoUpdateComponent implements OnInit {
       complemento: this.editForm.get(['complemento'])!.value,
       bairro: this.editForm.get(['bairro'])!.value,
       localidade: this.editForm.get(['localidade'])!.value,
-      uf: this.editForm.get(['uf'])!.value
+      uf: this.editForm.get(['uf'])!.value,
+      numero: this.editForm.get(['numero'])!.value
     };
   }
 
@@ -103,8 +106,8 @@ export class EnderecoUpdateComponent implements OnInit {
     this.viacep
       .buscarPorCep(this.editForm.get(['cep'])!.value)
       .then((endereco: EnderecoViaCep) => {
-        // Endereço retornado :)
         this.editForm.get(['cep'])!.setValue(endereco.cep);
+        this.editForm.get(['cep'])!.setErrors(null);
         this.editForm.get(['logradouro'])!.setValue(endereco.logradouro);
         this.editForm.get(['complemento'])!.setValue(endereco.complemento);
         this.editForm.get(['bairro'])!.setValue(endereco.bairro);

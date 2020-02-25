@@ -1,9 +1,7 @@
 package br.com.mmgestor.domain;
 
-import static org.assertj.core.api.Assertions.assertThat;
-
 import org.junit.jupiter.api.Test;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import br.com.mmgestor.web.rest.TestUtil;
 
 public class EnderecoTest {

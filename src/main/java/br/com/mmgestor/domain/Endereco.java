@@ -1,5 +1,6 @@
 package br.com.mmgestor.domain;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -45,6 +46,10 @@ public class Endereco implements Serializable {
     @Pattern(regexp = "[A-Z]{2}")
     @Column(name = "uf", length = 2, nullable = false)
     private String uf;
+
+    @NotNull
+    @Column(name = "numero", nullable = false)
+    private String numero;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -132,6 +137,19 @@ public class Endereco implements Serializable {
     public void setUf(String uf) {
         this.uf = uf;
     }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public Endereco numero(String numero) {
+        this.numero = numero;
+        return this;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
     @Override
@@ -160,6 +178,7 @@ public class Endereco implements Serializable {
             ", bairro='" + getBairro() + "'" +
             ", localidade='" + getLocalidade() + "'" +
             ", uf='" + getUf() + "'" +
+            ", numero='" + getNumero() + "'" +
             "}";
     }
 }

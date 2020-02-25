@@ -33,6 +33,9 @@
             <column name="uf" type="varchar(2)">
                 <constraints nullable="false" />
             </column>
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
     </changeSet>
@@ -62,6 +65,7 @@
             <column name="bairro" type="string"/>
             <column name="localidade" type="string"/>
             <column name="uf" type="string"/>
+            <column name="numero" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

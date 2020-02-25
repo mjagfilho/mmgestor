@@ -11,7 +11,7 @@
       "updated": "Um Endereço foi atualizado com o identificador {{ param }}",
       "deleted": "Um Endereço foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Endereço {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o Endereço {{ id }}?"
       },
       "detail": {
         "title": "Endereço"
@@ -23,6 +23,7 @@
       "bairro": "Bairro",
       "localidade": "Localidade",
       "uf": "UF",
+      "numero": "Número",
       "buscarCEP": "Consultar CEP"
     }
   }

@@ -13,9 +13,7 @@ export class EnderecoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ endereco }) => {
-      this.endereco = endereco;
-    });
+    this.activatedRoute.data.subscribe(({ endereco }) => (this.endereco = endereco));
   }
 
   previousState(): void {

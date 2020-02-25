@@ -2,17 +2,22 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-endereco-heading" jhiTranslate="mmgestorApp.endereco.home.createOrEditLabel">Create or edit a Endereco</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
-                <div class="input-group">
-                    <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.cep" for="field_cep">Cep</label>:&nbsp;
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.cep" for="field_cep">Cep</label>
                     <input type="text" class="form-control" name="cep" id="field_cep"
                            formControlName="cep" placeholder="{{'mmgestorApp.endereco.cep.placeholder' | translate}}" [textMask]="{mask: cepMask}"/>
+                    <button type="button" id="consultar-cep" class="input-group-append btn btn-info"  (click)="consultarCEP()">
+                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="mmgestorApp.endereco.buscarCEP">Search CEP</span>
+                    </button>
                     <div *ngIf="editForm.get('cep')!.invalid && (editForm.get('cep')!.dirty || editForm.get('cep')!.touched)">
                         <small class="form-text text-danger"
                                *ngIf="editForm.get('cep')?.errors?.required" jhiTranslate="entity.validation.required">
@@ -31,11 +36,8 @@
                             This field should follow pattern for "Cep".
                         </small>
                     </div>
-                    &nbsp;
-                    <button type="button" id="consultar-cep" class="input-group-append btn btn-info"  (click)="consultarCEP()">
-                        <fa-icon [icon]="'search'"></fa-icon>&nbsp;<span jhiTranslate="mmgestorApp.endereco.buscarCEP">Search CEP</span>
-                    </button>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.logradouro" for="field_logradouro">Logradouro</label>
                     <input type="text" class="form-control" name="logradouro" id="field_logradouro"
@@ -47,11 +49,25 @@
                         </small>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.numero" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                    <div *ngIf="editForm.get('numero')!.invalid && (editForm.get('numero')!.dirty || editForm.get('numero')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numero')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.complemento" for="field_complemento">Complemento</label>
                     <input type="text" class="form-control" name="complemento" id="field_complemento"
                            formControlName="complemento"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.bairro" for="field_bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="field_bairro"
@@ -63,6 +79,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.localidade" for="field_localidade">Localidade</label>
                     <input type="text" class="form-control" name="localidade" id="field_localidade"
@@ -74,6 +91,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.endereco.uf" for="field_uf">Uf</label>
                     <input type="text" class="form-control" name="uf" id="field_uf"
@@ -97,14 +115,15 @@
                         </small>
                     </div>
                 </div>
-
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

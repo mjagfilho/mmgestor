@@ -34,7 +34,8 @@ export class EnderecoComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     this.enderecoService
       .query({
         page: pageToLoad - 1,
@@ -96,7 +97,7 @@ export class EnderecoComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.enderecos = data ? data : [];
+    this.enderecos = data || [];
   }
 
   protected onError(): void {

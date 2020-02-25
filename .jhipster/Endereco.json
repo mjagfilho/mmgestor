@@ -51,6 +51,13 @@
             "fieldValidateRulesMinlength": 2,
             "fieldValidateRulesMaxlength": 2,
             "fieldValidateRulesPattern": "[A-Z]{2}"
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
         }
     ],
     "relationships": [],
@@ -63,5 +70,7 @@
     "fluentMethods": true,
     "readOnly": false,
     "clientRootFolder": "",
-    "applications": "*"
+    "applications": "*",
+    "searchEngine": false,
+    "databaseType": "sql"
 }

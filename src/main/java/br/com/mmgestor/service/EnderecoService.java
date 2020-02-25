@@ -50,7 +50,6 @@ public class EnderecoService {
         return enderecoRepository.findAll(pageable);
     }
 
-
     /**
      * Get one endereco by id.
      *

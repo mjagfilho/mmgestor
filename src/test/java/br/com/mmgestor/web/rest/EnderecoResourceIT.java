@@ -52,6 +52,9 @@ public class EnderecoResourceIT {
     private static final String DEFAULT_UF = "AA";
     private static final String UPDATED_UF = "BB";
 
+    private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO = "BBBBBBBBBB";
+
     @Autowired
     private EnderecoRepository enderecoRepository;
 
@@ -102,7 +105,8 @@ public class EnderecoResourceIT {
             .complemento(DEFAULT_COMPLEMENTO)
             .bairro(DEFAULT_BAIRRO)
             .localidade(DEFAULT_LOCALIDADE)
-            .uf(DEFAULT_UF);
+            .uf(DEFAULT_UF)
+            .numero(DEFAULT_NUMERO);
         return endereco;
     }
     /**
@@ -118,7 +122,8 @@ public class EnderecoResourceIT {
             .complemento(UPDATED_COMPLEMENTO)
             .bairro(UPDATED_BAIRRO)
             .localidade(UPDATED_LOCALIDADE)
-            .uf(UPDATED_UF);
+            .uf(UPDATED_UF)
+            .numero(UPDATED_NUMERO);
         return endereco;
     }
 
@@ -134,7 +139,7 @@ public class EnderecoResourceIT {
 
         // Create the Endereco
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isCreated());
 
@@ -148,6 +153,7 @@ public class EnderecoResourceIT {
         assertThat(testEndereco.getBairro()).isEqualTo(DEFAULT_BAIRRO);
         assertThat(testEndereco.getLocalidade()).isEqualTo(DEFAULT_LOCALIDADE);
         assertThat(testEndereco.getUf()).isEqualTo(DEFAULT_UF);
+        assertThat(testEndereco.getNumero()).isEqualTo(DEFAULT_NUMERO);
     }
 
     @Test
@@ -160,7 +166,7 @@ public class EnderecoResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -180,7 +186,7 @@ public class EnderecoResourceIT {
         // Create the Endereco, which fails.
 
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -198,7 +204,7 @@ public class EnderecoResourceIT {
         // Create the Endereco, which fails.
 
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -216,7 +222,7 @@ public class EnderecoResourceIT {
         // Create the Endereco, which fails.
 
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -234,7 +240,7 @@ public class EnderecoResourceIT {
         // Create the Endereco, which fails.
 
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -252,7 +258,25 @@ public class EnderecoResourceIT {
         // Create the Endereco, which fails.
 
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
+            .content(TestUtil.convertObjectToJsonBytes(endereco)))
+            .andExpect(status().isBadRequest());
+
+        List<Endereco> enderecoList = enderecoRepository.findAll();
+        assertThat(enderecoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = enderecoRepository.findAll().size();
+        // set the field null
+        endereco.setNumero(null);
+
+        // Create the Endereco, which fails.
+
+        restEnderecoMockMvc.perform(post("/api/enderecos")
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -269,14 +293,15 @@ public class EnderecoResourceIT {
         // Get all the enderecoList
         restEnderecoMockMvc.perform(get("/api/enderecos?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(endereco.getId().intValue())))
             .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
             .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
             .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO)))
             .andExpect(jsonPath("$.[*].bairro").value(hasItem(DEFAULT_BAIRRO)))
             .andExpect(jsonPath("$.[*].localidade").value(hasItem(DEFAULT_LOCALIDADE)))
-            .andExpect(jsonPath("$.[*].uf").value(hasItem(DEFAULT_UF)));
+            .andExpect(jsonPath("$.[*].uf").value(hasItem(DEFAULT_UF)))
+            .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)));
     }
     
     @Test
@@ -288,14 +313,15 @@ public class EnderecoResourceIT {
         // Get the endereco
         restEnderecoMockMvc.perform(get("/api/enderecos/{id}", endereco.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(endereco.getId().intValue()))
             .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
             .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
             .andExpect(jsonPath("$.complemento").value(DEFAULT_COMPLEMENTO))
             .andExpect(jsonPath("$.bairro").value(DEFAULT_BAIRRO))
             .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
-            .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
+            .andExpect(jsonPath("$.uf").value(DEFAULT_UF))
+            .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO));
     }
 
     @Test
@@ -324,10 +350,11 @@ public class EnderecoResourceIT {
             .complemento(UPDATED_COMPLEMENTO)
             .bairro(UPDATED_BAIRRO)
             .localidade(UPDATED_LOCALIDADE)
-            .uf(UPDATED_UF);
+            .uf(UPDATED_UF)
+            .numero(UPDATED_NUMERO);
 
         restEnderecoMockMvc.perform(put("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedEndereco)))
             .andExpect(status().isOk());
 
@@ -341,6 +368,7 @@ public class EnderecoResourceIT {
         assertThat(testEndereco.getBairro()).isEqualTo(UPDATED_BAIRRO);
         assertThat(testEndereco.getLocalidade()).isEqualTo(UPDATED_LOCALIDADE);
         assertThat(testEndereco.getUf()).isEqualTo(UPDATED_UF);
+        assertThat(testEndereco.getNumero()).isEqualTo(UPDATED_NUMERO);
     }
 
     @Test
@@ -352,7 +380,7 @@ public class EnderecoResourceIT {
 
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restEnderecoMockMvc.perform(put("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(TestUtil.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -371,7 +399,7 @@ public class EnderecoResourceIT {
 
         // Delete the endereco
         restEnderecoMockMvc.perform(delete("/api/enderecos/{id}", endereco.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(TestUtil.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

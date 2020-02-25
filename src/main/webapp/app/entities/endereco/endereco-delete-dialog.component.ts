@@ -13,7 +13,7 @@ export class EnderecoDeleteDialogComponent {
 
   constructor(protected enderecoService: EnderecoService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 
