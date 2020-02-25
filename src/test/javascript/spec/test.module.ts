@@ -13,6 +13,9 @@ import { MockActivatedRoute, MockRouter } from './helpers/mock-route.service';
 import { MockActiveModal } from './helpers/mock-active-modal.service';
 import { MockEventManager } from './helpers/mock-event-manager.service';
 
+import { TextMaskModule } from 'angular2-text-mask';
+import { NgxViacepModule } from '@brunoc/ngx-viacep';
+
 @NgModule({
   providers: [
     DatePipe,
@@ -56,6 +59,7 @@ import { MockEventManager } from './helpers/mock-event-manager.service';
       useValue: null
     }
   ],
-  imports: [HttpClientTestingModule]
+  imports: [HttpClientTestingModule],
+  exports: [TextMaskModule, NgxViacepModule]
 })
 export class MmgestorTestModule {}

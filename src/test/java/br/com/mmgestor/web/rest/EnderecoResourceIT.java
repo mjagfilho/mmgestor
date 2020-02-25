@@ -293,7 +293,7 @@ public class EnderecoResourceIT {
         // Get all the enderecoList
         restEnderecoMockMvc.perform(get("/api/enderecos?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(endereco.getId().intValue())))
             .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
             .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
@@ -313,7 +313,7 @@ public class EnderecoResourceIT {
         // Get the endereco
         restEnderecoMockMvc.perform(get("/api/enderecos/{id}", endereco.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
             .andExpect(jsonPath("$.id").value(endereco.getId().intValue()))
             .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
             .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
