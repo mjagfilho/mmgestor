@@ -101,14 +101,17 @@ export class EnderecoUpdateComponent implements OnInit {
 
   consultarCEP(): void {
     this.viacep
-      .buscarPorCep('52041360')
+      .buscarPorCep(this.editForm.get(['cep'])!.value)
       .then((endereco: EnderecoViaCep) => {
         // Endereço retornado :)
-        console.log(endereco);
+        this.editForm.get(['cep'])!.setValue(endereco.cep);
+        this.editForm.get(['logradouro'])!.setValue(endereco.logradouro);
+        this.editForm.get(['complemento'])!.setValue(endereco.complemento);
+        this.editForm.get(['bairro'])!.setValue(endereco.bairro);
+        this.editForm.get(['localidade'])!.setValue(endereco.localidade);
+        this.editForm.get(['uf'])!.setValue(endereco.uf);
       })
       .catch((error: ErroCep) => {
-        // Alguma coisa deu errado :/
-        console.log(error.message);
         switch (error.getCode()) {
           case ErrorValues.CEP_NAO_ENCONTRADO:
             console.log('CEP não encontrado!');
@@ -116,7 +119,9 @@ export class EnderecoUpdateComponent implements OnInit {
           case ErrorValues.ERRO_SERVIDOR:
             console.log('O serviço de consulta está enfrentando instabilidade');
             break;
-          // Quaisquer outros erros contidos em ErrorValues podem ser tratados assim
+          default:
+            console.log(error.message);
+            break;
         }
       });
   }
