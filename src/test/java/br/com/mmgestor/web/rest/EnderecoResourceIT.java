@@ -34,8 +34,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 @SpringBootTest(classes = MmgestorApp.class)
 public class EnderecoResourceIT {
 
-    private static final String DEFAULT_CEP = "84j679-225";
-    private static final String UPDATED_CEP = "16y704-523";
+    private static final String DEFAULT_CEP = "84567-225";
+    private static final String UPDATED_CEP = "16870-523";
 
     private static final String DEFAULT_LOGRADOURO = "AAAAAAAAAA";
     private static final String UPDATED_LOGRADOURO = "BBBBBBBBBB";

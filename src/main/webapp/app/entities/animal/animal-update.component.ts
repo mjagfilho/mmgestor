@@ -1,16 +1,14 @@
-import { Component, OnInit } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { DadosAssociacaoService } from 'app/entities/dados-associacao/dados-associacao.service';
+import { Animal, IAnimal } from 'app/shared/model/animal.model';
+import { IDadosAssociacao } from 'app/shared/model/dados-associacao.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import * as moment from 'moment';
-
-import { IAnimal, Animal } from 'app/shared/model/animal.model';
 import { AnimalService } from './animal.service';
-import { IDadosAssociacao } from 'app/shared/model/dados-associacao.model';
-import { DadosAssociacaoService } from 'app/entities/dados-associacao/dados-associacao.service';
 
 @Component({
   selector: 'jhi-animal-update',
