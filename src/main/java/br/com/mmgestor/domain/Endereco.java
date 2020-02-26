@@ -21,9 +21,9 @@ public class Endereco implements Serializable {
     private Long id;
 
     @NotNull
-    @Size(min = 10, max = 10)
-    @Pattern(regexp = "[0-9]{2}.[0-9]{3}-[0-9]{3}")
-    @Column(name = "cep", length = 10, nullable = false)
+    @Size(min = 9, max = 9)
+    @Pattern(regexp = "[0-9]{5}-[0-9]{3}")
+    @Column(name = "cep", length = 9, nullable = false)
     private String cep;
 
     @NotNull

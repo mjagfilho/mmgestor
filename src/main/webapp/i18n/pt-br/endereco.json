@@ -17,7 +17,7 @@
         "title": "Endereço"
       },
       "cep": "CEP",
-      "cep.placeholder": "99.999-99",
+      "cep.placeholder": "99999-99",
       "logradouro": "Logradouro",
       "complemento": "Complemento",
       "bairro": "Bairro",

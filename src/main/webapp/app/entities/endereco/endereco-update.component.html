@@ -24,16 +24,16 @@
                         This field is required.
                         </small>
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('cep')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 10 }">
-                        This field is required to be at least 10 characters.
+                               *ngIf="editForm.get('cep')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 9 }">
+                        This field is required to be at least 9 characters.
                         </small>
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('cep')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 10 }">
-                        This field cannot be longer than 10 characters.
+                               *ngIf="editForm.get('cep')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 9 }">
+                        This field cannot be longer than 9 characters.
                         </small>
                         <small class="form-text text-danger"
-                               *ngIf="editForm.get('cep')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Cep' }">
-                            This field should follow pattern for "Cep".
+                               *ngIf="editForm.get('cep')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'CEP' }">
+                            This field should follow pattern for "CEP".
                         </small>
                     </div>
                 </div>

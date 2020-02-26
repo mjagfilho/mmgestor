@@ -5,9 +5,9 @@
 
     <groupId>br.com.mmgestor</groupId>
     <artifactId>mmgestor</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2</version>
     <packaging>jar</packaging>
-    <name>Mmgestor</name>
+    <name>MMGestor</name>
 
     <repositories>
         <!-- jhipster-needle-maven-repository -->

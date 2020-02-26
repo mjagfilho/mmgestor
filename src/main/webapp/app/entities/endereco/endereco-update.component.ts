@@ -20,10 +20,7 @@ export class EnderecoUpdateComponent implements OnInit {
 
   editForm = this.fb.group({
     id: [],
-    cep: [
-      null,
-      [Validators.required, Validators.minLength(10), Validators.maxLength(10), Validators.pattern('[0-9]{2}.[0-9]{3}-[0-9]{3}')]
-    ],
+    cep: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('[0-9]{5}-[0-9]{3}')]],
     logradouro: [null, [Validators.required]],
     complemento: [],
     bairro: [null, [Validators.required]],
@@ -107,8 +104,8 @@ export class EnderecoUpdateComponent implements OnInit {
       .buscarPorCep(this.editForm.get(['cep'])!.value)
       .then((endereco: EnderecoViaCep) => {
         this.editForm.get(['cep'])!.setValue(endereco.cep);
-        this.editForm.get(['cep'])!.setErrors(null);
         this.editForm.get(['logradouro'])!.setValue(endereco.logradouro);
+        this.editForm.get(['numero'])!.setValue('');
         this.editForm.get(['complemento'])!.setValue(endereco.complemento);
         this.editForm.get(['bairro'])!.setValue(endereco.bairro);
         this.editForm.get(['localidade'])!.setValue(endereco.localidade);
