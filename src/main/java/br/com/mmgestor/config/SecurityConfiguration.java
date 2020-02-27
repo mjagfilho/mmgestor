@@ -64,7 +64,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .accessDeniedHandler(problemSupport)
         .and()
             .headers()
-            .contentSecurityPolicy("default-src 'self'; frame-src 'self' data:; script-src 'self' 'unsafe-eval' https://viacep.com.br; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' data:; object-src 'none'")
+            .contentSecurityPolicy("default-src 'self'; script-src 'unsafe-inline' 'sha256-+WlV8/ocn5lG4wb+FlH8DR0jf4xpq/V/Bdl/6wiEZpI='; script-src-elem 'self' 'unsafe-inline'; connect-src 'self' https://viacep.com.br; require-trusted-types-for 'script'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src https://use.typekit.net data:; object-src 'none'; frame-src 'self' data:;")
         .and()
             .referrerPolicy(ReferrerPolicyHeaderWriter.ReferrerPolicy.STRICT_ORIGIN_WHEN_CROSS_ORIGIN)
         .and()
