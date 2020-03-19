@@ -59,10 +59,17 @@ spring:
   liquibase:
     contexts: prod
   mail:
-    host: localhost
-    port: 25
-    username:
-    password:
+    host: mail.mmgestor.com.br
+    port: 587
+    username: sistema@mmgestor.com.br
+    password: jF!CiSNiK3nF
+    protocol: smtp
+    tls: true
+    properties.mail.smtp:
+      auth: true
+      starttls.enable: true
+      ssl.trust: mail.mmgestor.com.br
+    test-connection: true
   thymeleaf:
     cache: true
 
@@ -119,7 +126,9 @@ jhipster:
         token-validity-in-seconds: 86400
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
-    base-url: http://my-server-url-to-change # Modify according to your server's URL
+    enabled: true
+    base-url: http://www.mmgestor.com.br
+    from: sistema@mmgestor.com.br
   metrics:
     logs: # Reports metrics in the logs
       enabled: false

@@ -31,13 +31,18 @@ The `npm run` command will list all of the scripts available to run for this pro
 ### Tools
 
 https://github.com/brunoc107/ngx-viacep
+https://csp-evaluator.withgoogle.com/
+https://report-uri.com/home/hash
+https://fontawesome.com/icons?d=gallery
 
 ### Troubleshooting
 
 https://stackoverflow.com/questions/41019034/check-sum-error-in-jhipster-when-editing-an-existing-entity-generated-using-the
 
+```
 ./mvnw liquibase:clearCheckSums
 UPDATE databasechangelog SET md5sum = null
+```
 
 ### PWA Support
 
