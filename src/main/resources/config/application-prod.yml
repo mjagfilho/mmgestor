@@ -127,7 +127,7 @@ jhipster:
         token-validity-in-seconds-for-remember-me: 2592000
   mail: # specific JHipster mail property, for standard properties see MailProperties
     enabled: true
-    base-url: http://www.mmgestor.com.br
+    base-url: www.mmgestor.com.br
     from: sistema@mmgestor.com.br
   metrics:
     logs: # Reports metrics in the logs
