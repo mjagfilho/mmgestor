@@ -35,6 +35,14 @@ import { RouterModule } from '@angular/router';
       {
         path: 'associado',
         loadChildren: () => import('./associado/associado.module').then(m => m.MmgestorAssociadoModule)
+      },
+      {
+        path: 'tipo-associado',
+        loadChildren: () => import('./tipo-associado/tipo-associado.module').then(m => m.MmgestorTipoAssociadoModule)
+      },
+      {
+        path: 'associados-haras',
+        loadChildren: () => import('./associados-haras/associados-haras.module').then(m => m.MmgestorAssociadosHarasModule)
       }
       /* jhipster-needle-add-entity-route - JHipster will add entity modules routes here */
     ])

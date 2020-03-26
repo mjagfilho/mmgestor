@@ -2,6 +2,7 @@ package br.com.mmgestor.web.rest;
 
 import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.Associado;
+import br.com.mmgestor.domain.TipoAssociado;
 import br.com.mmgestor.domain.Endereco;
 import br.com.mmgestor.domain.User;
 import br.com.mmgestor.repository.AssociadoRepository;
@@ -88,6 +89,16 @@ public class AssociadoResourceIT {
         Associado associado = new Associado()
             .dtNascimento(DEFAULT_DT_NASCIMENTO);
         // Add required entity
+        TipoAssociado tipoAssociado;
+        if (TestUtil.findAll(em, TipoAssociado.class).isEmpty()) {
+            tipoAssociado = TipoAssociadoResourceIT.createEntity(em);
+            em.persist(tipoAssociado);
+            em.flush();
+        } else {
+            tipoAssociado = TestUtil.findAll(em, TipoAssociado.class).get(0);
+        }
+        associado.setTipo(tipoAssociado);
+        // Add required entity
         Endereco endereco;
         if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
             endereco = EnderecoResourceIT.createEntity(em);
@@ -113,6 +124,16 @@ public class AssociadoResourceIT {
     public static Associado createUpdatedEntity(EntityManager em) {
         Associado associado = new Associado()
             .dtNascimento(UPDATED_DT_NASCIMENTO);
+        // Add required entity
+        TipoAssociado tipoAssociado;
+        if (TestUtil.findAll(em, TipoAssociado.class).isEmpty()) {
+            tipoAssociado = TipoAssociadoResourceIT.createUpdatedEntity(em);
+            em.persist(tipoAssociado);
+            em.flush();
+        } else {
+            tipoAssociado = TestUtil.findAll(em, TipoAssociado.class).get(0);
+        }
+        associado.setTipo(tipoAssociado);
         // Add required entity
         Endereco endereco;
         if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
@@ -183,11 +204,11 @@ public class AssociadoResourceIT {
         // Get all the associadoList
         restAssociadoMockMvc.perform(get("/api/associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associado.getId().intValue())))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())));
     }
-    
+
     @Test
     @Transactional
     public void getAssociado() throws Exception {
@@ -197,7 +218,7 @@ public class AssociadoResourceIT {
         // Get the associado
         restAssociadoMockMvc.perform(get("/api/associados/{id}", associado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(associado.getId().intValue()))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()));
     }

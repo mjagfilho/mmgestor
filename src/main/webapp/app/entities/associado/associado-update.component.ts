@@ -1,18 +1,21 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { IUser } from 'app/core/user/user.model';
-import { UserService } from 'app/core/user/user.service';
-import { EnderecoService } from 'app/entities/endereco/endereco.service';
-import { Associado, IAssociado } from 'app/shared/model/associado.model';
-import { IEndereco } from 'app/shared/model/endereco.model';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
-import { AssociadoService } from './associado.service';
 
-type SelectableEntity = IEndereco | IUser;
+import { IAssociado, Associado } from 'app/shared/model/associado.model';
+import { AssociadoService } from './associado.service';
+import { ITipoAssociado } from 'app/shared/model/tipo-associado.model';
+import { TipoAssociadoService } from 'app/entities/tipo-associado/tipo-associado.service';
+import { IEndereco } from 'app/shared/model/endereco.model';
+import { EnderecoService } from 'app/entities/endereco/endereco.service';
+import { IUser } from 'app/core/user/user.model';
+import { UserService } from 'app/core/user/user.service';
+
+type SelectableEntity = ITipoAssociado | IEndereco | IUser;
 
 @Component({
   selector: 'jhi-associado-update',
@@ -20,21 +23,22 @@ type SelectableEntity = IEndereco | IUser;
 })
 export class AssociadoUpdateComponent implements OnInit {
   isSaving = false;
-
+  tipos: ITipoAssociado[] = [];
   enderecos: IEndereco[] = [];
-
   users: IUser[] = [];
   dtNascimentoDp: any;
 
   editForm = this.fb.group({
     id: [],
     dtNascimento: [],
+    tipo: [null, Validators.required],
     endereco: [null, Validators.required],
     usuario: [null, Validators.required]
   });
 
   constructor(
     protected associadoService: AssociadoService,
+    protected tipoAssociadoService: TipoAssociadoService,
     protected enderecoService: EnderecoService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
@@ -45,11 +49,33 @@ export class AssociadoUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ associado }) => {
       this.updateForm(associado);
 
+      this.tipoAssociadoService
+        .query({ filter: 'associado-is-null' })
+        .pipe(
+          map((res: HttpResponse<ITipoAssociado[]>) => {
+            return res.body || [];
+          })
+        )
+        .subscribe((resBody: ITipoAssociado[]) => {
+          if (!associado.tipo || !associado.tipo.id) {
+            this.tipos = resBody;
+          } else {
+            this.tipoAssociadoService
+              .find(associado.tipo.id)
+              .pipe(
+                map((subRes: HttpResponse<ITipoAssociado>) => {
+                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
+                })
+              )
+              .subscribe((concatRes: ITipoAssociado[]) => (this.tipos = concatRes));
+          }
+        });
+
       this.enderecoService
         .query({ filter: 'associado-is-null' })
         .pipe(
           map((res: HttpResponse<IEndereco[]>) => {
-            return res.body ? res.body : [];
+            return res.body || [];
           })
         )
         .subscribe((resBody: IEndereco[]) => {
@@ -63,20 +89,11 @@ export class AssociadoUpdateComponent implements OnInit {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
                 })
               )
-              .subscribe((concatRes: IEndereco[]) => {
-                this.enderecos = concatRes;
-              });
+              .subscribe((concatRes: IEndereco[]) => (this.enderecos = concatRes));
           }
         });
 
-      this.userService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IUser[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IUser[]) => (this.users = resBody));
+      this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
 
@@ -84,6 +101,7 @@ export class AssociadoUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: associado.id,
       dtNascimento: associado.dtNascimento,
+      tipo: associado.tipo,
       endereco: associado.endereco,
       usuario: associado.usuario
     });
@@ -108,6 +126,7 @@ export class AssociadoUpdateComponent implements OnInit {
       ...new Associado(),
       id: this.editForm.get(['id'])!.value,
       dtNascimento: this.editForm.get(['dtNascimento'])!.value,
+      tipo: this.editForm.get(['tipo'])!.value,
       endereco: this.editForm.get(['endereco'])!.value,
       usuario: this.editForm.get(['usuario'])!.value
     };

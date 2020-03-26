@@ -24,8 +24,8 @@
                 "required",
                 "pattern"
             ],
-            "fieldValidateRulesMinlength": 2,
-            "fieldValidateRulesMaxlength": 2,
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "2",
             "fieldValidateRulesPattern": "[A-Z]{2}"
         }
     ],

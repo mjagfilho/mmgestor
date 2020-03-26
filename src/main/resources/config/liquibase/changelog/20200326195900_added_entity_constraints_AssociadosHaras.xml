@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <!--
+        Added the constraints for entity AssociadosHaras.
+    -->
+    <changeSet id="20200326195900-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="associado_id"
+                                 baseTableName="associados_haras"
+                                 constraintName="fk_associados_haras_associado_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="associado"/>
+
+        <addForeignKeyConstraint baseColumnNames="haras_id"
+                                 baseTableName="associados_haras"
+                                 constraintName="fk_associados_haras_haras_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="haras"/>
+
+    </changeSet>
+</databaseChangeLog>

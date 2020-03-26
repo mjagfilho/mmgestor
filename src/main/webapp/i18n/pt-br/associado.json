@@ -17,6 +17,7 @@
         "title": "Associado"
       },
       "dtNascimento": "Dt Nascimento",
+      "tipo": "Tipo",
       "endereco": "Endereco",
       "usuario": "Usuario"
     }

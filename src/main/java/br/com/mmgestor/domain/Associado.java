@@ -1,5 +1,6 @@
 package br.com.mmgestor.domain;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -22,6 +23,11 @@ public class Associado implements Serializable {
 
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
+
+    @OneToOne(optional = false)
+    @NotNull
+    @JoinColumn(unique = true)
+    private TipoAssociado tipo;
 
     @OneToOne(optional = false)
     @NotNull
@@ -53,6 +59,19 @@ public class Associado implements Serializable {
 
     public void setDtNascimento(LocalDate dtNascimento) {
         this.dtNascimento = dtNascimento;
+    }
+
+    public TipoAssociado getTipo() {
+        return tipo;
+    }
+
+    public Associado tipo(TipoAssociado tipoAssociado) {
+        this.tipo = tipoAssociado;
+        return this;
+    }
+
+    public void setTipo(TipoAssociado tipoAssociado) {
+        this.tipo = tipoAssociado;
     }
 
     public Endereco getEndereco() {

@@ -6,7 +6,7 @@
     xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd
                         http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd">
 
-    
+
     <!--
         Added the entity Associado.
     -->
@@ -17,6 +17,9 @@
             </column>
             <column name="dt_nascimento" type="date">
                 <constraints nullable="true" />
+            </column>
+            <column name="tipo_id" type="bigint">
+                <constraints unique="true" nullable="false" uniqueConstraintName="ux_associado_tipo_id" />
             </column>
             <column name="endereco_id" type="bigint">
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_associado_endereco_id" />
@@ -48,6 +51,7 @@
                   tableName="associado">
             <column name="id" type="numeric"/>
             <column name="dt_nascimento" type="date"/>
+            <column name="tipo_id" type="numeric"/>
             <column name="endereco_id" type="numeric"/>
             <column name="usuario_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->

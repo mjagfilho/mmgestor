@@ -13,7 +13,7 @@ export class AssociadoDeleteDialogComponent {
 
   constructor(protected associadoService: AssociadoService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

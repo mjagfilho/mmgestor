@@ -1,0 +1,25 @@
+{
+  "mmgestorApp": {
+    "associadosHaras": {
+      "home": {
+        "title": "Associados Haras",
+        "createLabel": "Criar novo Associados Haras",
+        "createOrEditLabel": "Criar ou editar Associados Haras",
+        "notFound": "Nenhum Associados Haras encontrado"
+      },
+      "created": "Um novo Associados Haras foi criado com o identificador {{ param }}",
+      "updated": "Um Associados Haras foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Associados Haras foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Associados Haras {{ id }}?"
+      },
+      "detail": {
+        "title": "Associados Haras"
+      },
+      "dataAssociacao": "Data Associacao",
+      "ehAtivo": "Eh Ativo",
+      "associado": "Associado",
+      "haras": "Haras"
+    }
+  }
+}

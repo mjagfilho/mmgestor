@@ -13,9 +13,7 @@ export class AssociadoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ associado }) => {
-      this.associado = associado;
-    });
+    this.activatedRoute.data.subscribe(({ associado }) => (this.associado = associado));
   }
 
   previousState(): void {

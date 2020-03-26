@@ -50,7 +50,6 @@ public class AssociadoService {
         return associadoRepository.findAll(pageable);
     }
 
-
     /**
      * Get one associado by id.
      *

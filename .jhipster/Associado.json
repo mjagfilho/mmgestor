@@ -9,6 +9,15 @@
     "relationships": [
         {
             "relationshipType": "one-to-one",
+            "otherEntityName": "tipoAssociado",
+            "otherEntityRelationshipName": "associado",
+            "relationshipValidateRules": "required",
+            "relationshipName": "tipo",
+            "otherEntityField": "id",
+            "ownerSide": true
+        },
+        {
+            "relationshipType": "one-to-one",
             "otherEntityName": "endereco",
             "otherEntityRelationshipName": "associado",
             "relationshipValidateRules": "required",

@@ -10,12 +10,19 @@
                 "required",
                 "pattern"
             ],
-            "fieldValidateRulesMinlength": 10,
-            "fieldValidateRulesMaxlength": 10,
+            "fieldValidateRulesMinlength": "9",
+            "fieldValidateRulesMaxlength": "9",
             "fieldValidateRulesPattern": "[0-9]{5}-[0-9]{3}"
         },
         {
             "fieldName": "logradouro",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numero",
             "fieldType": "String",
             "fieldValidateRules": [
                 "required"
@@ -48,16 +55,9 @@
                 "required",
                 "pattern"
             ],
-            "fieldValidateRulesMinlength": 2,
-            "fieldValidateRulesMaxlength": 2,
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "2",
             "fieldValidateRulesPattern": "[A-Z]{2}"
-        },
-        {
-            "fieldName": "numero",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
         }
     ],
     "relationships": [],

@@ -1,0 +1,27 @@
+{
+  "mmgestorApp": {
+    "tipoAssociado": {
+      "home": {
+        "title": "Tipo Associados",
+        "createLabel": "Criar novo Tipo Associado",
+        "createOrEditLabel": "Criar ou editar Tipo Associado",
+        "notFound": "Nenhum Tipo Associado encontrado"
+      },
+      "created": "Um novo Tipo Associado foi criado com o identificador {{ param }}",
+      "updated": "Um Tipo Associado foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Tipo Associado foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Tipo Associado {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Associado"
+      },
+      "nome": "Nome",
+      "descricao": "Descricao",
+      "ehAdministrador": "Eh Administrador",
+      "ehFinanceiro": "Eh Financeiro",
+      "ehOperacional": "Eh Operacional",
+      "ehVeterinario": "Eh Veterinario"
+    }
+  }
+}

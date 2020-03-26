@@ -3,11 +3,20 @@ entity User(jhi_user)
 entity Endereco {
 	cep String minlength(9) maxlength(9) required pattern(/[0-9]{5}-[0-9]{3}/)
 	logradouro String required
-    numero String required
   	complemento String
   	bairro String required
   	localidade String required
   	uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
+    numero String required
+}
+
+entity TipoAssociado {
+	nome String required
+    descricao String
+    ehAdministrador Boolean required
+    ehFinanceiro Boolean required
+    ehOperacional Boolean required
+    ehVeterinario Boolean required
 }
 
 entity Associado {
@@ -18,6 +27,11 @@ entity Haras {
 	nome String required
     localidade String required
     uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
+}
+
+entity AssociadosHaras {
+	dataAssociacao LocalDate required
+    ehAtivo Boolean required
 }
 
 entity TipoLocal {
@@ -67,6 +81,7 @@ entity DadosAssociacao {
 }
 
 relationship OneToOne {
+	Associado{tipo required} to TipoAssociado,
 	Associado{endereco required} to Endereco,
     Associado{usuario required} to User,
     Local{tipo required} to TipoLocal,
@@ -77,6 +92,8 @@ relationship OneToOne {
 
 relationship ManyToOne {
 	Haras{responsavel required} to Associado,
+    AssociadosHaras{associado required} to Associado,
+    AssociadosHaras{haras required} to Haras,
     Local{pai} to Local
 }
 

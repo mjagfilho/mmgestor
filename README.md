@@ -28,6 +28,19 @@ Add the `help` flag on any command to see how you can use it. For example, `npm 
 
 The `npm run` command will list all of the scripts available to run for this project.
 
+### Update Entities
+
+```
+jhipster import-jdl .\mmgestor.jh --json-only
+jhipster entity EntityName --regenerate
+```
+
+```
+mvn compile liquibase:diff
+```
+
+Add the "new_changelog.xml" in the master.xml
+
 ### Tools
 
 https://github.com/brunoc107/ngx-viacep
@@ -43,6 +56,10 @@ https://stackoverflow.com/questions/41019034/check-sum-error-in-jhipster-when-ed
 ./mvnw liquibase:clearCheckSums
 UPDATE databasechangelog SET md5sum = null
 ```
+
+https://stackoverflow.com/questions/34655157/how-to-solve-liquibase-checksum-validation-fail-after-liquibase-upgrade/34661256
+
+https://stackoverflow.com/questions/22691455/jhipster-liquibase-doesnt-update-database
 
 ### PWA Support
 

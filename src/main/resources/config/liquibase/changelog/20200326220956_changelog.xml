@@ -1,0 +1,16 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="mjagf (generated)" id="1585260617746-14">
+        <addColumn tableName="associado">
+            <column name="tipo_id" type="int8">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1585260617746-15">
+        <addUniqueConstraint columnNames="tipo_id" constraintName="UK_jlkitc7t9n2x1j3ti028no140" tableName="associado"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1585260617746-16">
+        <addForeignKeyConstraint baseColumnNames="tipo_id" baseTableName="associado" constraintName="FKl5yuwlisi7rksewd3hhvd7ac" deferrable="false" initiallyDeferred="false" referencedColumnNames="id" referencedTableName="tipo_associado" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
