@@ -1,10 +1,19 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.TipoAssociado;
-import br.com.mmgestor.repository.TipoAssociadoRepository;
-import br.com.mmgestor.service.TipoAssociadoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -12,21 +21,17 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.util.List;
-
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.TipoAssociado;
+import br.com.mmgestor.repository.TipoAssociadoRepository;
+import br.com.mmgestor.service.TipoAssociadoService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link TipoAssociadoResource} REST controller.
@@ -269,7 +274,7 @@ public class TipoAssociadoResourceIT {
         // Get all the tipoAssociadoList
         restTipoAssociadoMockMvc.perform(get("/api/tipo-associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tipoAssociado.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
@@ -288,7 +293,7 @@ public class TipoAssociadoResourceIT {
         // Get the tipoAssociado
         restTipoAssociadoMockMvc.perform(get("/api/tipo-associados/{id}", tipoAssociado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(tipoAssociado.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))

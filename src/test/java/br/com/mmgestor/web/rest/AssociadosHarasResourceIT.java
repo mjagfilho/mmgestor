@@ -1,12 +1,21 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.AssociadosHaras;
-import br.com.mmgestor.domain.Associado;
-import br.com.mmgestor.domain.Haras;
-import br.com.mmgestor.repository.AssociadosHarasRepository;
-import br.com.mmgestor.service.AssociadosHarasService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -14,23 +23,19 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.Associado;
+import br.com.mmgestor.domain.AssociadosHaras;
+import br.com.mmgestor.domain.Haras;
+import br.com.mmgestor.repository.AssociadosHarasRepository;
+import br.com.mmgestor.service.AssociadosHarasService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link AssociadosHarasResource} REST controller.
@@ -235,7 +240,7 @@ public class AssociadosHarasResourceIT {
         // Get all the associadosHarasList
         restAssociadosHarasMockMvc.perform(get("/api/associados-haras?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associadosHaras.getId().intValue())))
             .andExpect(jsonPath("$.[*].dataAssociacao").value(hasItem(DEFAULT_DATA_ASSOCIACAO.toString())))
             .andExpect(jsonPath("$.[*].ehAtivo").value(hasItem(DEFAULT_EH_ATIVO.booleanValue())));
@@ -250,7 +255,7 @@ public class AssociadosHarasResourceIT {
         // Get the associadosHaras
         restAssociadosHarasMockMvc.perform(get("/api/associados-haras/{id}", associadosHaras.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(associadosHaras.getId().intValue()))
             .andExpect(jsonPath("$.dataAssociacao").value(DEFAULT_DATA_ASSOCIACAO.toString()))
             .andExpect(jsonPath("$.ehAtivo").value(DEFAULT_EH_ATIVO.booleanValue()));

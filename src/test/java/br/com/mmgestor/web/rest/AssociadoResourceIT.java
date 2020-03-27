@@ -1,13 +1,21 @@
 package br.com.mmgestor.web.rest;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.Associado;
-import br.com.mmgestor.domain.TipoAssociado;
-import br.com.mmgestor.domain.Endereco;
-import br.com.mmgestor.domain.User;
-import br.com.mmgestor.repository.AssociadoRepository;
-import br.com.mmgestor.service.AssociadoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
+
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,23 +23,20 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
-import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import javax.persistence.EntityManager;
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.Associado;
+import br.com.mmgestor.domain.Endereco;
+import br.com.mmgestor.domain.TipoAssociado;
+import br.com.mmgestor.domain.User;
+import br.com.mmgestor.repository.AssociadoRepository;
+import br.com.mmgestor.service.AssociadoService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link AssociadoResource} REST controller.
@@ -204,7 +209,7 @@ public class AssociadoResourceIT {
         // Get all the associadoList
         restAssociadoMockMvc.perform(get("/api/associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associado.getId().intValue())))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())));
     }
@@ -218,7 +223,7 @@ public class AssociadoResourceIT {
         // Get the associado
         restAssociadoMockMvc.perform(get("/api/associados/{id}", associado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
+            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
             .andExpect(jsonPath("$.id").value(associado.getId().intValue()))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()));
     }
