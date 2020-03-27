@@ -8,7 +8,6 @@ import org.springframework.stereotype.Repository;
 /**
  * Spring Data  repository for the AssociadosHaras entity.
  */
-@SuppressWarnings("unused")
 @Repository
 public interface AssociadosHarasRepository extends JpaRepository<AssociadosHaras, Long> {
 
