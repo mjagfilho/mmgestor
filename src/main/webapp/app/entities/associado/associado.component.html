@@ -36,7 +36,7 @@
                     <td>{{ associado.dtNascimento | date:'mediumDate' }}</td>
                     <td>
                         <div *ngIf="associado.tipo">
-                            <a [routerLink]="['/tipo-associado', associado.tipo?.id, 'view']" >{{ associado.tipo?.id }}</a>
+                            <a [routerLink]="['/tipo-associado', associado.tipo?.id, 'view']" >{{ associado.tipo?.nome }}</a>
                         </div>
                     </td>
                     <td>
@@ -45,7 +45,7 @@
                         </div>
                     </td>
                     <td>
-                        {{ associado.usuario?.id }}
+                        {{ associado.usuario?.firstName }} {{ associado.usuario?.lastName }}
                     </td>
                     <td class="text-right">
                         <div class="btn-group">

@@ -11,15 +11,15 @@
       "updated": "Um Associado foi atualizado com o identificador {{ param }}",
       "deleted": "Um Associado foi excluído com o identificador {{ param }}",
       "delete": {
-        "question": "Tem certeza de que deseja excluir Associado {{ id }}?"
+        "question": "Tem certeza de que deseja excluir o Associado {{ nome }}?"
       },
       "detail": {
         "title": "Associado"
       },
       "dtNascimento": "Dt Nascimento",
       "tipo": "Tipo",
-      "endereco": "Endereco",
-      "usuario": "Usuario"
+      "endereco": "Endereço",
+      "usuario": "Usuário"
     }
   }
 }

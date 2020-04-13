@@ -25,7 +25,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.tipo" for="field_tipo">Tipo</label>
                     <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo">
                         <option *ngIf="!editForm.get('tipo')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="tipoAssociadoOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoAssociadoOption" *ngFor="let tipoAssociadoOption of tipos; trackBy: trackById">{{ tipoAssociadoOption.id }}</option>
+                        <option [ngValue]="tipoAssociadoOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoAssociadoOption" *ngFor="let tipoAssociadoOption of tipos; trackBy: trackById">{{ tipoAssociadoOption.nome }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('tipo')!.invalid && (editForm.get('tipo')!.dirty || editForm.get('tipo')!.touched)">
@@ -53,7 +53,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.usuario" for="field_usuario">Usuario</label>
                     <select class="form-control" id="field_usuario" name="usuario" formControlName="usuario">
                         <option *ngIf="!editForm.get('usuario')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
+                        <option [ngValue]="userOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.firstName }} {{userOption.lastName}}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('usuario')!.invalid && (editForm.get('usuario')!.dirty || editForm.get('usuario')!.touched)">
