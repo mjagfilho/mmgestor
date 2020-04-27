@@ -13,7 +13,7 @@ export class LocalDeleteDialogComponent {
 
   constructor(protected localService: LocalService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

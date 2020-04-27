@@ -41,6 +41,7 @@ jhipster entity EntityName --regenerate
 
 ```
 mvn compile liquibase:diff
+mvn liquibase:clearCheckSums
 ```
 
 Add the "new_changelog.xml" in the master.xml

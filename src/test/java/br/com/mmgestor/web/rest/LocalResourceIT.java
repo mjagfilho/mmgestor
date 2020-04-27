@@ -1,20 +1,11 @@
 package br.com.mmgestor.web.rest;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.math.BigDecimal;
-import java.util.List;
-
-import javax.persistence.EntityManager;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.Local;
+import br.com.mmgestor.domain.TipoLocal;
+import br.com.mmgestor.repository.LocalRepository;
+import br.com.mmgestor.service.LocalService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -29,13 +20,15 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.Endereco;
-import br.com.mmgestor.domain.Local;
-import br.com.mmgestor.domain.TipoLocal;
-import br.com.mmgestor.repository.LocalRepository;
-import br.com.mmgestor.service.LocalService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import javax.persistence.EntityManager;
+import java.math.BigDecimal;
+import java.util.List;
+
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link LocalResource} REST controller.
@@ -51,6 +44,27 @@ public class LocalResourceIT {
 
     private static final Boolean DEFAULT_EH_CONTIGUA = false;
     private static final Boolean UPDATED_EH_CONTIGUA = true;
+
+    private static final String DEFAULT_CEP = "56002-548";
+    private static final String UPDATED_CEP = "38945-743";
+
+    private static final String DEFAULT_LOGRADOURO = "AAAAAAAAAA";
+    private static final String UPDATED_LOGRADOURO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COMPLEMENTO = "AAAAAAAAAA";
+    private static final String UPDATED_COMPLEMENTO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BAIRRO = "AAAAAAAAAA";
+    private static final String UPDATED_BAIRRO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LOCALIDADE = "AAAAAAAAAA";
+    private static final String UPDATED_LOCALIDADE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_UF = "AA";
+    private static final String UPDATED_UF = "BB";
 
     @Autowired
     private LocalRepository localRepository;
@@ -99,7 +113,14 @@ public class LocalResourceIT {
         Local local = new Local()
             .nome(DEFAULT_NOME)
             .area(DEFAULT_AREA)
-            .ehContigua(DEFAULT_EH_CONTIGUA);
+            .ehContigua(DEFAULT_EH_CONTIGUA)
+            .cep(DEFAULT_CEP)
+            .logradouro(DEFAULT_LOGRADOURO)
+            .numero(DEFAULT_NUMERO)
+            .complemento(DEFAULT_COMPLEMENTO)
+            .bairro(DEFAULT_BAIRRO)
+            .localidade(DEFAULT_LOCALIDADE)
+            .uf(DEFAULT_UF);
         // Add required entity
         TipoLocal tipoLocal;
         if (TestUtil.findAll(em, TipoLocal.class).isEmpty()) {
@@ -110,16 +131,6 @@ public class LocalResourceIT {
             tipoLocal = TestUtil.findAll(em, TipoLocal.class).get(0);
         }
         local.setTipo(tipoLocal);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        local.setEndereco(endereco);
         return local;
     }
     /**
@@ -132,7 +143,14 @@ public class LocalResourceIT {
         Local local = new Local()
             .nome(UPDATED_NOME)
             .area(UPDATED_AREA)
-            .ehContigua(UPDATED_EH_CONTIGUA);
+            .ehContigua(UPDATED_EH_CONTIGUA)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
         // Add required entity
         TipoLocal tipoLocal;
         if (TestUtil.findAll(em, TipoLocal.class).isEmpty()) {
@@ -143,16 +161,6 @@ public class LocalResourceIT {
             tipoLocal = TestUtil.findAll(em, TipoLocal.class).get(0);
         }
         local.setTipo(tipoLocal);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createUpdatedEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        local.setEndereco(endereco);
         return local;
     }
 
@@ -179,6 +187,13 @@ public class LocalResourceIT {
         assertThat(testLocal.getNome()).isEqualTo(DEFAULT_NOME);
         assertThat(testLocal.getArea()).isEqualTo(DEFAULT_AREA);
         assertThat(testLocal.isEhContigua()).isEqualTo(DEFAULT_EH_CONTIGUA);
+        assertThat(testLocal.getCep()).isEqualTo(DEFAULT_CEP);
+        assertThat(testLocal.getLogradouro()).isEqualTo(DEFAULT_LOGRADOURO);
+        assertThat(testLocal.getNumero()).isEqualTo(DEFAULT_NUMERO);
+        assertThat(testLocal.getComplemento()).isEqualTo(DEFAULT_COMPLEMENTO);
+        assertThat(testLocal.getBairro()).isEqualTo(DEFAULT_BAIRRO);
+        assertThat(testLocal.getLocalidade()).isEqualTo(DEFAULT_LOCALIDADE);
+        assertThat(testLocal.getUf()).isEqualTo(DEFAULT_UF);
     }
 
     @Test
@@ -257,6 +272,114 @@ public class LocalResourceIT {
 
     @Test
     @Transactional
+    public void checkCepIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setCep(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLogradouroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setLogradouro(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setNumero(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkBairroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setBairro(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLocalidadeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setLocalidade(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkUfIsRequired() throws Exception {
+        int databaseSizeBeforeTest = localRepository.findAll().size();
+        // set the field null
+        local.setUf(null);
+
+        // Create the Local, which fails.
+
+        restLocalMockMvc.perform(post("/api/locals")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(local)))
+            .andExpect(status().isBadRequest());
+
+        List<Local> localList = localRepository.findAll();
+        assertThat(localList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllLocals() throws Exception {
         // Initialize the database
         localRepository.saveAndFlush(local);
@@ -264,11 +387,18 @@ public class LocalResourceIT {
         // Get all the localList
         restLocalMockMvc.perform(get("/api/locals?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(local.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].area").value(hasItem(DEFAULT_AREA.intValue())))
-            .andExpect(jsonPath("$.[*].ehContigua").value(hasItem(DEFAULT_EH_CONTIGUA.booleanValue())));
+            .andExpect(jsonPath("$.[*].ehContigua").value(hasItem(DEFAULT_EH_CONTIGUA.booleanValue())))
+            .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
+            .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
+            .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
+            .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO)))
+            .andExpect(jsonPath("$.[*].bairro").value(hasItem(DEFAULT_BAIRRO)))
+            .andExpect(jsonPath("$.[*].localidade").value(hasItem(DEFAULT_LOCALIDADE)))
+            .andExpect(jsonPath("$.[*].uf").value(hasItem(DEFAULT_UF)));
     }
 
     @Test
@@ -280,11 +410,18 @@ public class LocalResourceIT {
         // Get the local
         restLocalMockMvc.perform(get("/api/locals/{id}", local.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(local.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.area").value(DEFAULT_AREA.intValue()))
-            .andExpect(jsonPath("$.ehContigua").value(DEFAULT_EH_CONTIGUA.booleanValue()));
+            .andExpect(jsonPath("$.ehContigua").value(DEFAULT_EH_CONTIGUA.booleanValue()))
+            .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
+            .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
+            .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO))
+            .andExpect(jsonPath("$.complemento").value(DEFAULT_COMPLEMENTO))
+            .andExpect(jsonPath("$.bairro").value(DEFAULT_BAIRRO))
+            .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
+            .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
 
     @Test
@@ -310,7 +447,14 @@ public class LocalResourceIT {
         updatedLocal
             .nome(UPDATED_NOME)
             .area(UPDATED_AREA)
-            .ehContigua(UPDATED_EH_CONTIGUA);
+            .ehContigua(UPDATED_EH_CONTIGUA)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
 
         restLocalMockMvc.perform(put("/api/locals")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -324,6 +468,13 @@ public class LocalResourceIT {
         assertThat(testLocal.getNome()).isEqualTo(UPDATED_NOME);
         assertThat(testLocal.getArea()).isEqualTo(UPDATED_AREA);
         assertThat(testLocal.isEhContigua()).isEqualTo(UPDATED_EH_CONTIGUA);
+        assertThat(testLocal.getCep()).isEqualTo(UPDATED_CEP);
+        assertThat(testLocal.getLogradouro()).isEqualTo(UPDATED_LOGRADOURO);
+        assertThat(testLocal.getNumero()).isEqualTo(UPDATED_NUMERO);
+        assertThat(testLocal.getComplemento()).isEqualTo(UPDATED_COMPLEMENTO);
+        assertThat(testLocal.getBairro()).isEqualTo(UPDATED_BAIRRO);
+        assertThat(testLocal.getLocalidade()).isEqualTo(UPDATED_LOCALIDADE);
+        assertThat(testLocal.getUf()).isEqualTo(UPDATED_UF);
     }
 
     @Test

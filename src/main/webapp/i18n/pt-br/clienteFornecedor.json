@@ -2,7 +2,7 @@
   "mmgestorApp": {
     "clienteFornecedor": {
       "home": {
-        "title": "Cliente Fornecedors",
+        "title": "Clientes Fornecedores",
         "createLabel": "Criar novo Cliente Fornecedor",
         "createOrEditLabel": "Criar ou editar Cliente Fornecedor",
         "notFound": "Nenhum Cliente Fornecedor encontrado"
@@ -18,11 +18,17 @@
       },
       "nome": "Nome",
       "dtNascimento": "Dt Nascimento",
-      "cpf": "Cpf",
+      "cpf": "CPF",
       "nomeHaras": "Nome Haras",
       "localidadeHaras": "Localidade Haras",
-      "ufHaras": "Uf Haras",
-      "endereco": "Endereco"
+      "ufHaras": "UF Haras",
+      "cep": "Cep",
+      "logradouro": "Logradouro",
+      "numero": "Número",
+      "complemento": "Complemento",
+      "bairro": "Bairro",
+      "localidade": "Localidade",
+      "uf": "UF"
     }
   }
 }

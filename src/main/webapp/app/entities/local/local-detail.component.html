@@ -1,38 +1,63 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="local">
-            <h2><span jhiTranslate="mmgestorApp.local.detail.title">Local</span> {{local.id}}</h2>
+            <h2><span jhiTranslate="mmgestorApp.local.detail.title">Local</span> {{ local.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mmgestorApp.local.nome">Nome</span></dt>
                 <dd>
-                    <span>{{local.nome}}</span>
+                    <span>{{ local.nome }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.local.area">Area</span></dt>
                 <dd>
-                    <span>{{local.area}}</span>
+                    <span>{{ local.area }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.local.ehContigua">Eh Contigua</span></dt>
                 <dd>
-                    <span>{{local.ehContigua}}</span>
+                    <span>{{ local.ehContigua }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.cep">Cep</span></dt>
+                <dd>
+                    <span>{{ local.cep }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.logradouro">Logradouro</span></dt>
+                <dd>
+                    <span>{{ local.logradouro }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.numero">Numero</span></dt>
+                <dd>
+                    <span>{{ local.numero }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.complemento">Complemento</span></dt>
+                <dd>
+                    <span>{{ local.complemento }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.bairro">Bairro</span></dt>
+                <dd>
+                    <span>{{ local.bairro }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.localidade">Localidade</span></dt>
+                <dd>
+                    <span>{{ local.localidade }}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.local.uf">Uf</span></dt>
+                <dd>
+                    <span>{{ local.uf }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.local.tipo">Tipo</span></dt>
                 <dd>
                     <div *ngIf="local.tipo">
-                        <a [routerLink]="['/tipo-local', local.tipo?.id, 'view']">{{local.tipo?.id}}</a>
-                    </div>
-                </dd>
-                <dt><span jhiTranslate="mmgestorApp.local.endereco">Endereco</span></dt>
-                <dd>
-                    <div *ngIf="local.endereco">
-                        <a [routerLink]="['/endereco', local.endereco?.id, 'view']">{{local.endereco?.id}}</a>
+                        <a [routerLink]="['/tipo-local', local.tipo?.id, 'view']">{{ local.tipo?.id }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.local.pai">Pai</span></dt>
                 <dd>
                     <div *ngIf="local.pai">
-                        <a [routerLink]="['/local', local.pai?.id, 'view']">{{local.pai?.id}}</a>
+                        <a [routerLink]="['/local', local.pai?.id, 'view']">{{ local.pai?.id }}</a>
                     </div>
                 </dd>
             </dl>
@@ -40,13 +65,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/local', local.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

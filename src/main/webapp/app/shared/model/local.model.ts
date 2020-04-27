@@ -1,4 +1,3 @@
-import { IEndereco } from 'app/shared/model/endereco.model';
 import { ITipoLocal } from 'app/shared/model/tipo-local.model';
 
 export interface ILocal {
@@ -6,8 +5,14 @@ export interface ILocal {
   nome?: string;
   area?: number;
   ehContigua?: boolean;
+  cep?: string;
+  logradouro?: string;
+  numero?: string;
+  complemento?: string;
+  bairro?: string;
+  localidade?: string;
+  uf?: string;
   tipo?: ITipoLocal;
-  endereco?: IEndereco;
   pai?: ILocal;
 }
 
@@ -17,8 +22,14 @@ export class Local implements ILocal {
     public nome?: string,
     public area?: number,
     public ehContigua?: boolean,
+    public cep?: string,
+    public logradouro?: string,
+    public numero?: string,
+    public complemento?: string,
+    public bairro?: string,
+    public localidade?: string,
+    public uf?: string,
     public tipo?: ITipoLocal,
-    public endereco?: IEndereco,
     public pai?: ILocal
   ) {
     this.ehContigua = this.ehContigua || false;

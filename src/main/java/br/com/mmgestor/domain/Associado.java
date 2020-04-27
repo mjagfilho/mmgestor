@@ -24,15 +24,41 @@ public class Associado implements Serializable {
     @Column(name = "dt_nascimento")
     private LocalDate dtNascimento;
 
-    @OneToOne(optional = false)
     @NotNull
-    @JoinColumn(unique = true)
-    private TipoAssociado tipo;
+    @Size(min = 9, max = 9)
+    @Pattern(regexp = "[0-9]{5}-[0-9]{3}")
+    @Column(name = "cep", length = 9, nullable = false)
+    private String cep;
+
+    @NotNull
+    @Column(name = "logradouro", nullable = false)
+    private String logradouro;
+
+    @NotNull
+    @Column(name = "numero", nullable = false)
+    private String numero;
+
+    @Column(name = "complemento")
+    private String complemento;
+
+    @NotNull
+    @Column(name = "bairro", nullable = false)
+    private String bairro;
+
+    @NotNull
+    @Column(name = "localidade", nullable = false)
+    private String localidade;
+
+    @NotNull
+    @Size(min = 2, max = 2)
+    @Pattern(regexp = "[A-Z]{2}")
+    @Column(name = "uf", length = 2, nullable = false)
+    private String uf;
 
     @OneToOne(optional = false)
     @NotNull
     @JoinColumn(unique = true)
-    private Endereco endereco;
+    private TipoAssociado tipo;
 
     @OneToOne(optional = false)
     @NotNull
@@ -61,6 +87,97 @@ public class Associado implements Serializable {
         this.dtNascimento = dtNascimento;
     }
 
+    public String getCep() {
+        return cep;
+    }
+
+    public Associado cep(String cep) {
+        this.cep = cep;
+        return this;
+    }
+
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public Associado logradouro(String logradouro) {
+        this.logradouro = logradouro;
+        return this;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public Associado numero(String numero) {
+        this.numero = numero;
+        return this;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public Associado complemento(String complemento) {
+        this.complemento = complemento;
+        return this;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public Associado bairro(String bairro) {
+        this.bairro = bairro;
+        return this;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public Associado localidade(String localidade) {
+        this.localidade = localidade;
+        return this;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public Associado uf(String uf) {
+        this.uf = uf;
+        return this;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
+    }
+
     public TipoAssociado getTipo() {
         return tipo;
     }
@@ -72,19 +189,6 @@ public class Associado implements Serializable {
 
     public void setTipo(TipoAssociado tipoAssociado) {
         this.tipo = tipoAssociado;
-    }
-
-    public Endereco getEndereco() {
-        return endereco;
-    }
-
-    public Associado endereco(Endereco endereco) {
-        this.endereco = endereco;
-        return this;
-    }
-
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
     }
 
     public User getUsuario() {
@@ -122,6 +226,13 @@ public class Associado implements Serializable {
         return "Associado{" +
             "id=" + getId() +
             ", dtNascimento='" + getDtNascimento() + "'" +
+            ", cep='" + getCep() + "'" +
+            ", logradouro='" + getLogradouro() + "'" +
+            ", numero='" + getNumero() + "'" +
+            ", complemento='" + getComplemento() + "'" +
+            ", bairro='" + getBairro() + "'" +
+            ", localidade='" + getLocalidade() + "'" +
+            ", uf='" + getUf() + "'" +
             "}";
     }
 }

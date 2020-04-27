@@ -21,6 +21,13 @@ entity TipoAssociado {
 
 entity Associado {
     dtNascimento LocalDate
+    cep String minlength(9) maxlength(9) required pattern(/[0-9]{5}-[0-9]{3}/)
+	logradouro String required
+    numero String required
+  	complemento String
+  	bairro String required
+  	localidade String required
+  	uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
 entity Haras {
@@ -43,6 +50,13 @@ entity Local {
 	nome String required
     area BigDecimal required
     ehContigua Boolean required
+    cep String minlength(9) maxlength(9) required pattern(/[0-9]{5}-[0-9]{3}/)
+	logradouro String required
+    numero String required
+  	complemento String
+  	bairro String required
+  	localidade String required
+  	uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
 entity ClienteFornecedor {
@@ -52,6 +66,13 @@ entity ClienteFornecedor {
     nomeHaras String required
     localidadeHaras String required
     ufHaras String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
+    cep String minlength(9) maxlength(9) required pattern(/[0-9]{5}-[0-9]{3}/)
+	logradouro String required
+    numero String required
+  	complemento String
+  	bairro String required
+  	localidade String required
+  	uf String minlength(2) maxlength(2) required pattern(/[A-Z]{2}/)
 }
 
 enum Sexo {
@@ -82,11 +103,8 @@ entity DadosAssociacao {
 
 relationship OneToOne {
 	Associado{tipo required} to TipoAssociado,
-	Associado{endereco required} to Endereco,
-    Associado{usuario required} to User,
+	Associado{usuario required} to User,
     Local{tipo required} to TipoLocal,
-    Local{endereco required} to Endereco,
-    ClienteFornecedor{endereco required} to Endereco,
     Animal{dadosAssociacao} to DadosAssociacao{animal}
 }
 

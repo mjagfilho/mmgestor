@@ -34,7 +34,8 @@ export class ClienteFornecedorComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     this.clienteFornecedorService
       .query({
         page: pageToLoad - 1,
@@ -96,7 +97,7 @@ export class ClienteFornecedorComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.clienteFornecedors = data ? data : [];
+    this.clienteFornecedors = data || [];
   }
 
   protected onError(): void {

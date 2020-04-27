@@ -2,7 +2,7 @@
   "mmgestorApp": {
     "local": {
       "home": {
-        "title": "Locals",
+        "title": "Locais",
         "createLabel": "Criar novo Local",
         "createOrEditLabel": "Criar ou editar Local",
         "notFound": "Nenhum Local encontrado"
@@ -17,10 +17,16 @@
         "title": "Local"
       },
       "nome": "Nome",
-      "area": "Area",
-      "ehContigua": "Eh Contigua",
+      "area": "Área",
+      "ehContigua": "É Contigua",
+      "cep": "CEP",
+      "logradouro": "Logradouro",
+      "numero": "Número",
+      "complemento": "Complemento",
+      "bairro": "Bairro",
+      "localidade": "Localidade",
+      "uf": "UF",
       "tipo": "Tipo",
-      "endereco": "Endereco",
       "pai": "Pai"
     }
   }

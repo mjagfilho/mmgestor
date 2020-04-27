@@ -1,1 +1,1 @@
-id;dt_nascimento;tipo_id;endereco_id;usuario_id
+id;dt_nascimento;cep;logradouro;numero;complemento;bairro;localidade;uf;tipo_id;usuario_id

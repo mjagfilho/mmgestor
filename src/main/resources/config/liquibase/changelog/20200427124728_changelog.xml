@@ -1,0 +1,192 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="mjagf (generated)" id="1587991676371-12">
+        <addColumn tableName="associado">
+            <column name="bairro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-13">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="bairro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-14">
+        <addColumn tableName="local">
+            <column name="bairro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-15">
+        <addColumn tableName="associado">
+            <column name="cep" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-16">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="cep" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-17">
+        <addColumn tableName="local">
+            <column name="cep" type="varchar(9)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-18">
+        <addColumn tableName="associado">
+            <column name="complemento" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-19">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="complemento" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-20">
+        <addColumn tableName="local">
+            <column name="complemento" type="varchar(255)"/>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-21">
+        <addColumn tableName="associado">
+            <column name="localidade" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-22">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="localidade" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-23">
+        <addColumn tableName="local">
+            <column name="localidade" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-24">
+        <addColumn tableName="associado">
+            <column name="logradouro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-25">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="logradouro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-26">
+        <addColumn tableName="local">
+            <column name="logradouro" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-27">
+        <addColumn tableName="associado">
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-28">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-29">
+        <addColumn tableName="local">
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-30">
+        <addColumn tableName="associado">
+            <column name="uf" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-31">
+        <addColumn tableName="cliente_fornecedor">
+            <column name="uf" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-32">
+        <addColumn tableName="local">
+            <column name="uf" type="varchar(2)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-33">
+        <dropForeignKeyConstraint baseTableName="associado" constraintName="fk_associado_endereco_id"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-34">
+        <dropForeignKeyConstraint baseTableName="cliente_fornecedor" constraintName="fk_cliente_fornecedor_endereco_id"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-35">
+        <dropForeignKeyConstraint baseTableName="local" constraintName="fk_local_endereco_id"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-36">
+        <dropUniqueConstraint constraintName="ux_associado_endereco_id" tableName="associado"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-37">
+        <dropUniqueConstraint constraintName="ux_cliente_fornecedor_endereco_id" tableName="cliente_fornecedor"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-38">
+        <dropUniqueConstraint constraintName="ux_local_endereco_id" tableName="local"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-39">
+        <dropColumn columnName="endereco_id" tableName="associado"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-40">
+        <dropColumn columnName="endereco_id" tableName="cliente_fornecedor"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-41">
+        <dropColumn columnName="endereco_id" tableName="local"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-3">
+        <addUniqueConstraint columnNames="cpf" constraintName="UC_CLIENTE_FORNECEDORCPF_COL" tableName="cliente_fornecedor"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-6">
+        <addUniqueConstraint columnNames="email" constraintName="UC_JHI_USEREMAIL_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-7">
+        <addUniqueConstraint columnNames="login" constraintName="UC_JHI_USERLOGIN_COL" tableName="jhi_user"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-8">
+        <addUniqueConstraint columnNames="nome" constraintName="UC_TIPO_LOCALNOME_COL" tableName="tipo_local"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-9">
+        <addUniqueConstraint columnNames="tipo_id" constraintName="UK_auaou1bicghu06r4syf0eddma" tableName="local"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-10">
+        <addUniqueConstraint columnNames="usuario_id" constraintName="UK_hqin9rjjrb2ncbulot2chfiv9" tableName="associado"/>
+    </changeSet>
+    <changeSet author="mjagf (generated)" id="1587991676371-11">
+        <addUniqueConstraint columnNames="tipo_id" constraintName="UK_jlkitc7t9n2x1j3ti028no140" tableName="associado"/>
+    </changeSet>
+</databaseChangeLog>

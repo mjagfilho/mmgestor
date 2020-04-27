@@ -2,7 +2,6 @@ package br.com.mmgestor.web.rest;
 
 import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.ClienteFornecedor;
-import br.com.mmgestor.domain.Endereco;
 import br.com.mmgestor.repository.ClienteFornecedorRepository;
 import br.com.mmgestor.service.ClienteFornecedorService;
 import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
@@ -55,6 +54,27 @@ public class ClienteFornecedorResourceIT {
     private static final String DEFAULT_UF_HARAS = "AA";
     private static final String UPDATED_UF_HARAS = "BB";
 
+    private static final String DEFAULT_CEP = "89143-118";
+    private static final String UPDATED_CEP = "67948-598";
+
+    private static final String DEFAULT_LOGRADOURO = "AAAAAAAAAA";
+    private static final String UPDATED_LOGRADOURO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COMPLEMENTO = "AAAAAAAAAA";
+    private static final String UPDATED_COMPLEMENTO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BAIRRO = "AAAAAAAAAA";
+    private static final String UPDATED_BAIRRO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LOCALIDADE = "AAAAAAAAAA";
+    private static final String UPDATED_LOCALIDADE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_UF = "AA";
+    private static final String UPDATED_UF = "BB";
+
     @Autowired
     private ClienteFornecedorRepository clienteFornecedorRepository;
 
@@ -105,17 +125,14 @@ public class ClienteFornecedorResourceIT {
             .cpf(DEFAULT_CPF)
             .nomeHaras(DEFAULT_NOME_HARAS)
             .localidadeHaras(DEFAULT_LOCALIDADE_HARAS)
-            .ufHaras(DEFAULT_UF_HARAS);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        clienteFornecedor.setEndereco(endereco);
+            .ufHaras(DEFAULT_UF_HARAS)
+            .cep(DEFAULT_CEP)
+            .logradouro(DEFAULT_LOGRADOURO)
+            .numero(DEFAULT_NUMERO)
+            .complemento(DEFAULT_COMPLEMENTO)
+            .bairro(DEFAULT_BAIRRO)
+            .localidade(DEFAULT_LOCALIDADE)
+            .uf(DEFAULT_UF);
         return clienteFornecedor;
     }
     /**
@@ -131,17 +148,14 @@ public class ClienteFornecedorResourceIT {
             .cpf(UPDATED_CPF)
             .nomeHaras(UPDATED_NOME_HARAS)
             .localidadeHaras(UPDATED_LOCALIDADE_HARAS)
-            .ufHaras(UPDATED_UF_HARAS);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createUpdatedEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        clienteFornecedor.setEndereco(endereco);
+            .ufHaras(UPDATED_UF_HARAS)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
         return clienteFornecedor;
     }
 
@@ -171,6 +185,13 @@ public class ClienteFornecedorResourceIT {
         assertThat(testClienteFornecedor.getNomeHaras()).isEqualTo(DEFAULT_NOME_HARAS);
         assertThat(testClienteFornecedor.getLocalidadeHaras()).isEqualTo(DEFAULT_LOCALIDADE_HARAS);
         assertThat(testClienteFornecedor.getUfHaras()).isEqualTo(DEFAULT_UF_HARAS);
+        assertThat(testClienteFornecedor.getCep()).isEqualTo(DEFAULT_CEP);
+        assertThat(testClienteFornecedor.getLogradouro()).isEqualTo(DEFAULT_LOGRADOURO);
+        assertThat(testClienteFornecedor.getNumero()).isEqualTo(DEFAULT_NUMERO);
+        assertThat(testClienteFornecedor.getComplemento()).isEqualTo(DEFAULT_COMPLEMENTO);
+        assertThat(testClienteFornecedor.getBairro()).isEqualTo(DEFAULT_BAIRRO);
+        assertThat(testClienteFornecedor.getLocalidade()).isEqualTo(DEFAULT_LOCALIDADE);
+        assertThat(testClienteFornecedor.getUf()).isEqualTo(DEFAULT_UF);
     }
 
     @Test
@@ -285,6 +306,114 @@ public class ClienteFornecedorResourceIT {
 
     @Test
     @Transactional
+    public void checkCepIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setCep(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLogradouroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setLogradouro(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setNumero(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkBairroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setBairro(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLocalidadeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setLocalidade(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkUfIsRequired() throws Exception {
+        int databaseSizeBeforeTest = clienteFornecedorRepository.findAll().size();
+        // set the field null
+        clienteFornecedor.setUf(null);
+
+        // Create the ClienteFornecedor, which fails.
+
+        restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
+            .andExpect(status().isBadRequest());
+
+        List<ClienteFornecedor> clienteFornecedorList = clienteFornecedorRepository.findAll();
+        assertThat(clienteFornecedorList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllClienteFornecedors() throws Exception {
         // Initialize the database
         clienteFornecedorRepository.saveAndFlush(clienteFornecedor);
@@ -292,16 +421,23 @@ public class ClienteFornecedorResourceIT {
         // Get all the clienteFornecedorList
         restClienteFornecedorMockMvc.perform(get("/api/cliente-fornecedors?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(clienteFornecedor.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].cpf").value(hasItem(DEFAULT_CPF)))
             .andExpect(jsonPath("$.[*].nomeHaras").value(hasItem(DEFAULT_NOME_HARAS)))
             .andExpect(jsonPath("$.[*].localidadeHaras").value(hasItem(DEFAULT_LOCALIDADE_HARAS)))
-            .andExpect(jsonPath("$.[*].ufHaras").value(hasItem(DEFAULT_UF_HARAS)));
+            .andExpect(jsonPath("$.[*].ufHaras").value(hasItem(DEFAULT_UF_HARAS)))
+            .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
+            .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
+            .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
+            .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO)))
+            .andExpect(jsonPath("$.[*].bairro").value(hasItem(DEFAULT_BAIRRO)))
+            .andExpect(jsonPath("$.[*].localidade").value(hasItem(DEFAULT_LOCALIDADE)))
+            .andExpect(jsonPath("$.[*].uf").value(hasItem(DEFAULT_UF)));
     }
-    
+
     @Test
     @Transactional
     public void getClienteFornecedor() throws Exception {
@@ -311,14 +447,21 @@ public class ClienteFornecedorResourceIT {
         // Get the clienteFornecedor
         restClienteFornecedorMockMvc.perform(get("/api/cliente-fornecedors/{id}", clienteFornecedor.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(clienteFornecedor.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()))
             .andExpect(jsonPath("$.cpf").value(DEFAULT_CPF))
             .andExpect(jsonPath("$.nomeHaras").value(DEFAULT_NOME_HARAS))
             .andExpect(jsonPath("$.localidadeHaras").value(DEFAULT_LOCALIDADE_HARAS))
-            .andExpect(jsonPath("$.ufHaras").value(DEFAULT_UF_HARAS));
+            .andExpect(jsonPath("$.ufHaras").value(DEFAULT_UF_HARAS))
+            .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
+            .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
+            .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO))
+            .andExpect(jsonPath("$.complemento").value(DEFAULT_COMPLEMENTO))
+            .andExpect(jsonPath("$.bairro").value(DEFAULT_BAIRRO))
+            .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
+            .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
 
     @Test
@@ -347,7 +490,14 @@ public class ClienteFornecedorResourceIT {
             .cpf(UPDATED_CPF)
             .nomeHaras(UPDATED_NOME_HARAS)
             .localidadeHaras(UPDATED_LOCALIDADE_HARAS)
-            .ufHaras(UPDATED_UF_HARAS);
+            .ufHaras(UPDATED_UF_HARAS)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
 
         restClienteFornecedorMockMvc.perform(put("/api/cliente-fornecedors")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -364,6 +514,13 @@ public class ClienteFornecedorResourceIT {
         assertThat(testClienteFornecedor.getNomeHaras()).isEqualTo(UPDATED_NOME_HARAS);
         assertThat(testClienteFornecedor.getLocalidadeHaras()).isEqualTo(UPDATED_LOCALIDADE_HARAS);
         assertThat(testClienteFornecedor.getUfHaras()).isEqualTo(UPDATED_UF_HARAS);
+        assertThat(testClienteFornecedor.getCep()).isEqualTo(UPDATED_CEP);
+        assertThat(testClienteFornecedor.getLogradouro()).isEqualTo(UPDATED_LOGRADOURO);
+        assertThat(testClienteFornecedor.getNumero()).isEqualTo(UPDATED_NUMERO);
+        assertThat(testClienteFornecedor.getComplemento()).isEqualTo(UPDATED_COMPLEMENTO);
+        assertThat(testClienteFornecedor.getBairro()).isEqualTo(UPDATED_BAIRRO);
+        assertThat(testClienteFornecedor.getLocalidade()).isEqualTo(UPDATED_LOCALIDADE);
+        assertThat(testClienteFornecedor.getUf()).isEqualTo(UPDATED_UF);
     }
 
     @Test

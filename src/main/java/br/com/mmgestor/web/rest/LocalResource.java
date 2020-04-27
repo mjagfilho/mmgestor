@@ -94,9 +94,7 @@ public class LocalResource {
     /**
      * {@code GET  /locals} : get all the locals.
      *
-
      * @param pageable the pagination information.
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of locals in body.
      */
     @GetMapping("/locals")

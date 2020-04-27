@@ -13,9 +13,7 @@ export class ClienteFornecedorDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ clienteFornecedor }) => {
-      this.clienteFornecedor = clienteFornecedor;
-    });
+    this.activatedRoute.data.subscribe(({ clienteFornecedor }) => (this.clienteFornecedor = clienteFornecedor));
   }
 
   previousState(): void {

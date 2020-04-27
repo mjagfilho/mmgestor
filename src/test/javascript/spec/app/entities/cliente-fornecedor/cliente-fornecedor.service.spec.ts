@@ -1,6 +1,5 @@
 import { TestBed, getTestBed } from '@angular/core/testing';
 import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
-import { take, map } from 'rxjs/operators';
 import * as moment from 'moment';
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { ClienteFornecedorService } from 'app/entities/cliente-fornecedor/cliente-fornecedor.service';
@@ -14,6 +13,7 @@ describe('Service Tests', () => {
     let elemDefault: IClienteFornecedor;
     let expectedResult: IClienteFornecedor | IClienteFornecedor[] | boolean | null;
     let currentDate: moment.Moment;
+
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [HttpClientTestingModule]
@@ -24,7 +24,22 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new ClienteFornecedor(0, 'AAAAAAA', currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
+      elemDefault = new ClienteFornecedor(
+        0,
+        'AAAAAAA',
+        currentDate,
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA',
+        'AAAAAAA'
+      );
     });
 
     describe('Service methods', () => {
@@ -35,10 +50,8 @@ describe('Service Tests', () => {
           },
           elemDefault
         );
-        service
-          .find(123)
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+
+        service.find(123).subscribe(resp => (expectedResult = resp.body));
 
         const req = httpMock.expectOne({ method: 'GET' });
         req.flush(returnedFromService);
@@ -53,16 +66,16 @@ describe('Service Tests', () => {
           },
           elemDefault
         );
+
         const expected = Object.assign(
           {
             dtNascimento: currentDate
           },
           returnedFromService
         );
-        service
-          .create(new ClienteFornecedor())
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+
+        service.create(new ClienteFornecedor()).subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'POST' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
@@ -76,7 +89,14 @@ describe('Service Tests', () => {
             cpf: 'BBBBBB',
             nomeHaras: 'BBBBBB',
             localidadeHaras: 'BBBBBB',
-            ufHaras: 'BBBBBB'
+            ufHaras: 'BBBBBB',
+            cep: 'BBBBBB',
+            logradouro: 'BBBBBB',
+            numero: 'BBBBBB',
+            complemento: 'BBBBBB',
+            bairro: 'BBBBBB',
+            localidade: 'BBBBBB',
+            uf: 'BBBBBB'
           },
           elemDefault
         );
@@ -87,10 +107,9 @@ describe('Service Tests', () => {
           },
           returnedFromService
         );
-        service
-          .update(expected)
-          .pipe(take(1))
-          .subscribe(resp => (expectedResult = resp.body));
+
+        service.update(expected).subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'PUT' });
         req.flush(returnedFromService);
         expect(expectedResult).toMatchObject(expected);
@@ -104,23 +123,27 @@ describe('Service Tests', () => {
             cpf: 'BBBBBB',
             nomeHaras: 'BBBBBB',
             localidadeHaras: 'BBBBBB',
-            ufHaras: 'BBBBBB'
+            ufHaras: 'BBBBBB',
+            cep: 'BBBBBB',
+            logradouro: 'BBBBBB',
+            numero: 'BBBBBB',
+            complemento: 'BBBBBB',
+            bairro: 'BBBBBB',
+            localidade: 'BBBBBB',
+            uf: 'BBBBBB'
           },
           elemDefault
         );
+
         const expected = Object.assign(
           {
             dtNascimento: currentDate
           },
           returnedFromService
         );
-        service
-          .query()
-          .pipe(
-            take(1),
-            map(resp => resp.body)
-          )
-          .subscribe(body => (expectedResult = body));
+
+        service.query().subscribe(resp => (expectedResult = resp.body));
+
         const req = httpMock.expectOne({ method: 'GET' });
         req.flush([returnedFromService]);
         httpMock.verify();

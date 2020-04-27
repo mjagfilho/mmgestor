@@ -50,7 +50,6 @@ public class ClienteFornecedorService {
         return clienteFornecedorRepository.findAll(pageable);
     }
 
-
     /**
      * Get one clienteFornecedor by id.
      *

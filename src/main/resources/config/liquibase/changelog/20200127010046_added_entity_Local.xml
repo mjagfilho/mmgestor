@@ -24,11 +24,29 @@
             <column name="eh_contigua" type="boolean">
                 <constraints nullable="false" />
             </column>
+            <column name="cep" type="varchar(9)">
+                <constraints nullable="false" />
+            </column>
+            <column name="logradouro" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="complemento" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="bairro" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="localidade" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="uf" type="varchar(2)">
+                <constraints nullable="false" />
+            </column>
             <column name="tipo_id" type="bigint">
                 <constraints unique="true" nullable="false" uniqueConstraintName="ux_local_tipo_id" />
-            </column>
-            <column name="endereco_id" type="bigint">
-                <constraints unique="true" nullable="false" uniqueConstraintName="ux_local_endereco_id" />
             </column>
             <column name="pai_id" type="bigint">
                 <constraints nullable="true" />
@@ -59,8 +77,14 @@
             <column name="nome" type="string"/>
             <column name="area" type="numeric"/>
             <column name="eh_contigua" type="boolean"/>
+            <column name="cep" type="string"/>
+            <column name="logradouro" type="string"/>
+            <column name="numero" type="string"/>
+            <column name="complemento" type="string"/>
+            <column name="bairro" type="string"/>
+            <column name="localidade" type="string"/>
+            <column name="uf" type="string"/>
             <column name="tipo_id" type="numeric"/>
-            <column name="endereco_id" type="numeric"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

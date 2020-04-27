@@ -13,9 +13,7 @@ export class LocalDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ local }) => {
-      this.local = local;
-    });
+    this.activatedRoute.data.subscribe(({ local }) => (this.local = local));
   }
 
   previousState(): void {

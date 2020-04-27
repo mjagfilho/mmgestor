@@ -1,13 +1,11 @@
-import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { HttpResponse } from '@angular/common/http';
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { EnderecoService } from 'app/entities/endereco/endereco.service';
-import { ClienteFornecedor, IClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
-import { IEndereco } from 'app/shared/model/endereco.model';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
+
+import { IClienteFornecedor, ClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
 import { ClienteFornecedorService } from './cliente-fornecedor.service';
 
 @Component({
@@ -16,8 +14,6 @@ import { ClienteFornecedorService } from './cliente-fornecedor.service';
 })
 export class ClienteFornecedorUpdateComponent implements OnInit {
   isSaving = false;
-
-  enderecos: IEndereco[] = [];
   dtNascimentoDp: any;
 
   editForm = this.fb.group({
@@ -31,12 +27,17 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
     nomeHaras: [null, [Validators.required]],
     localidadeHaras: [null, [Validators.required]],
     ufHaras: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
-    endereco: [null, Validators.required]
+    cep: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('[0-9]{5}-[0-9]{3}')]],
+    logradouro: [null, [Validators.required]],
+    numero: [null, [Validators.required]],
+    complemento: [],
+    bairro: [null, [Validators.required]],
+    localidade: [null, [Validators.required]],
+    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]]
   });
 
   constructor(
     protected clienteFornecedorService: ClienteFornecedorService,
-    protected enderecoService: EnderecoService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
   ) {}
@@ -44,30 +45,6 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
   ngOnInit(): void {
     this.activatedRoute.data.subscribe(({ clienteFornecedor }) => {
       this.updateForm(clienteFornecedor);
-
-      this.enderecoService
-        .query({ filter: 'clientefornecedor-is-null' })
-        .pipe(
-          map((res: HttpResponse<IEndereco[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IEndereco[]) => {
-          if (!clienteFornecedor.endereco || !clienteFornecedor.endereco.id) {
-            this.enderecos = resBody;
-          } else {
-            this.enderecoService
-              .find(clienteFornecedor.endereco.id)
-              .pipe(
-                map((subRes: HttpResponse<IEndereco>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IEndereco[]) => {
-                this.enderecos = concatRes;
-              });
-          }
-        });
     });
   }
 
@@ -80,7 +57,13 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
       nomeHaras: clienteFornecedor.nomeHaras,
       localidadeHaras: clienteFornecedor.localidadeHaras,
       ufHaras: clienteFornecedor.ufHaras,
-      endereco: clienteFornecedor.endereco
+      cep: clienteFornecedor.cep,
+      logradouro: clienteFornecedor.logradouro,
+      numero: clienteFornecedor.numero,
+      complemento: clienteFornecedor.complemento,
+      bairro: clienteFornecedor.bairro,
+      localidade: clienteFornecedor.localidade,
+      uf: clienteFornecedor.uf
     });
   }
 
@@ -108,7 +91,13 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
       nomeHaras: this.editForm.get(['nomeHaras'])!.value,
       localidadeHaras: this.editForm.get(['localidadeHaras'])!.value,
       ufHaras: this.editForm.get(['ufHaras'])!.value,
-      endereco: this.editForm.get(['endereco'])!.value
+      cep: this.editForm.get(['cep'])!.value,
+      logradouro: this.editForm.get(['logradouro'])!.value,
+      numero: this.editForm.get(['numero'])!.value,
+      complemento: this.editForm.get(['complemento'])!.value,
+      bairro: this.editForm.get(['bairro'])!.value,
+      localidade: this.editForm.get(['localidade'])!.value,
+      uf: this.editForm.get(['uf'])!.value
     };
   }
 
@@ -126,9 +115,5 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
 
   protected onSaveError(): void {
     this.isSaving = false;
-  }
-
-  trackById(index: number, item: IEndereco): any {
-    return item.id;
   }
 }

@@ -10,12 +10,10 @@ import { IAssociado, Associado } from 'app/shared/model/associado.model';
 import { AssociadoService } from './associado.service';
 import { ITipoAssociado } from 'app/shared/model/tipo-associado.model';
 import { TipoAssociadoService } from 'app/entities/tipo-associado/tipo-associado.service';
-import { IEndereco } from 'app/shared/model/endereco.model';
-import { EnderecoService } from 'app/entities/endereco/endereco.service';
 import { IUser } from 'app/core/user/user.model';
 import { UserService } from 'app/core/user/user.service';
 
-type SelectableEntity = ITipoAssociado | IEndereco | IUser;
+type SelectableEntity = ITipoAssociado | IUser;
 
 @Component({
   selector: 'jhi-associado-update',
@@ -24,22 +22,26 @@ type SelectableEntity = ITipoAssociado | IEndereco | IUser;
 export class AssociadoUpdateComponent implements OnInit {
   isSaving = false;
   tipos: ITipoAssociado[] = [];
-  enderecos: IEndereco[] = [];
   users: IUser[] = [];
   dtNascimentoDp: any;
 
   editForm = this.fb.group({
     id: [],
     dtNascimento: [],
+    cep: [null, [Validators.required, Validators.minLength(9), Validators.maxLength(9), Validators.pattern('[0-9]{5}-[0-9]{3}')]],
+    logradouro: [null, [Validators.required]],
+    numero: [null, [Validators.required]],
+    complemento: [],
+    bairro: [null, [Validators.required]],
+    localidade: [null, [Validators.required]],
+    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
     tipo: [null, Validators.required],
-    endereco: [null, Validators.required],
     usuario: [null, Validators.required]
   });
 
   constructor(
     protected associadoService: AssociadoService,
     protected tipoAssociadoService: TipoAssociadoService,
-    protected enderecoService: EnderecoService,
     protected userService: UserService,
     protected activatedRoute: ActivatedRoute,
     private fb: FormBuilder
@@ -71,28 +73,6 @@ export class AssociadoUpdateComponent implements OnInit {
           }
         });
 
-      this.enderecoService
-        .query({ filter: 'associado-is-null' })
-        .pipe(
-          map((res: HttpResponse<IEndereco[]>) => {
-            return res.body || [];
-          })
-        )
-        .subscribe((resBody: IEndereco[]) => {
-          if (!associado.endereco || !associado.endereco.id) {
-            this.enderecos = resBody;
-          } else {
-            this.enderecoService
-              .find(associado.endereco.id)
-              .pipe(
-                map((subRes: HttpResponse<IEndereco>) => {
-                  return subRes.body ? [subRes.body].concat(resBody) : resBody;
-                })
-              )
-              .subscribe((concatRes: IEndereco[]) => (this.enderecos = concatRes));
-          }
-        });
-
       this.userService.query().subscribe((res: HttpResponse<IUser[]>) => (this.users = res.body || []));
     });
   }
@@ -101,8 +81,14 @@ export class AssociadoUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: associado.id,
       dtNascimento: associado.dtNascimento,
+      cep: associado.cep,
+      logradouro: associado.logradouro,
+      numero: associado.numero,
+      complemento: associado.complemento,
+      bairro: associado.bairro,
+      localidade: associado.localidade,
+      uf: associado.uf,
       tipo: associado.tipo,
-      endereco: associado.endereco,
       usuario: associado.usuario
     });
   }
@@ -126,8 +112,14 @@ export class AssociadoUpdateComponent implements OnInit {
       ...new Associado(),
       id: this.editForm.get(['id'])!.value,
       dtNascimento: this.editForm.get(['dtNascimento'])!.value,
+      cep: this.editForm.get(['cep'])!.value,
+      logradouro: this.editForm.get(['logradouro'])!.value,
+      numero: this.editForm.get(['numero'])!.value,
+      complemento: this.editForm.get(['complemento'])!.value,
+      bairro: this.editForm.get(['bairro'])!.value,
+      localidade: this.editForm.get(['localidade'])!.value,
+      uf: this.editForm.get(['uf'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      endereco: this.editForm.get(['endereco'])!.value,
       usuario: this.editForm.get(['usuario'])!.value
     };
   }

@@ -33,8 +33,26 @@
             <column name="uf_haras" type="varchar(2)">
                 <constraints nullable="false" />
             </column>
-            <column name="endereco_id" type="bigint">
-                <constraints unique="true" nullable="false" uniqueConstraintName="ux_cliente_fornecedor_endereco_id" />
+            <column name="cep" type="varchar(9)">
+                <constraints nullable="false" />
+            </column>
+            <column name="logradouro" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="numero" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="complemento" type="varchar(255)">
+                <constraints nullable="true" />
+            </column>
+            <column name="bairro" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="localidade" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="uf" type="varchar(2)">
+                <constraints nullable="false" />
             </column>
             <!-- jhipster-needle-liquibase-add-column - JHipster will add columns here, do not remove-->
         </createTable>
@@ -65,7 +83,13 @@
             <column name="nome_haras" type="string"/>
             <column name="localidade_haras" type="string"/>
             <column name="uf_haras" type="string"/>
-            <column name="endereco_id" type="numeric"/>
+            <column name="cep" type="string"/>
+            <column name="logradouro" type="string"/>
+            <column name="numero" type="string"/>
+            <column name="complemento" type="string"/>
+            <column name="bairro" type="string"/>
+            <column name="localidade" type="string"/>
+            <column name="uf" type="string"/>
             <!-- jhipster-needle-liquibase-add-loadcolumn - JHipster (and/or extensions) can add load columns here, do not remove-->
         </loadData>
     </changeSet>

@@ -7,17 +7,12 @@
         Added the constraints for entity Associado.
     -->
     <changeSet id="20200209000952-2" author="jhipster">
+        
         <addForeignKeyConstraint baseColumnNames="tipo_id"
                                  baseTableName="associado"
                                  constraintName="fk_associado_tipo_id"
                                  referencedColumnNames="id"
                                  referencedTableName="tipo_associado"/>
-
-        <addForeignKeyConstraint baseColumnNames="endereco_id"
-                                 baseTableName="associado"
-                                 constraintName="fk_associado_endereco_id"
-                                 referencedColumnNames="id"
-                                 referencedTableName="endereco"/>
 
         <addForeignKeyConstraint baseColumnNames="usuario_id"
                                  baseTableName="associado"

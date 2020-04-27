@@ -50,7 +50,6 @@ public class LocalService {
         return localRepository.findAll(pageable);
     }
 
-
     /**
      * Get one local by id.
      *

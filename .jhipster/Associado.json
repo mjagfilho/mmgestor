@@ -4,6 +4,64 @@
         {
             "fieldName": "dtNascimento",
             "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "cep",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesMinlength": "9",
+            "fieldValidateRulesMaxlength": "9",
+            "fieldValidateRulesPattern": "[0-9]{5}-[0-9]{3}"
+        },
+        {
+            "fieldName": "logradouro",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "numero",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "complemento",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "bairro",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "localidade",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "2",
+            "fieldValidateRulesPattern": "[A-Z]{2}"
         }
     ],
     "relationships": [
@@ -13,15 +71,6 @@
             "otherEntityRelationshipName": "associado",
             "relationshipValidateRules": "required",
             "relationshipName": "tipo",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "endereco",
-            "otherEntityRelationshipName": "associado",
-            "relationshipValidateRules": "required",
-            "relationshipName": "endereco",
             "otherEntityField": "id",
             "ownerSide": true
         },

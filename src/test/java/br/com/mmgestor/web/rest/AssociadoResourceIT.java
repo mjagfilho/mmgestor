@@ -1,21 +1,12 @@
 package br.com.mmgestor.web.rest;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.hamcrest.Matchers.hasItem;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.List;
-
-import javax.persistence.EntityManager;
+import br.com.mmgestor.MmgestorApp;
+import br.com.mmgestor.domain.Associado;
+import br.com.mmgestor.domain.TipoAssociado;
+import br.com.mmgestor.domain.User;
+import br.com.mmgestor.repository.AssociadoRepository;
+import br.com.mmgestor.service.AssociadoService;
+import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,20 +14,23 @@ import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
+import org.springframework.http.MediaType;
 import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.validation.Validator;
 
-import br.com.mmgestor.MmgestorApp;
-import br.com.mmgestor.domain.Associado;
-import br.com.mmgestor.domain.Endereco;
-import br.com.mmgestor.domain.TipoAssociado;
-import br.com.mmgestor.domain.User;
-import br.com.mmgestor.repository.AssociadoRepository;
-import br.com.mmgestor.service.AssociadoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
+import javax.persistence.EntityManager;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.List;
+
+import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.hamcrest.Matchers.hasItem;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
 /**
  * Integration tests for the {@link AssociadoResource} REST controller.
@@ -46,6 +40,27 @@ public class AssociadoResourceIT {
 
     private static final LocalDate DEFAULT_DT_NASCIMENTO = LocalDate.ofEpochDay(0L);
     private static final LocalDate UPDATED_DT_NASCIMENTO = LocalDate.now(ZoneId.systemDefault());
+
+    private static final String DEFAULT_CEP = "53787-600";
+    private static final String UPDATED_CEP = "64567-280";
+
+    private static final String DEFAULT_LOGRADOURO = "AAAAAAAAAA";
+    private static final String UPDATED_LOGRADOURO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_NUMERO = "AAAAAAAAAA";
+    private static final String UPDATED_NUMERO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_COMPLEMENTO = "AAAAAAAAAA";
+    private static final String UPDATED_COMPLEMENTO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_BAIRRO = "AAAAAAAAAA";
+    private static final String UPDATED_BAIRRO = "BBBBBBBBBB";
+
+    private static final String DEFAULT_LOCALIDADE = "AAAAAAAAAA";
+    private static final String UPDATED_LOCALIDADE = "BBBBBBBBBB";
+
+    private static final String DEFAULT_UF = "AA";
+    private static final String UPDATED_UF = "BB";
 
     @Autowired
     private AssociadoRepository associadoRepository;
@@ -92,7 +107,14 @@ public class AssociadoResourceIT {
      */
     public static Associado createEntity(EntityManager em) {
         Associado associado = new Associado()
-            .dtNascimento(DEFAULT_DT_NASCIMENTO);
+            .dtNascimento(DEFAULT_DT_NASCIMENTO)
+            .cep(DEFAULT_CEP)
+            .logradouro(DEFAULT_LOGRADOURO)
+            .numero(DEFAULT_NUMERO)
+            .complemento(DEFAULT_COMPLEMENTO)
+            .bairro(DEFAULT_BAIRRO)
+            .localidade(DEFAULT_LOCALIDADE)
+            .uf(DEFAULT_UF);
         // Add required entity
         TipoAssociado tipoAssociado;
         if (TestUtil.findAll(em, TipoAssociado.class).isEmpty()) {
@@ -103,16 +125,6 @@ public class AssociadoResourceIT {
             tipoAssociado = TestUtil.findAll(em, TipoAssociado.class).get(0);
         }
         associado.setTipo(tipoAssociado);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        associado.setEndereco(endereco);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -128,7 +140,14 @@ public class AssociadoResourceIT {
      */
     public static Associado createUpdatedEntity(EntityManager em) {
         Associado associado = new Associado()
-            .dtNascimento(UPDATED_DT_NASCIMENTO);
+            .dtNascimento(UPDATED_DT_NASCIMENTO)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
         // Add required entity
         TipoAssociado tipoAssociado;
         if (TestUtil.findAll(em, TipoAssociado.class).isEmpty()) {
@@ -139,16 +158,6 @@ public class AssociadoResourceIT {
             tipoAssociado = TestUtil.findAll(em, TipoAssociado.class).get(0);
         }
         associado.setTipo(tipoAssociado);
-        // Add required entity
-        Endereco endereco;
-        if (TestUtil.findAll(em, Endereco.class).isEmpty()) {
-            endereco = EnderecoResourceIT.createUpdatedEntity(em);
-            em.persist(endereco);
-            em.flush();
-        } else {
-            endereco = TestUtil.findAll(em, Endereco.class).get(0);
-        }
-        associado.setEndereco(endereco);
         // Add required entity
         User user = UserResourceIT.createEntity(em);
         em.persist(user);
@@ -178,6 +187,13 @@ public class AssociadoResourceIT {
         assertThat(associadoList).hasSize(databaseSizeBeforeCreate + 1);
         Associado testAssociado = associadoList.get(associadoList.size() - 1);
         assertThat(testAssociado.getDtNascimento()).isEqualTo(DEFAULT_DT_NASCIMENTO);
+        assertThat(testAssociado.getCep()).isEqualTo(DEFAULT_CEP);
+        assertThat(testAssociado.getLogradouro()).isEqualTo(DEFAULT_LOGRADOURO);
+        assertThat(testAssociado.getNumero()).isEqualTo(DEFAULT_NUMERO);
+        assertThat(testAssociado.getComplemento()).isEqualTo(DEFAULT_COMPLEMENTO);
+        assertThat(testAssociado.getBairro()).isEqualTo(DEFAULT_BAIRRO);
+        assertThat(testAssociado.getLocalidade()).isEqualTo(DEFAULT_LOCALIDADE);
+        assertThat(testAssociado.getUf()).isEqualTo(DEFAULT_UF);
     }
 
     @Test
@@ -202,6 +218,114 @@ public class AssociadoResourceIT {
 
     @Test
     @Transactional
+    public void checkCepIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setCep(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLogradouroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setLogradouro(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkNumeroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setNumero(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkBairroIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setBairro(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkLocalidadeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setLocalidade(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
+    public void checkUfIsRequired() throws Exception {
+        int databaseSizeBeforeTest = associadoRepository.findAll().size();
+        // set the field null
+        associado.setUf(null);
+
+        // Create the Associado, which fails.
+
+        restAssociadoMockMvc.perform(post("/api/associados")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(associado)))
+            .andExpect(status().isBadRequest());
+
+        List<Associado> associadoList = associadoRepository.findAll();
+        assertThat(associadoList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllAssociados() throws Exception {
         // Initialize the database
         associadoRepository.saveAndFlush(associado);
@@ -209,9 +333,16 @@ public class AssociadoResourceIT {
         // Get all the associadoList
         restAssociadoMockMvc.perform(get("/api/associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associado.getId().intValue())))
-            .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())));
+            .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())))
+            .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
+            .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
+            .andExpect(jsonPath("$.[*].numero").value(hasItem(DEFAULT_NUMERO)))
+            .andExpect(jsonPath("$.[*].complemento").value(hasItem(DEFAULT_COMPLEMENTO)))
+            .andExpect(jsonPath("$.[*].bairro").value(hasItem(DEFAULT_BAIRRO)))
+            .andExpect(jsonPath("$.[*].localidade").value(hasItem(DEFAULT_LOCALIDADE)))
+            .andExpect(jsonPath("$.[*].uf").value(hasItem(DEFAULT_UF)));
     }
 
     @Test
@@ -223,9 +354,16 @@ public class AssociadoResourceIT {
         // Get the associado
         restAssociadoMockMvc.perform(get("/api/associados/{id}", associado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(TestUtil.APPLICATION_JSON_UTF8))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(associado.getId().intValue()))
-            .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()));
+            .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()))
+            .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
+            .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
+            .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO))
+            .andExpect(jsonPath("$.complemento").value(DEFAULT_COMPLEMENTO))
+            .andExpect(jsonPath("$.bairro").value(DEFAULT_BAIRRO))
+            .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
+            .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
 
     @Test
@@ -249,7 +387,14 @@ public class AssociadoResourceIT {
         // Disconnect from session so that the updates on updatedAssociado are not directly saved in db
         em.detach(updatedAssociado);
         updatedAssociado
-            .dtNascimento(UPDATED_DT_NASCIMENTO);
+            .dtNascimento(UPDATED_DT_NASCIMENTO)
+            .cep(UPDATED_CEP)
+            .logradouro(UPDATED_LOGRADOURO)
+            .numero(UPDATED_NUMERO)
+            .complemento(UPDATED_COMPLEMENTO)
+            .bairro(UPDATED_BAIRRO)
+            .localidade(UPDATED_LOCALIDADE)
+            .uf(UPDATED_UF);
 
         restAssociadoMockMvc.perform(put("/api/associados")
             .contentType(TestUtil.APPLICATION_JSON_UTF8)
@@ -261,6 +406,13 @@ public class AssociadoResourceIT {
         assertThat(associadoList).hasSize(databaseSizeBeforeUpdate);
         Associado testAssociado = associadoList.get(associadoList.size() - 1);
         assertThat(testAssociado.getDtNascimento()).isEqualTo(UPDATED_DT_NASCIMENTO);
+        assertThat(testAssociado.getCep()).isEqualTo(UPDATED_CEP);
+        assertThat(testAssociado.getLogradouro()).isEqualTo(UPDATED_LOGRADOURO);
+        assertThat(testAssociado.getNumero()).isEqualTo(UPDATED_NUMERO);
+        assertThat(testAssociado.getComplemento()).isEqualTo(UPDATED_COMPLEMENTO);
+        assertThat(testAssociado.getBairro()).isEqualTo(UPDATED_BAIRRO);
+        assertThat(testAssociado.getLocalidade()).isEqualTo(UPDATED_LOCALIDADE);
+        assertThat(testAssociado.getUf()).isEqualTo(UPDATED_UF);
     }
 
     @Test

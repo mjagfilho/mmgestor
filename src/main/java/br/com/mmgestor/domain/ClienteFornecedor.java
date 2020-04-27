@@ -1,5 +1,6 @@
 package br.com.mmgestor.domain;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -47,10 +48,36 @@ public class ClienteFornecedor implements Serializable {
     @Column(name = "uf_haras", length = 2, nullable = false)
     private String ufHaras;
 
-    @OneToOne(optional = false)
     @NotNull
-    @JoinColumn(unique = true)
-    private Endereco endereco;
+    @Size(min = 9, max = 9)
+    @Pattern(regexp = "[0-9]{5}-[0-9]{3}")
+    @Column(name = "cep", length = 9, nullable = false)
+    private String cep;
+
+    @NotNull
+    @Column(name = "logradouro", nullable = false)
+    private String logradouro;
+
+    @NotNull
+    @Column(name = "numero", nullable = false)
+    private String numero;
+
+    @Column(name = "complemento")
+    private String complemento;
+
+    @NotNull
+    @Column(name = "bairro", nullable = false)
+    private String bairro;
+
+    @NotNull
+    @Column(name = "localidade", nullable = false)
+    private String localidade;
+
+    @NotNull
+    @Size(min = 2, max = 2)
+    @Pattern(regexp = "[A-Z]{2}")
+    @Column(name = "uf", length = 2, nullable = false)
+    private String uf;
 
     // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
     public Long getId() {
@@ -139,17 +166,95 @@ public class ClienteFornecedor implements Serializable {
         this.ufHaras = ufHaras;
     }
 
-    public Endereco getEndereco() {
-        return endereco;
+    public String getCep() {
+        return cep;
     }
 
-    public ClienteFornecedor endereco(Endereco endereco) {
-        this.endereco = endereco;
+    public ClienteFornecedor cep(String cep) {
+        this.cep = cep;
         return this;
     }
 
-    public void setEndereco(Endereco endereco) {
-        this.endereco = endereco;
+    public void setCep(String cep) {
+        this.cep = cep;
+    }
+
+    public String getLogradouro() {
+        return logradouro;
+    }
+
+    public ClienteFornecedor logradouro(String logradouro) {
+        this.logradouro = logradouro;
+        return this;
+    }
+
+    public void setLogradouro(String logradouro) {
+        this.logradouro = logradouro;
+    }
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public ClienteFornecedor numero(String numero) {
+        this.numero = numero;
+        return this;
+    }
+
+    public void setNumero(String numero) {
+        this.numero = numero;
+    }
+
+    public String getComplemento() {
+        return complemento;
+    }
+
+    public ClienteFornecedor complemento(String complemento) {
+        this.complemento = complemento;
+        return this;
+    }
+
+    public void setComplemento(String complemento) {
+        this.complemento = complemento;
+    }
+
+    public String getBairro() {
+        return bairro;
+    }
+
+    public ClienteFornecedor bairro(String bairro) {
+        this.bairro = bairro;
+        return this;
+    }
+
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
+    }
+
+    public String getLocalidade() {
+        return localidade;
+    }
+
+    public ClienteFornecedor localidade(String localidade) {
+        this.localidade = localidade;
+        return this;
+    }
+
+    public void setLocalidade(String localidade) {
+        this.localidade = localidade;
+    }
+
+    public String getUf() {
+        return uf;
+    }
+
+    public ClienteFornecedor uf(String uf) {
+        this.uf = uf;
+        return this;
+    }
+
+    public void setUf(String uf) {
+        this.uf = uf;
     }
     // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
 
@@ -179,6 +284,13 @@ public class ClienteFornecedor implements Serializable {
             ", nomeHaras='" + getNomeHaras() + "'" +
             ", localidadeHaras='" + getLocalidadeHaras() + "'" +
             ", ufHaras='" + getUfHaras() + "'" +
+            ", cep='" + getCep() + "'" +
+            ", logradouro='" + getLogradouro() + "'" +
+            ", numero='" + getNumero() + "'" +
+            ", complemento='" + getComplemento() + "'" +
+            ", bairro='" + getBairro() + "'" +
+            ", localidade='" + getLocalidade() + "'" +
+            ", uf='" + getUf() + "'" +
             "}";
     }
 }

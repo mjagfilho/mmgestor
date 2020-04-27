@@ -34,7 +34,8 @@ export class LocalComponent implements OnInit, OnDestroy {
   ) {}
 
   loadPage(page?: number): void {
-    const pageToLoad: number = page ? page : this.page;
+    const pageToLoad: number = page || this.page;
+
     this.localService
       .query({
         page: pageToLoad - 1,
@@ -96,7 +97,7 @@ export class LocalComponent implements OnInit, OnDestroy {
         sort: this.predicate + ',' + (this.ascending ? 'asc' : 'desc')
       }
     });
-    this.locals = data ? data : [];
+    this.locals = data || [];
   }
 
   protected onError(): void {

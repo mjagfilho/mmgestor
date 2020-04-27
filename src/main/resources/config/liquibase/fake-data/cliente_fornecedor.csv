@@ -1,1 +1,1 @@
-id;nome;dt_nascimento;cpf;nome_haras;localidade_haras;uf_haras;endereco_id
+id;nome;dt_nascimento;cpf;nome_haras;localidade_haras;uf_haras;cep;logradouro;numero;complemento;bairro;localidade;uf

@@ -24,7 +24,7 @@ describe('Service Tests', () => {
       httpMock = injector.get(HttpTestingController);
       currentDate = moment();
 
-      elemDefault = new Associado(0, currentDate);
+      elemDefault = new Associado(0, currentDate, 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA', 'AAAAAAA');
     });
 
     describe('Service methods', () => {
@@ -69,7 +69,14 @@ describe('Service Tests', () => {
       it('should update a Associado', () => {
         const returnedFromService = Object.assign(
           {
-            dtNascimento: currentDate.format(DATE_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT),
+            cep: 'BBBBBB',
+            logradouro: 'BBBBBB',
+            numero: 'BBBBBB',
+            complemento: 'BBBBBB',
+            bairro: 'BBBBBB',
+            localidade: 'BBBBBB',
+            uf: 'BBBBBB'
           },
           elemDefault
         );
@@ -91,7 +98,14 @@ describe('Service Tests', () => {
       it('should return a list of Associado', () => {
         const returnedFromService = Object.assign(
           {
-            dtNascimento: currentDate.format(DATE_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT),
+            cep: 'BBBBBB',
+            logradouro: 'BBBBBB',
+            numero: 'BBBBBB',
+            complemento: 'BBBBBB',
+            bairro: 'BBBBBB',
+            localidade: 'BBBBBB',
+            uf: 'BBBBBB'
           },
           elemDefault
         );
