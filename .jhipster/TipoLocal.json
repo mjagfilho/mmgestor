@@ -1,25 +1,28 @@
 {
-  "name": "TipoLocal",
-  "fields": [
-    {
-      "fieldName": "nome",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
-    },
-    {
-      "fieldName": "descricao",
-      "fieldType": "String"
-    }
-  ],
-  "relationships": [],
-  "changelogDate": "20200127010045",
-  "entityTableName": "tipo_local",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "clientRootFolder": "",
-  "applications": "*"
+    "name": "TipoLocal",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "descricao",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [],
+    "changelogDate": "20200127010045",
+    "entityTableName": "tipo_local",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
 }

@@ -1,52 +1,63 @@
 {
-  "name": "Animal",
-  "fields": [
-    {
-      "fieldName": "nome",
-      "fieldType": "String",
-      "fieldValidateRules": ["required", "unique"]
-    },
-    {
-      "fieldName": "dtNascimento",
-      "fieldType": "LocalDate",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "sexo",
-      "fieldType": "Sexo",
-      "fieldValues": "MACHO,FEMEA",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "pelagem",
-      "fieldType": "Pelagem",
-      "fieldValues": "BRANCA,ALAZA,CASTANHA,TORDILHA,AMARILHA,BAIA,PAMPA,ROSILHA,PRETA,LOBUNA",
-      "fieldValidateRules": ["required"]
-    },
-    {
-      "fieldName": "ehVivo",
-      "fieldType": "Boolean",
-      "fieldValidateRules": ["required"]
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "dadosAssociacao",
-      "otherEntityRelationshipName": "animal",
-      "relationshipName": "dadosAssociacao",
-      "otherEntityField": "id",
-      "ownerSide": true
-    }
-  ],
-  "changelogDate": "20200127010048",
-  "entityTableName": "animal",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "clientRootFolder": "",
-  "applications": "*"
+    "name": "Animal",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "dtNascimento",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "sexo",
+            "fieldType": "Sexo",
+            "fieldValues": "MACHO,FEMEA",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "pelagem",
+            "fieldType": "Pelagem",
+            "fieldValues": "BRANCA,ALAZA,CASTANHA,TORDILHA,AMARILHA,BAIA,PAMPA,ROSILHA,PRETA,LOBUNA",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ehVivo",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "dadosAssociacao",
+            "otherEntityRelationshipName": "animal",
+            "relationshipName": "dadosAssociacao",
+            "otherEntityField": "id",
+            "ownerSide": true
+        }
+    ],
+    "changelogDate": "20200127010048",
+    "entityTableName": "animal",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
 }

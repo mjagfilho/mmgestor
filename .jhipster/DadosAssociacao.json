@@ -1,54 +1,58 @@
 {
-  "name": "DadosAssociacao",
-  "fields": [
-    {
-      "fieldName": "criador",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "proprietario",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "livro",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "registro",
-      "fieldType": "String",
-      "fieldValidateRules": ["unique"]
-    },
-    {
-      "fieldName": "exameDNA",
-      "fieldType": "String"
-    },
-    {
-      "fieldName": "chip",
-      "fieldType": "String",
-      "fieldValidateRules": ["unique"]
-    },
-    {
-      "fieldName": "ehBloqueado",
-      "fieldType": "Boolean"
-    }
-  ],
-  "relationships": [
-    {
-      "relationshipType": "one-to-one",
-      "otherEntityName": "animal",
-      "otherEntityRelationshipName": "dadosAssociacao",
-      "relationshipName": "animal",
-      "ownerSide": false
-    }
-  ],
-  "changelogDate": "20200127010049",
-  "entityTableName": "dados_associacao",
-  "dto": "no",
-  "pagination": "pagination",
-  "service": "serviceClass",
-  "jpaMetamodelFiltering": false,
-  "fluentMethods": true,
-  "readOnly": false,
-  "clientRootFolder": "",
-  "applications": "*"
+    "name": "DadosAssociacao",
+    "fields": [
+        {
+            "fieldName": "criador",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "proprietario",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "livro",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "registro",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "exameDNA",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "chip",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "unique"
+            ]
+        },
+        {
+            "fieldName": "ehBloqueado",
+            "fieldType": "Boolean"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-one",
+            "otherEntityName": "animal",
+            "otherEntityRelationshipName": "dadosAssociacao",
+            "relationshipName": "animal",
+            "ownerSide": false
+        }
+    ],
+    "changelogDate": "20200127010049",
+    "entityTableName": "dados_associacao",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
 }
