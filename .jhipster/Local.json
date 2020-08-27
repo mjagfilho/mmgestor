@@ -1,112 +1,88 @@
 {
-    "name": "Local",
-    "fields": [
-        {
-            "fieldName": "nome",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "area",
-            "fieldType": "BigDecimal",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "ehContigua",
-            "fieldType": "Boolean",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "cep",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "minlength",
-                "maxlength",
-                "required",
-                "pattern"
-            ],
-            "fieldValidateRulesMinlength": "9",
-            "fieldValidateRulesMaxlength": "9",
-            "fieldValidateRulesPattern": "[0-9]{5}-[0-9]{3}"
-        },
-        {
-            "fieldName": "logradouro",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "numero",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "complemento",
-            "fieldType": "String"
-        },
-        {
-            "fieldName": "bairro",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "localidade",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "required"
-            ]
-        },
-        {
-            "fieldName": "uf",
-            "fieldType": "String",
-            "fieldValidateRules": [
-                "minlength",
-                "maxlength",
-                "required",
-                "pattern"
-            ],
-            "fieldValidateRulesMinlength": "2",
-            "fieldValidateRulesMaxlength": "2",
-            "fieldValidateRulesPattern": "[A-Z]{2}"
-        }
-    ],
-    "relationships": [
-        {
-            "relationshipType": "one-to-one",
-            "otherEntityName": "tipoLocal",
-            "otherEntityRelationshipName": "local",
-            "relationshipValidateRules": "required",
-            "relationshipName": "tipo",
-            "otherEntityField": "id",
-            "ownerSide": true
-        },
-        {
-            "relationshipType": "many-to-one",
-            "otherEntityName": "local",
-            "otherEntityRelationshipName": "local",
-            "relationshipName": "pai",
-            "otherEntityField": "id"
-        }
-    ],
-    "changelogDate": "20200127010046",
-    "entityTableName": "local",
-    "dto": "no",
-    "pagination": "pagination",
-    "service": "serviceClass",
-    "jpaMetamodelFiltering": false,
-    "fluentMethods": true,
-    "readOnly": false,
-    "clientRootFolder": "",
-    "applications": "*"
+  "name": "Local",
+  "fields": [
+    {
+      "fieldName": "nome",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "area",
+      "fieldType": "BigDecimal",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "ehContigua",
+      "fieldType": "Boolean",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "cep",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required", "pattern"],
+      "fieldValidateRulesMinlength": "9",
+      "fieldValidateRulesMaxlength": "9",
+      "fieldValidateRulesPattern": "[0-9]{5}-[0-9]{3}"
+    },
+    {
+      "fieldName": "logradouro",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "numero",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "complemento",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "bairro",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "localidade",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "uf",
+      "fieldType": "String",
+      "fieldValidateRules": ["minlength", "maxlength", "required", "pattern"],
+      "fieldValidateRulesMinlength": "2",
+      "fieldValidateRulesMaxlength": "2",
+      "fieldValidateRulesPattern": "[A-Z]{2}"
+    }
+  ],
+  "relationships": [
+    {
+      "relationshipType": "one-to-one",
+      "otherEntityName": "tipoLocal",
+      "otherEntityRelationshipName": "local",
+      "relationshipValidateRules": "required",
+      "relationshipName": "tipo",
+      "otherEntityField": "id",
+      "ownerSide": true
+    },
+    {
+      "relationshipType": "many-to-one",
+      "otherEntityName": "local",
+      "otherEntityRelationshipName": "local",
+      "relationshipName": "pai",
+      "otherEntityField": "id"
+    }
+  ],
+  "changelogDate": "20200127010046",
+  "entityTableName": "local",
+  "dto": "no",
+  "pagination": "pagination",
+  "service": "serviceClass",
+  "jpaMetamodelFiltering": false,
+  "fluentMethods": true,
+  "readOnly": false,
+  "clientRootFolder": "",
+  "applications": "*"
 }
