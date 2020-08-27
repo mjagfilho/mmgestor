@@ -1,0 +1,65 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="associado">
+            <h2><span jhiTranslate="mmgestorApp.associado.detail.title">Associado</span> {{associado.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mmgestorApp.associado.dtNascimento">Dt Nascimento</span></dt>
+                <dd>
+                    <span>{{associado.dtNascimento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.cep">Cep</span></dt>
+                <dd>
+                    <span>{{associado.cep}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.logradouro">Logradouro</span></dt>
+                <dd>
+                    <span>{{associado.logradouro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.numero">Numero</span></dt>
+                <dd>
+                    <span>{{associado.numero}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.complemento">Complemento</span></dt>
+                <dd>
+                    <span>{{associado.complemento}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.bairro">Bairro</span></dt>
+                <dd>
+                    <span>{{associado.bairro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.localidade">Localidade</span></dt>
+                <dd>
+                    <span>{{associado.localidade}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.uf">Uf</span></dt>
+                <dd>
+                    <span>{{associado.uf}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.tipo">Tipo</span></dt>
+                <dd>
+                    <div *ngIf="associado.tipo">
+                        <a [routerLink]="['/tipo-associado', associado.tipo?.id, 'view']">{{associado.tipo?.id}}</a>
+                    </div>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.associado.usuario">Usuario</span></dt>
+                <dd>
+                    {{associado.usuario?.id}}
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/associado', associado.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

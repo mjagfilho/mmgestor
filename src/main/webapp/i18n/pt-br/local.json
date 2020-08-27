@@ -1,0 +1,33 @@
+{
+  "mmgestorApp": {
+    "local": {
+      "home": {
+        "title": "Locals",
+        "createLabel": "Criar novo Local",
+        "createOrEditLabel": "Criar ou editar Local",
+        "notFound": "Nenhum Local encontrado"
+      },
+      "created": "Um novo Local foi criado com o identificador {{ param }}",
+      "updated": "Um Local foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Local foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Local {{ id }}?"
+      },
+      "detail": {
+        "title": "Local"
+      },
+      "nome": "Nome",
+      "area": "Area",
+      "ehContigua": "Eh Contigua",
+      "cep": "Cep",
+      "logradouro": "Logradouro",
+      "numero": "Numero",
+      "complemento": "Complemento",
+      "bairro": "Bairro",
+      "localidade": "Localidade",
+      "uf": "Uf",
+      "tipo": "Tipo",
+      "pai": "Pai"
+    }
+  }
+}

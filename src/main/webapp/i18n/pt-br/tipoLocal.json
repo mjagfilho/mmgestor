@@ -1,0 +1,23 @@
+{
+  "mmgestorApp": {
+    "tipoLocal": {
+      "home": {
+        "title": "Tipo Locals",
+        "createLabel": "Criar novo Tipo Local",
+        "createOrEditLabel": "Criar ou editar Tipo Local",
+        "notFound": "Nenhum Tipo Local encontrado"
+      },
+      "created": "Um novo Tipo Local foi criado com o identificador {{ param }}",
+      "updated": "Um Tipo Local foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Tipo Local foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Tipo Local {{ id }}?"
+      },
+      "detail": {
+        "title": "Tipo Local"
+      },
+      "nome": "Nome",
+      "descricao": "Descricao"
+    }
+  }
+}

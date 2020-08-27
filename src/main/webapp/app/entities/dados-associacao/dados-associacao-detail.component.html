@@ -1,0 +1,51 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="dadosAssociacao">
+            <h2><span jhiTranslate="mmgestorApp.dadosAssociacao.detail.title">Dados Associacao</span> {{dadosAssociacao.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.criador">Criador</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.criador}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.proprietario">Proprietario</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.proprietario}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.livro">Livro</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.livro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.registro">Registro</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.registro}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.exameDNA">Exame DNA</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.exameDNA}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.chip">Chip</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.chip}}</span>
+                </dd>
+                <dt><span jhiTranslate="mmgestorApp.dadosAssociacao.ehBloqueado">Eh Bloqueado</span></dt>
+                <dd>
+                    <span>{{dadosAssociacao.ehBloqueado}}</span>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/dados-associacao', dadosAssociacao.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

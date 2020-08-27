@@ -1,0 +1,176 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+            <h2 id="jhi-local-heading" jhiTranslate="mmgestorApp.local.home.createOrEditLabel">Create or edit a Local</h2>
+            <div>
+                <jhi-alert-error></jhi-alert-error>
+                <div class="form-group" [hidden]="!editForm.get('id')!.value">
+                    <label for="id" jhiTranslate="global.field.id">ID</label>
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
+                        readonly />
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.nome" for="field_nome">Nome</label>
+                    <input type="text" class="form-control" name="nome" id="field_nome"
+                           formControlName="nome"/>
+                    <div *ngIf="editForm.get('nome')!.invalid && (editForm.get('nome')!.dirty || editForm.get('nome')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('nome')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.area" for="field_area">Area</label>
+                    <input type="number" class="form-control" name="area" id="field_area"
+                           formControlName="area"/>
+                    <div *ngIf="editForm.get('area')!.invalid && (editForm.get('area')!.dirty || editForm.get('area')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('area')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                            [hidden]="!editForm.get('area')?.errors?.number" jhiTranslate="entity.validation.number">
+                            This field should be a number.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.ehContigua" for="field_ehContigua">Eh Contigua</label>
+                    <input type="checkbox" class="form-control" name="ehContigua" id="field_ehContigua"
+                           formControlName="ehContigua"/>
+                    <div *ngIf="editForm.get('ehContigua')!.invalid && (editForm.get('ehContigua')!.dirty || editForm.get('ehContigua')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('ehContigua')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.cep" for="field_cep">Cep</label>
+                    <input type="text" class="form-control" name="cep" id="field_cep"
+                           formControlName="cep"/>
+                    <div *ngIf="editForm.get('cep')!.invalid && (editForm.get('cep')!.dirty || editForm.get('cep')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cep')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cep')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 9 }">
+                        This field is required to be at least 9 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cep')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 9 }">
+                        This field cannot be longer than 9 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('cep')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Cep' }">
+                            This field should follow pattern for "Cep".
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.logradouro" for="field_logradouro">Logradouro</label>
+                    <input type="text" class="form-control" name="logradouro" id="field_logradouro"
+                           formControlName="logradouro"/>
+                    <div *ngIf="editForm.get('logradouro')!.invalid && (editForm.get('logradouro')!.dirty || editForm.get('logradouro')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('logradouro')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.numero" for="field_numero">Numero</label>
+                    <input type="text" class="form-control" name="numero" id="field_numero"
+                           formControlName="numero"/>
+                    <div *ngIf="editForm.get('numero')!.invalid && (editForm.get('numero')!.dirty || editForm.get('numero')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('numero')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.complemento" for="field_complemento">Complemento</label>
+                    <input type="text" class="form-control" name="complemento" id="field_complemento"
+                           formControlName="complemento"/>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.bairro" for="field_bairro">Bairro</label>
+                    <input type="text" class="form-control" name="bairro" id="field_bairro"
+                           formControlName="bairro"/>
+                    <div *ngIf="editForm.get('bairro')!.invalid && (editForm.get('bairro')!.dirty || editForm.get('bairro')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('bairro')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.localidade" for="field_localidade">Localidade</label>
+                    <input type="text" class="form-control" name="localidade" id="field_localidade"
+                           formControlName="localidade"/>
+                    <div *ngIf="editForm.get('localidade')!.invalid && (editForm.get('localidade')!.dirty || editForm.get('localidade')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('localidade')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.uf" for="field_uf">Uf</label>
+                    <input type="text" class="form-control" name="uf" id="field_uf"
+                           formControlName="uf"/>
+                    <div *ngIf="editForm.get('uf')!.invalid && (editForm.get('uf')!.dirty || editForm.get('uf')!.touched)">
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('uf')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('uf')?.errors?.minlength" jhiTranslate="entity.validation.minlength" [translateValues]="{ min: 2 }">
+                        This field is required to be at least 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('uf')?.errors?.maxlength" jhiTranslate="entity.validation.maxlength" [translateValues]="{ max: 2 }">
+                        This field cannot be longer than 2 characters.
+                        </small>
+                        <small class="form-text text-danger"
+                               *ngIf="editForm.get('uf')?.errors?.pattern" jhiTranslate="entity.validation.pattern" [translateValues]="{ pattern: 'Uf' }">
+                            This field should follow pattern for "Uf".
+                        </small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.tipo" for="field_tipo">Tipo</label>
+                    <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo">
+                        <option *ngIf="!editForm.get('tipo')!.value" [ngValue]="null" selected></option>
+                        <option [ngValue]="tipoLocalOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoLocalOption" *ngFor="let tipoLocalOption of tipos; trackBy: trackById">{{tipoLocalOption.id}}</option>
+                    </select>
+                </div>
+                <div *ngIf="editForm.get('tipo')!.invalid && (editForm.get('tipo')!.dirty || editForm.get('tipo')!.touched)">
+                    <small class="form-text text-danger"
+                           *ngIf="editForm.get('tipo')?.errors?.required" jhiTranslate="entity.validation.required">
+                        This field is required.
+                    </small>
+                </div>
+                <div class="form-group">
+                    <label class="form-control-label" jhiTranslate="mmgestorApp.local.pai" for="field_pai">Pai</label>
+                    <select class="form-control" id="field_pai" name="pai" formControlName="pai">
+                        <option [ngValue]="null"></option>
+                        <option [ngValue]="localOption.id === editForm.get('pai')!.value?.id ? editForm.get('pai')!.value : localOption" *ngFor="let localOption of locals; trackBy: trackById">{{localOption.id}}</option>
+                    </select>
+                </div>
+            </div>
+            <div>
+                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
+                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                </button>
+                <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
+                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

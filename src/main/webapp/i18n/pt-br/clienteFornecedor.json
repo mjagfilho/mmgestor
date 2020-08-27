@@ -1,0 +1,34 @@
+{
+  "mmgestorApp": {
+    "clienteFornecedor": {
+      "home": {
+        "title": "Cliente Fornecedors",
+        "createLabel": "Criar novo Cliente Fornecedor",
+        "createOrEditLabel": "Criar ou editar Cliente Fornecedor",
+        "notFound": "Nenhum Cliente Fornecedor encontrado"
+      },
+      "created": "Um novo Cliente Fornecedor foi criado com o identificador {{ param }}",
+      "updated": "Um Cliente Fornecedor foi atualizado com o identificador {{ param }}",
+      "deleted": "Um Cliente Fornecedor foi excluído com o identificador {{ param }}",
+      "delete": {
+        "question": "Tem certeza de que deseja excluir Cliente Fornecedor {{ id }}?"
+      },
+      "detail": {
+        "title": "Cliente Fornecedor"
+      },
+      "nome": "Nome",
+      "dtNascimento": "Dt Nascimento",
+      "cpf": "Cpf",
+      "nomeHaras": "Nome Haras",
+      "localidadeHaras": "Localidade Haras",
+      "ufHaras": "Uf Haras",
+      "cep": "Cep",
+      "logradouro": "Logradouro",
+      "numero": "Numero",
+      "complemento": "Complemento",
+      "bairro": "Bairro",
+      "localidade": "Localidade",
+      "uf": "Uf"
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "generator-jhipster": {
+    "promptValues": {
+      "packageName": "br.com.mmgestor",
+      "nativeLanguage": "pt-br"
+    },
+    "jhipsterVersion": "6.6.0",
+    "applicationType": "monolith",
+    "baseName": "mmgestor",
+    "packageName": "br.com.mmgestor",
+    "packageFolder": "br/com/mmgestor",
+    "serverPort": "800",
+    "authenticationType": "jwt",
+    "cacheProvider": "ehcache",
+    "enableHibernateCache": false,
+    "websocket": false,
+    "databaseType": "sql",
+    "devDatabaseType": "postgresql",
+    "prodDatabaseType": "postgresql",
+    "searchEngine": false,
+    "messageBroker": false,
+    "serviceDiscoveryType": false,
+    "buildTool": "maven",
+    "enableSwaggerCodegen": false,
+    "jwtSecretKey": "YTI1MjRhOTcxMmJlNjUyODA0YmIwNzVlZWQ5YTNlOGJmNjk0ZjU1M2YxODZiZjBlMjAxMDg0MGEzMTZmNDJjZWJjNTI1MGQ5MDA0MTk2MDExZmQ3OWY0MjUwNzA3MjBjYTJlZjA4Njc0MzBhNjEzODljNjJhNzE2YTk0NWRmNzY=",
+    "embeddableLaunchScript": false,
+    "useSass": true,
+    "clientPackageManager": "npm",
+    "clientFramework": "angularX",
+    "clientTheme": "none",
+    "clientThemeVariant": "",
+    "creationTimestamp": 1580086199984,
+    "testFrameworks": [],
+    "jhiPrefix": "jhi",
+    "entitySuffix": "",
+    "dtoSuffix": "DTO",
+    "otherModules": [],
+    "enableTranslation": true,
+    "nativeLanguage": "pt-br",
+    "languages": ["pt-br"],
+    "blueprints": []
+  }
+}

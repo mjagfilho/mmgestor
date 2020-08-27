@@ -1,0 +1,47 @@
+{
+    "name": "AssociadosHaras",
+    "fields": [
+        {
+            "fieldName": "dataAssociacao",
+            "fieldType": "LocalDate",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "ehAtivo",
+            "fieldType": "Boolean",
+            "fieldValidateRules": [
+                "required"
+            ]
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "associado",
+            "otherEntityRelationshipName": "associadosHaras",
+            "relationshipValidateRules": "required",
+            "relationshipName": "associado",
+            "otherEntityField": "id"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "haras",
+            "otherEntityRelationshipName": "associadosHaras",
+            "relationshipValidateRules": "required",
+            "relationshipName": "haras",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200326195900",
+    "entityTableName": "associados_haras",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}

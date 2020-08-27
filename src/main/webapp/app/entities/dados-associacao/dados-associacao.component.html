@@ -1,0 +1,75 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="mmgestorApp.dadosAssociacao.home.title">Dados Associacaos</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-dados-associacao" [routerLink]="['/dados-associacao/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="mmgestorApp.dadosAssociacao.home.createLabel">
+            Create a new Dados Associacao
+            </span>
+        </button>
+    </h2>
+    <jhi-alert-error></jhi-alert-error>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="alert alert-warning" *ngIf="dadosAssociacaos?.length === 0">
+        <span jhiTranslate="mmgestorApp.dadosAssociacao.home.notFound">No dadosAssociacaos found</span>
+    </div>
+    <div class="table-responsive" *ngIf="dadosAssociacaos?.length > 0">
+        <table class="table table-striped" aria-describedby="page-heading">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="criador"><span jhiTranslate="mmgestorApp.dadosAssociacao.criador">Criador</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="proprietario"><span jhiTranslate="mmgestorApp.dadosAssociacao.proprietario">Proprietario</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="livro"><span jhiTranslate="mmgestorApp.dadosAssociacao.livro">Livro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="registro"><span jhiTranslate="mmgestorApp.dadosAssociacao.registro">Registro</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="exameDNA"><span jhiTranslate="mmgestorApp.dadosAssociacao.exameDNA">Exame DNA</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="chip"><span jhiTranslate="mmgestorApp.dadosAssociacao.chip">Chip</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"  jhiSortBy="ehBloqueado"><span jhiTranslate="mmgestorApp.dadosAssociacao.ehBloqueado">Eh Bloqueado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
+            <th scope="col"></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dadosAssociacao of dadosAssociacaos ;trackBy: trackId">
+                <td><a [routerLink]="['/dados-associacao', dadosAssociacao.id, 'view' ]">{{dadosAssociacao.id}}</a></td>
+                <td>{{dadosAssociacao.criador}}</td>
+                <td>{{dadosAssociacao.proprietario}}</td>
+                <td>{{dadosAssociacao.livro}}</td>
+                <td>{{dadosAssociacao.registro}}</td>
+                <td>{{dadosAssociacao.exameDNA}}</td>
+                <td>{{dadosAssociacao.chip}}</td>
+                <td>{{dadosAssociacao.ehBloqueado}}</td>
+                <td class="text-right">
+                    <div class="btn-group">
+                        <button type="submit"
+                                [routerLink]="['/dados-associacao', dadosAssociacao.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/dados-associacao', dadosAssociacao.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit" (click)="delete(dadosAssociacao)"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="dadosAssociacaos?.length > 0">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
+        </div>
+    </div>
+</div>

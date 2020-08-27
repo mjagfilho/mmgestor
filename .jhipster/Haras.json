@@ -1,0 +1,52 @@
+{
+    "name": "Haras",
+    "fields": [
+        {
+            "fieldName": "nome",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "localidade",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
+            "fieldName": "uf",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength",
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesMinlength": "2",
+            "fieldValidateRulesMaxlength": "2",
+            "fieldValidateRulesPattern": "[A-Z]{2}"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "otherEntityName": "associado",
+            "otherEntityRelationshipName": "haras",
+            "relationshipValidateRules": "required",
+            "relationshipName": "responsavel",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20200127010044",
+    "entityTableName": "haras",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceClass",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "readOnly": false,
+    "clientRootFolder": "",
+    "applications": "*"
+}
