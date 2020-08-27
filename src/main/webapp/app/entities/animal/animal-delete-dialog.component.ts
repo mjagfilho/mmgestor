@@ -6,14 +6,14 @@ import { IAnimal } from 'app/shared/model/animal.model';
 import { AnimalService } from './animal.service';
 
 @Component({
-  templateUrl: './animal-delete-dialog.component.html'
+  templateUrl: './animal-delete-dialog.component.html',
 })
 export class AnimalDeleteDialogComponent {
   animal?: IAnimal;
 
   constructor(protected animalService: AnimalService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

@@ -15,13 +15,11 @@ type SelectableEntity = ITipoLocal | ILocal;
 
 @Component({
   selector: 'jhi-local-update',
-  templateUrl: './local-update.component.html'
+  templateUrl: './local-update.component.html',
 })
 export class LocalUpdateComponent implements OnInit {
   isSaving = false;
-
   tipos: ITipoLocal[] = [];
-
   locals: ILocal[] = [];
 
   editForm = this.fb.group({
@@ -37,7 +35,7 @@ export class LocalUpdateComponent implements OnInit {
     localidade: [null, [Validators.required]],
     uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
     tipo: [null, Validators.required],
-    pai: []
+    pai: [],
   });
 
   constructor(
@@ -55,7 +53,7 @@ export class LocalUpdateComponent implements OnInit {
         .query({ filter: 'local-is-null' })
         .pipe(
           map((res: HttpResponse<ITipoLocal[]>) => {
-            return res.body ? res.body : [];
+            return res.body || [];
           })
         )
         .subscribe((resBody: ITipoLocal[]) => {
@@ -69,20 +67,11 @@ export class LocalUpdateComponent implements OnInit {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
                 })
               )
-              .subscribe((concatRes: ITipoLocal[]) => {
-                this.tipos = concatRes;
-              });
+              .subscribe((concatRes: ITipoLocal[]) => (this.tipos = concatRes));
           }
         });
 
-      this.localService
-        .query()
-        .pipe(
-          map((res: HttpResponse<ILocal[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: ILocal[]) => (this.locals = resBody));
+      this.localService.query().subscribe((res: HttpResponse<ILocal[]>) => (this.locals = res.body || []));
     });
   }
 
@@ -100,7 +89,7 @@ export class LocalUpdateComponent implements OnInit {
       localidade: local.localidade,
       uf: local.uf,
       tipo: local.tipo,
-      pai: local.pai
+      pai: local.pai,
     });
   }
 
@@ -133,7 +122,7 @@ export class LocalUpdateComponent implements OnInit {
       localidade: this.editForm.get(['localidade'])!.value,
       uf: this.editForm.get(['uf'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      pai: this.editForm.get(['pai'])!.value
+      pai: this.editForm.get(['pai'])!.value,
     };
   }
 

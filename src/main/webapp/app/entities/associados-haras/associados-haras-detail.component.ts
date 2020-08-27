@@ -5,7 +5,7 @@ import { IAssociadosHaras } from 'app/shared/model/associados-haras.model';
 
 @Component({
   selector: 'jhi-associados-haras-detail',
-  templateUrl: './associados-haras-detail.component.html'
+  templateUrl: './associados-haras-detail.component.html',
 })
 export class AssociadosHarasDetailComponent implements OnInit {
   associadosHaras: IAssociadosHaras | null = null;
@@ -13,9 +13,7 @@ export class AssociadosHarasDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ associadosHaras }) => {
-      this.associadosHaras = associadosHaras;
-    });
+    this.activatedRoute.data.subscribe(({ associadosHaras }) => (this.associadosHaras = associadosHaras));
   }
 
   previousState(): void {

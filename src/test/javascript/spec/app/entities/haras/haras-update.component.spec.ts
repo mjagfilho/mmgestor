@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
         declarations: [HarasUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(HarasUpdateComponent, '')
         .compileComponents();

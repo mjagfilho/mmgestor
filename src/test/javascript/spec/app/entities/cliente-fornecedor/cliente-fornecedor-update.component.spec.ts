@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
         declarations: [ClienteFornecedorUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(ClienteFornecedorUpdateComponent, '')
         .compileComponents();

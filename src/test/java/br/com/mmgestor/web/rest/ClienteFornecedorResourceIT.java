@@ -4,27 +4,21 @@ import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.ClienteFornecedor;
 import br.com.mmgestor.repository.ClienteFornecedorRepository;
 import br.com.mmgestor.service.ClienteFornecedorService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -34,6 +28,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link ClienteFornecedorResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class ClienteFornecedorResourceIT {
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
@@ -82,35 +78,12 @@ public class ClienteFornecedorResourceIT {
     private ClienteFornecedorService clienteFornecedorService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restClienteFornecedorMockMvc;
 
     private ClienteFornecedor clienteFornecedor;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final ClienteFornecedorResource clienteFornecedorResource = new ClienteFornecedorResource(clienteFornecedorService);
-        this.restClienteFornecedorMockMvc = MockMvcBuilders.standaloneSetup(clienteFornecedorResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -168,10 +141,9 @@ public class ClienteFornecedorResourceIT {
     @Transactional
     public void createClienteFornecedor() throws Exception {
         int databaseSizeBeforeCreate = clienteFornecedorRepository.findAll().size();
-
         // Create the ClienteFornecedor
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isCreated());
 
@@ -204,7 +176,7 @@ public class ClienteFornecedorResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -223,8 +195,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -241,8 +214,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -259,8 +233,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -277,8 +252,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -295,8 +271,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -313,8 +290,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -331,8 +309,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -349,8 +328,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -367,8 +347,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -385,8 +366,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -403,8 +385,9 @@ public class ClienteFornecedorResourceIT {
 
         // Create the ClienteFornecedor, which fails.
 
+
         restClienteFornecedorMockMvc.perform(post("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -421,7 +404,7 @@ public class ClienteFornecedorResourceIT {
         // Get all the clienteFornecedorList
         restClienteFornecedorMockMvc.perform(get("/api/cliente-fornecedors?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(clienteFornecedor.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())))
@@ -447,7 +430,7 @@ public class ClienteFornecedorResourceIT {
         // Get the clienteFornecedor
         restClienteFornecedorMockMvc.perform(get("/api/cliente-fornecedors/{id}", clienteFornecedor.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(clienteFornecedor.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()))
@@ -463,7 +446,6 @@ public class ClienteFornecedorResourceIT {
             .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
             .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
-
     @Test
     @Transactional
     public void getNonExistingClienteFornecedor() throws Exception {
@@ -500,7 +482,7 @@ public class ClienteFornecedorResourceIT {
             .uf(UPDATED_UF);
 
         restClienteFornecedorMockMvc.perform(put("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedClienteFornecedor)))
             .andExpect(status().isOk());
 
@@ -528,11 +510,9 @@ public class ClienteFornecedorResourceIT {
     public void updateNonExistingClienteFornecedor() throws Exception {
         int databaseSizeBeforeUpdate = clienteFornecedorRepository.findAll().size();
 
-        // Create the ClienteFornecedor
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restClienteFornecedorMockMvc.perform(put("/api/cliente-fornecedors")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(clienteFornecedor)))
             .andExpect(status().isBadRequest());
 
@@ -551,7 +531,7 @@ public class ClienteFornecedorResourceIT {
 
         // Delete the clienteFornecedor
         restClienteFornecedorMockMvc.perform(delete("/api/cliente-fornecedors/{id}", clienteFornecedor.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

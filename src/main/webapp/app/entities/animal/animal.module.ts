@@ -11,6 +11,6 @@ import { animalRoute } from './animal.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(animalRoute)],
   declarations: [AnimalComponent, AnimalDetailComponent, AnimalUpdateComponent, AnimalDeleteDialogComponent],
-  entryComponents: [AnimalDeleteDialogComponent]
+  entryComponents: [AnimalDeleteDialogComponent],
 })
 export class MmgestorAnimalModule {}

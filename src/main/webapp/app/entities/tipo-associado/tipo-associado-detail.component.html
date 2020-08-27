@@ -1,46 +1,49 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="tipoAssociado">
-            <h2><span jhiTranslate="mmgestorApp.tipoAssociado.detail.title">Tipo Associado</span> {{tipoAssociado.id}}</h2>
+            <h2><span jhiTranslate="mmgestorApp.tipoAssociado.detail.title">Tipo Associado</span> {{ tipoAssociado.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.nome">Nome</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.nome}}</span>
+                    <span>{{ tipoAssociado.nome }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.descricao">Descricao</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.descricao}}</span>
+                    <span>{{ tipoAssociado.descricao }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.ehAdministrador">Eh Administrador</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.ehAdministrador}}</span>
+                    <span>{{ tipoAssociado.ehAdministrador }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.ehFinanceiro">Eh Financeiro</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.ehFinanceiro}}</span>
+                    <span>{{ tipoAssociado.ehFinanceiro }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.ehOperacional">Eh Operacional</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.ehOperacional}}</span>
+                    <span>{{ tipoAssociado.ehOperacional }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.tipoAssociado.ehVeterinario">Eh Veterinario</span></dt>
                 <dd>
-                    <span>{{tipoAssociado.ehVeterinario}}</span>
+                    <span>{{ tipoAssociado.ehVeterinario }}</span>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/tipo-associado', tipoAssociado.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

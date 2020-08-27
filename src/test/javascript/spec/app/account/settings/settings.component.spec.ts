@@ -21,14 +21,14 @@ describe('Component Tests', () => {
       langKey: 'pt-br',
       login: 'john',
       authorities: [],
-      imageUrl: ''
+      imageUrl: '',
     };
 
     beforeEach(async(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
         declarations: [SettingsComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(SettingsComponent, '')
         .compileComponents();
@@ -48,7 +48,7 @@ describe('Component Tests', () => {
         firstName: 'John',
         lastName: 'Doe',
         email: 'john.doe@mail.com',
-        langKey: 'pt-br'
+        langKey: 'pt-br',
       };
 
       // WHEN

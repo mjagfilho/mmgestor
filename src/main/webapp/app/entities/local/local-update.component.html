@@ -2,13 +2,15 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-local-heading" jhiTranslate="mmgestorApp.local.home.createOrEditLabel">Create or edit a Local</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.nome" for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome"
@@ -20,6 +22,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.area" for="field_area">Area</label>
                     <input type="number" class="form-control" name="area" id="field_area"
@@ -35,6 +38,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.ehContigua" for="field_ehContigua">Eh Contigua</label>
                     <input type="checkbox" class="form-control" name="ehContigua" id="field_ehContigua"
@@ -46,6 +50,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.cep" for="field_cep">Cep</label>
                     <input type="text" class="form-control" name="cep" id="field_cep"
@@ -69,6 +74,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.logradouro" for="field_logradouro">Logradouro</label>
                     <input type="text" class="form-control" name="logradouro" id="field_logradouro"
@@ -80,6 +86,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control" name="numero" id="field_numero"
@@ -91,11 +98,13 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.complemento" for="field_complemento">Complemento</label>
                     <input type="text" class="form-control" name="complemento" id="field_complemento"
                            formControlName="complemento"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.bairro" for="field_bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="field_bairro"
@@ -107,6 +116,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.localidade" for="field_localidade">Localidade</label>
                     <input type="text" class="form-control" name="localidade" id="field_localidade"
@@ -118,6 +128,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.uf" for="field_uf">Uf</label>
                     <input type="text" class="form-control" name="uf" id="field_uf"
@@ -146,7 +157,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.tipo" for="field_tipo">Tipo</label>
                     <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo">
                         <option *ngIf="!editForm.get('tipo')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="tipoLocalOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoLocalOption" *ngFor="let tipoLocalOption of tipos; trackBy: trackById">{{tipoLocalOption.id}}</option>
+                        <option [ngValue]="tipoLocalOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoLocalOption" *ngFor="let tipoLocalOption of tipos; trackBy: trackById">{{ tipoLocalOption.id }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('tipo')!.invalid && (editForm.get('tipo')!.dirty || editForm.get('tipo')!.touched)">
@@ -155,20 +166,23 @@
                         This field is required.
                     </small>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.local.pai" for="field_pai">Pai</label>
                     <select class="form-control" id="field_pai" name="pai" formControlName="pai">
                         <option [ngValue]="null"></option>
-                        <option [ngValue]="localOption.id === editForm.get('pai')!.value?.id ? editForm.get('pai')!.value : localOption" *ngFor="let localOption of locals; trackBy: trackById">{{localOption.id}}</option>
+                        <option [ngValue]="localOption.id === editForm.get('pai')!.value?.id ? editForm.get('pai')!.value : localOption" *ngFor="let localOption of locals; trackBy: trackById">{{ localOption.id }}</option>
                     </select>
                 </div>
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

@@ -4,25 +4,19 @@ import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.TipoAssociado;
 import br.com.mmgestor.repository.TipoAssociadoRepository;
 import br.com.mmgestor.service.TipoAssociadoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -32,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link TipoAssociadoResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class TipoAssociadoResourceIT {
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
@@ -59,35 +55,12 @@ public class TipoAssociadoResourceIT {
     private TipoAssociadoService tipoAssociadoService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restTipoAssociadoMockMvc;
 
     private TipoAssociado tipoAssociado;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final TipoAssociadoResource tipoAssociadoResource = new TipoAssociadoResource(tipoAssociadoService);
-        this.restTipoAssociadoMockMvc = MockMvcBuilders.standaloneSetup(tipoAssociadoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -131,10 +104,9 @@ public class TipoAssociadoResourceIT {
     @Transactional
     public void createTipoAssociado() throws Exception {
         int databaseSizeBeforeCreate = tipoAssociadoRepository.findAll().size();
-
         // Create the TipoAssociado
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isCreated());
 
@@ -160,7 +132,7 @@ public class TipoAssociadoResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -179,8 +151,9 @@ public class TipoAssociadoResourceIT {
 
         // Create the TipoAssociado, which fails.
 
+
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -197,8 +170,9 @@ public class TipoAssociadoResourceIT {
 
         // Create the TipoAssociado, which fails.
 
+
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -215,8 +189,9 @@ public class TipoAssociadoResourceIT {
 
         // Create the TipoAssociado, which fails.
 
+
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -233,8 +208,9 @@ public class TipoAssociadoResourceIT {
 
         // Create the TipoAssociado, which fails.
 
+
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -251,8 +227,9 @@ public class TipoAssociadoResourceIT {
 
         // Create the TipoAssociado, which fails.
 
+
         restTipoAssociadoMockMvc.perform(post("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -269,7 +246,7 @@ public class TipoAssociadoResourceIT {
         // Get all the tipoAssociadoList
         restTipoAssociadoMockMvc.perform(get("/api/tipo-associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tipoAssociado.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)))
@@ -288,7 +265,7 @@ public class TipoAssociadoResourceIT {
         // Get the tipoAssociado
         restTipoAssociadoMockMvc.perform(get("/api/tipo-associados/{id}", tipoAssociado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tipoAssociado.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO))
@@ -297,7 +274,6 @@ public class TipoAssociadoResourceIT {
             .andExpect(jsonPath("$.ehOperacional").value(DEFAULT_EH_OPERACIONAL.booleanValue()))
             .andExpect(jsonPath("$.ehVeterinario").value(DEFAULT_EH_VETERINARIO.booleanValue()));
     }
-
     @Test
     @Transactional
     public void getNonExistingTipoAssociado() throws Exception {
@@ -327,7 +303,7 @@ public class TipoAssociadoResourceIT {
             .ehVeterinario(UPDATED_EH_VETERINARIO);
 
         restTipoAssociadoMockMvc.perform(put("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedTipoAssociado)))
             .andExpect(status().isOk());
 
@@ -348,11 +324,9 @@ public class TipoAssociadoResourceIT {
     public void updateNonExistingTipoAssociado() throws Exception {
         int databaseSizeBeforeUpdate = tipoAssociadoRepository.findAll().size();
 
-        // Create the TipoAssociado
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTipoAssociadoMockMvc.perform(put("/api/tipo-associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoAssociado)))
             .andExpect(status().isBadRequest());
 
@@ -371,7 +345,7 @@ public class TipoAssociadoResourceIT {
 
         // Delete the tipoAssociado
         restTipoAssociadoMockMvc.perform(delete("/api/tipo-associados/{id}", tipoAssociado.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

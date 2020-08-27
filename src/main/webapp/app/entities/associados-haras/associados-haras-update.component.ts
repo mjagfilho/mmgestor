@@ -4,8 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
-import * as moment from 'moment';
 
 import { IAssociadosHaras, AssociadosHaras } from 'app/shared/model/associados-haras.model';
 import { AssociadosHarasService } from './associados-haras.service';
@@ -18,13 +16,11 @@ type SelectableEntity = IAssociado | IHaras;
 
 @Component({
   selector: 'jhi-associados-haras-update',
-  templateUrl: './associados-haras-update.component.html'
+  templateUrl: './associados-haras-update.component.html',
 })
 export class AssociadosHarasUpdateComponent implements OnInit {
   isSaving = false;
-
   associados: IAssociado[] = [];
-
   haras: IHaras[] = [];
   dataAssociacaoDp: any;
 
@@ -33,7 +29,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
     dataAssociacao: [null, [Validators.required]],
     ehAtivo: [null, [Validators.required]],
     associado: [null, Validators.required],
-    haras: [null, Validators.required]
+    haras: [null, Validators.required],
   });
 
   constructor(
@@ -48,23 +44,9 @@ export class AssociadosHarasUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ associadosHaras }) => {
       this.updateForm(associadosHaras);
 
-      this.associadoService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IAssociado[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IAssociado[]) => (this.associados = resBody));
+      this.associadoService.query().subscribe((res: HttpResponse<IAssociado[]>) => (this.associados = res.body || []));
 
-      this.harasService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IHaras[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IHaras[]) => (this.haras = resBody));
+      this.harasService.query().subscribe((res: HttpResponse<IHaras[]>) => (this.haras = res.body || []));
     });
   }
 
@@ -74,7 +56,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
       dataAssociacao: associadosHaras.dataAssociacao,
       ehAtivo: associadosHaras.ehAtivo,
       associado: associadosHaras.associado,
-      haras: associadosHaras.haras
+      haras: associadosHaras.haras,
     });
   }
 
@@ -99,7 +81,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
       dataAssociacao: this.editForm.get(['dataAssociacao'])!.value,
       ehAtivo: this.editForm.get(['ehAtivo'])!.value,
       associado: this.editForm.get(['associado'])!.value,
-      haras: this.editForm.get(['haras'])!.value
+      haras: this.editForm.get(['haras'])!.value,
     };
   }
 

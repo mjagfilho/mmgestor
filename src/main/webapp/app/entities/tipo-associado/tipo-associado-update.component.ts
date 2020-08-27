@@ -10,7 +10,7 @@ import { TipoAssociadoService } from './tipo-associado.service';
 
 @Component({
   selector: 'jhi-tipo-associado-update',
-  templateUrl: './tipo-associado-update.component.html'
+  templateUrl: './tipo-associado-update.component.html',
 })
 export class TipoAssociadoUpdateComponent implements OnInit {
   isSaving = false;
@@ -22,7 +22,7 @@ export class TipoAssociadoUpdateComponent implements OnInit {
     ehAdministrador: [null, [Validators.required]],
     ehFinanceiro: [null, [Validators.required]],
     ehOperacional: [null, [Validators.required]],
-    ehVeterinario: [null, [Validators.required]]
+    ehVeterinario: [null, [Validators.required]],
   });
 
   constructor(protected tipoAssociadoService: TipoAssociadoService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -41,7 +41,7 @@ export class TipoAssociadoUpdateComponent implements OnInit {
       ehAdministrador: tipoAssociado.ehAdministrador,
       ehFinanceiro: tipoAssociado.ehFinanceiro,
       ehOperacional: tipoAssociado.ehOperacional,
-      ehVeterinario: tipoAssociado.ehVeterinario
+      ehVeterinario: tipoAssociado.ehVeterinario,
     });
   }
 
@@ -68,7 +68,7 @@ export class TipoAssociadoUpdateComponent implements OnInit {
       ehAdministrador: this.editForm.get(['ehAdministrador'])!.value,
       ehFinanceiro: this.editForm.get(['ehFinanceiro'])!.value,
       ehOperacional: this.editForm.get(['ehOperacional'])!.value,
-      ehVeterinario: this.editForm.get(['ehVeterinario'])!.value
+      ehVeterinario: this.editForm.get(['ehVeterinario'])!.value,
     };
   }
 

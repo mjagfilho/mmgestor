@@ -3,8 +3,6 @@ package br.com.mmgestor.config;
 import br.com.mmgestor.security.*;
 import br.com.mmgestor.security.jwt.*;
 
-import org.springframework.beans.factory.BeanInitializationException;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpMethod;

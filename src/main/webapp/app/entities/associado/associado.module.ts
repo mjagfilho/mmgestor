@@ -11,6 +11,6 @@ import { associadoRoute } from './associado.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(associadoRoute)],
   declarations: [AssociadoComponent, AssociadoDetailComponent, AssociadoUpdateComponent, AssociadoDeleteDialogComponent],
-  entryComponents: [AssociadoDeleteDialogComponent]
+  entryComponents: [AssociadoDeleteDialogComponent],
 })
 export class MmgestorAssociadoModule {}

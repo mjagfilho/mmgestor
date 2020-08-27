@@ -6,27 +6,21 @@ import br.com.mmgestor.domain.TipoAssociado;
 import br.com.mmgestor.domain.User;
 import br.com.mmgestor.repository.AssociadoRepository;
 import br.com.mmgestor.service.AssociadoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -36,6 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link AssociadoResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class AssociadoResourceIT {
 
     private static final LocalDate DEFAULT_DT_NASCIMENTO = LocalDate.ofEpochDay(0L);
@@ -69,35 +65,12 @@ public class AssociadoResourceIT {
     private AssociadoService associadoService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restAssociadoMockMvc;
 
     private Associado associado;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final AssociadoResource associadoResource = new AssociadoResource(associadoService);
-        this.restAssociadoMockMvc = MockMvcBuilders.standaloneSetup(associadoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -175,10 +148,9 @@ public class AssociadoResourceIT {
     @Transactional
     public void createAssociado() throws Exception {
         int databaseSizeBeforeCreate = associadoRepository.findAll().size();
-
         // Create the Associado
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isCreated());
 
@@ -206,7 +178,7 @@ public class AssociadoResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -225,8 +197,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -243,8 +216,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -261,8 +235,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -279,8 +254,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -297,8 +273,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -315,8 +292,9 @@ public class AssociadoResourceIT {
 
         // Create the Associado, which fails.
 
+
         restAssociadoMockMvc.perform(post("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -333,7 +311,7 @@ public class AssociadoResourceIT {
         // Get all the associadoList
         restAssociadoMockMvc.perform(get("/api/associados?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associado.getId().intValue())))
             .andExpect(jsonPath("$.[*].dtNascimento").value(hasItem(DEFAULT_DT_NASCIMENTO.toString())))
             .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
@@ -354,7 +332,7 @@ public class AssociadoResourceIT {
         // Get the associado
         restAssociadoMockMvc.perform(get("/api/associados/{id}", associado.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(associado.getId().intValue()))
             .andExpect(jsonPath("$.dtNascimento").value(DEFAULT_DT_NASCIMENTO.toString()))
             .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
@@ -365,7 +343,6 @@ public class AssociadoResourceIT {
             .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
             .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
-
     @Test
     @Transactional
     public void getNonExistingAssociado() throws Exception {
@@ -397,7 +374,7 @@ public class AssociadoResourceIT {
             .uf(UPDATED_UF);
 
         restAssociadoMockMvc.perform(put("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedAssociado)))
             .andExpect(status().isOk());
 
@@ -420,11 +397,9 @@ public class AssociadoResourceIT {
     public void updateNonExistingAssociado() throws Exception {
         int databaseSizeBeforeUpdate = associadoRepository.findAll().size();
 
-        // Create the Associado
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAssociadoMockMvc.perform(put("/api/associados")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associado)))
             .andExpect(status().isBadRequest());
 
@@ -443,7 +418,7 @@ public class AssociadoResourceIT {
 
         // Delete the associado
         restAssociadoMockMvc.perform(delete("/api/associados/{id}", associado.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

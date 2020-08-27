@@ -10,7 +10,7 @@ import { EnderecoService } from './endereco.service';
 
 @Component({
   selector: 'jhi-endereco-update',
-  templateUrl: './endereco-update.component.html'
+  templateUrl: './endereco-update.component.html',
 })
 export class EnderecoUpdateComponent implements OnInit {
   isSaving = false;
@@ -23,7 +23,7 @@ export class EnderecoUpdateComponent implements OnInit {
     complemento: [],
     bairro: [null, [Validators.required]],
     localidade: [null, [Validators.required]],
-    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]]
+    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
   });
 
   constructor(protected enderecoService: EnderecoService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -43,7 +43,7 @@ export class EnderecoUpdateComponent implements OnInit {
       complemento: endereco.complemento,
       bairro: endereco.bairro,
       localidade: endereco.localidade,
-      uf: endereco.uf
+      uf: endereco.uf,
     });
   }
 
@@ -71,7 +71,7 @@ export class EnderecoUpdateComponent implements OnInit {
       complemento: this.editForm.get(['complemento'])!.value,
       bairro: this.editForm.get(['bairro'])!.value,
       localidade: this.editForm.get(['localidade'])!.value,
-      uf: this.editForm.get(['uf'])!.value
+      uf: this.editForm.get(['uf'])!.value,
     };
   }
 

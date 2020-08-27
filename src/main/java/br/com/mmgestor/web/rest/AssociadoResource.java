@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -88,9 +87,7 @@ public class AssociadoResource {
     /**
      * {@code GET  /associados} : get all the associados.
      *
-
      * @param pageable the pagination information.
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of associados in body.
      */
     @GetMapping("/associados")

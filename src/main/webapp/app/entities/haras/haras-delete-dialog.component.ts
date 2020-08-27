@@ -6,14 +6,14 @@ import { IHaras } from 'app/shared/model/haras.model';
 import { HarasService } from './haras.service';
 
 @Component({
-  templateUrl: './haras-delete-dialog.component.html'
+  templateUrl: './haras-delete-dialog.component.html',
 })
 export class HarasDeleteDialogComponent {
   haras?: IHaras;
 
   constructor(protected harasService: HarasService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

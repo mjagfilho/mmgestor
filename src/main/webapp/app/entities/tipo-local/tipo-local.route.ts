@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ITipoLocal, TipoLocal } from 'app/shared/model/tipo-local.model';
 import { TipoLocalService } from './tipo-local.service';
@@ -38,50 +38,47 @@ export const tipoLocalRoute: Routes = [
   {
     path: '',
     component: TipoLocalComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.tipoLocal.home.title'
+      pageTitle: 'mmgestorApp.tipoLocal.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: TipoLocalDetailComponent,
     resolve: {
-      tipoLocal: TipoLocalResolve
+      tipoLocal: TipoLocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoLocal.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoLocal.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: TipoLocalUpdateComponent,
     resolve: {
-      tipoLocal: TipoLocalResolve
+      tipoLocal: TipoLocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoLocal.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoLocal.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: TipoLocalUpdateComponent,
     resolve: {
-      tipoLocal: TipoLocalResolve
+      tipoLocal: TipoLocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoLocal.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoLocal.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

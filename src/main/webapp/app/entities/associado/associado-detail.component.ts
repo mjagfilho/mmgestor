@@ -5,7 +5,7 @@ import { IAssociado } from 'app/shared/model/associado.model';
 
 @Component({
   selector: 'jhi-associado-detail',
-  templateUrl: './associado-detail.component.html'
+  templateUrl: './associado-detail.component.html',
 })
 export class AssociadoDetailComponent implements OnInit {
   associado: IAssociado | null = null;
@@ -13,9 +13,7 @@ export class AssociadoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ associado }) => {
-      this.associado = associado;
-    });
+    this.activatedRoute.data.subscribe(({ associado }) => (this.associado = associado));
   }
 
   previousState(): void {

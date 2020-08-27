@@ -2,13 +2,15 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-tipo-associado-heading" jhiTranslate="mmgestorApp.tipoAssociado.home.createOrEditLabel">Create or edit a Tipo Associado</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.nome" for="field_nome">Nome</label>
                     <input type="text" class="form-control" name="nome" id="field_nome"
@@ -20,11 +22,13 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.descricao" for="field_descricao">Descricao</label>
                     <input type="text" class="form-control" name="descricao" id="field_descricao"
                            formControlName="descricao"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.ehAdministrador" for="field_ehAdministrador">Eh Administrador</label>
                     <input type="checkbox" class="form-control" name="ehAdministrador" id="field_ehAdministrador"
@@ -36,6 +40,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.ehFinanceiro" for="field_ehFinanceiro">Eh Financeiro</label>
                     <input type="checkbox" class="form-control" name="ehFinanceiro" id="field_ehFinanceiro"
@@ -47,6 +52,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.ehOperacional" for="field_ehOperacional">Eh Operacional</label>
                     <input type="checkbox" class="form-control" name="ehOperacional" id="field_ehOperacional"
@@ -58,6 +64,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.tipoAssociado.ehVeterinario" for="field_ehVeterinario">Eh Veterinario</label>
                     <input type="checkbox" class="form-control" name="ehVeterinario" id="field_ehVeterinario"
@@ -69,14 +76,15 @@
                         </small>
                     </div>
                 </div>
-
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

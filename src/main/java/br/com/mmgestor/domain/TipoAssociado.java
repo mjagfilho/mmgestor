@@ -1,5 +1,6 @@
 package br.com.mmgestor.domain;
 
+
 import javax.persistence.*;
 import javax.validation.constraints.*;
 
@@ -42,7 +43,7 @@ public class TipoAssociado implements Serializable {
     @Column(name = "eh_veterinario", nullable = false)
     private Boolean ehVeterinario;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -128,7 +129,7 @@ public class TipoAssociado implements Serializable {
     public void setEhVeterinario(Boolean ehVeterinario) {
         this.ehVeterinario = ehVeterinario;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -146,6 +147,7 @@ public class TipoAssociado implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "TipoAssociado{" +

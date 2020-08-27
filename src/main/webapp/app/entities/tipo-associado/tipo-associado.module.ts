@@ -11,6 +11,6 @@ import { tipoAssociadoRoute } from './tipo-associado.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(tipoAssociadoRoute)],
   declarations: [TipoAssociadoComponent, TipoAssociadoDetailComponent, TipoAssociadoUpdateComponent, TipoAssociadoDeleteDialogComponent],
-  entryComponents: [TipoAssociadoDeleteDialogComponent]
+  entryComponents: [TipoAssociadoDeleteDialogComponent],
 })
 export class MmgestorTipoAssociadoModule {}

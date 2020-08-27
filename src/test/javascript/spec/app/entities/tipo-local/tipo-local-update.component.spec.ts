@@ -18,7 +18,7 @@ describe('Component Tests', () => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
         declarations: [TipoLocalUpdateComponent],
-        providers: [FormBuilder]
+        providers: [FormBuilder],
       })
         .overrideTemplate(TipoLocalUpdateComponent, '')
         .compileComponents();

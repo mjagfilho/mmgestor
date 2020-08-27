@@ -6,14 +6,14 @@ import { IAssociado } from 'app/shared/model/associado.model';
 import { AssociadoService } from './associado.service';
 
 @Component({
-  templateUrl: './associado-delete-dialog.component.html'
+  templateUrl: './associado-delete-dialog.component.html',
 })
 export class AssociadoDeleteDialogComponent {
   associado?: IAssociado;
 
   constructor(protected associadoService: AssociadoService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

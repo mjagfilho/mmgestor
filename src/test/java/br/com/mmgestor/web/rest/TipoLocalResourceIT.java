@@ -4,25 +4,19 @@ import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.TipoLocal;
 import br.com.mmgestor.repository.TipoLocalRepository;
 import br.com.mmgestor.service.TipoLocalService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -32,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link TipoLocalResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class TipoLocalResourceIT {
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
@@ -47,35 +43,12 @@ public class TipoLocalResourceIT {
     private TipoLocalService tipoLocalService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restTipoLocalMockMvc;
 
     private TipoLocal tipoLocal;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final TipoLocalResource tipoLocalResource = new TipoLocalResource(tipoLocalService);
-        this.restTipoLocalMockMvc = MockMvcBuilders.standaloneSetup(tipoLocalResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -111,10 +84,9 @@ public class TipoLocalResourceIT {
     @Transactional
     public void createTipoLocal() throws Exception {
         int databaseSizeBeforeCreate = tipoLocalRepository.findAll().size();
-
         // Create the TipoLocal
         restTipoLocalMockMvc.perform(post("/api/tipo-locals")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoLocal)))
             .andExpect(status().isCreated());
 
@@ -136,7 +108,7 @@ public class TipoLocalResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restTipoLocalMockMvc.perform(post("/api/tipo-locals")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoLocal)))
             .andExpect(status().isBadRequest());
 
@@ -155,8 +127,9 @@ public class TipoLocalResourceIT {
 
         // Create the TipoLocal, which fails.
 
+
         restTipoLocalMockMvc.perform(post("/api/tipo-locals")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoLocal)))
             .andExpect(status().isBadRequest());
 
@@ -173,7 +146,7 @@ public class TipoLocalResourceIT {
         // Get all the tipoLocalList
         restTipoLocalMockMvc.perform(get("/api/tipo-locals?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(tipoLocal.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].descricao").value(hasItem(DEFAULT_DESCRICAO)));
@@ -188,12 +161,11 @@ public class TipoLocalResourceIT {
         // Get the tipoLocal
         restTipoLocalMockMvc.perform(get("/api/tipo-locals/{id}", tipoLocal.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(tipoLocal.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.descricao").value(DEFAULT_DESCRICAO));
     }
-
     @Test
     @Transactional
     public void getNonExistingTipoLocal() throws Exception {
@@ -219,7 +191,7 @@ public class TipoLocalResourceIT {
             .descricao(UPDATED_DESCRICAO);
 
         restTipoLocalMockMvc.perform(put("/api/tipo-locals")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedTipoLocal)))
             .andExpect(status().isOk());
 
@@ -236,11 +208,9 @@ public class TipoLocalResourceIT {
     public void updateNonExistingTipoLocal() throws Exception {
         int databaseSizeBeforeUpdate = tipoLocalRepository.findAll().size();
 
-        // Create the TipoLocal
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restTipoLocalMockMvc.perform(put("/api/tipo-locals")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(tipoLocal)))
             .andExpect(status().isBadRequest());
 
@@ -259,7 +229,7 @@ public class TipoLocalResourceIT {
 
         // Delete the tipoLocal
         restTipoLocalMockMvc.perform(delete("/api/tipo-locals/{id}", tipoLocal.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

@@ -5,7 +5,7 @@ import { IAnimal } from 'app/shared/model/animal.model';
 
 @Component({
   selector: 'jhi-animal-detail',
-  templateUrl: './animal-detail.component.html'
+  templateUrl: './animal-detail.component.html',
 })
 export class AnimalDetailComponent implements OnInit {
   animal: IAnimal | null = null;
@@ -13,9 +13,7 @@ export class AnimalDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ animal }) => {
-      this.animal = animal;
-    });
+    this.activatedRoute.data.subscribe(({ animal }) => (this.animal = animal));
   }
 
   previousState(): void {

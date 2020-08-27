@@ -4,7 +4,6 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
 import { IHaras, Haras } from 'app/shared/model/haras.model';
 import { HarasService } from './haras.service';
@@ -13,11 +12,10 @@ import { AssociadoService } from 'app/entities/associado/associado.service';
 
 @Component({
   selector: 'jhi-haras-update',
-  templateUrl: './haras-update.component.html'
+  templateUrl: './haras-update.component.html',
 })
 export class HarasUpdateComponent implements OnInit {
   isSaving = false;
-
   associados: IAssociado[] = [];
 
   editForm = this.fb.group({
@@ -25,7 +23,7 @@ export class HarasUpdateComponent implements OnInit {
     nome: [null, [Validators.required]],
     localidade: [null, [Validators.required]],
     uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
-    responsavel: [null, Validators.required]
+    responsavel: [null, Validators.required],
   });
 
   constructor(
@@ -39,14 +37,7 @@ export class HarasUpdateComponent implements OnInit {
     this.activatedRoute.data.subscribe(({ haras }) => {
       this.updateForm(haras);
 
-      this.associadoService
-        .query()
-        .pipe(
-          map((res: HttpResponse<IAssociado[]>) => {
-            return res.body ? res.body : [];
-          })
-        )
-        .subscribe((resBody: IAssociado[]) => (this.associados = resBody));
+      this.associadoService.query().subscribe((res: HttpResponse<IAssociado[]>) => (this.associados = res.body || []));
     });
   }
 
@@ -56,7 +47,7 @@ export class HarasUpdateComponent implements OnInit {
       nome: haras.nome,
       localidade: haras.localidade,
       uf: haras.uf,
-      responsavel: haras.responsavel
+      responsavel: haras.responsavel,
     });
   }
 
@@ -81,7 +72,7 @@ export class HarasUpdateComponent implements OnInit {
       nome: this.editForm.get(['nome'])!.value,
       localidade: this.editForm.get(['localidade'])!.value,
       uf: this.editForm.get(['uf'])!.value,
-      responsavel: this.editForm.get(['responsavel'])!.value
+      responsavel: this.editForm.get(['responsavel'])!.value,
     };
   }
 

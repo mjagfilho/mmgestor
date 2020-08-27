@@ -6,7 +6,7 @@ import { IClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
 import { ClienteFornecedorService } from './cliente-fornecedor.service';
 
 @Component({
-  templateUrl: './cliente-fornecedor-delete-dialog.component.html'
+  templateUrl: './cliente-fornecedor-delete-dialog.component.html',
 })
 export class ClienteFornecedorDeleteDialogComponent {
   clienteFornecedor?: IClienteFornecedor;
@@ -17,7 +17,7 @@ export class ClienteFornecedorDeleteDialogComponent {
     protected eventManager: JhiEventManager
   ) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

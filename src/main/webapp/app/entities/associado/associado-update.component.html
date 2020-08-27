@@ -2,22 +2,25 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-associado-heading" jhiTranslate="mmgestorApp.associado.home.createOrEditLabel">Create or edit a Associado</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.dtNascimento" for="field_dtNascimento">Dt Nascimento</label>
                     <div class="input-group">
-                        <input id="field_dtNascimento" type="text" class="form-control" name="dtNascimento" ngbDatepicker  #dtNascimentoDp="ngbDatepicker" formControlName="dtNascimento"/>
+                        <input id="field_dtNascimento" type="text" class="form-control" name="dtNascimento" ngbDatepicker #dtNascimentoDp="ngbDatepicker" formControlName="dtNascimento"/>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dtNascimentoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            <button type="button" class="btn btn-secondary" (click)="dtNascimentoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.cep" for="field_cep">Cep</label>
                     <input type="text" class="form-control" name="cep" id="field_cep"
@@ -41,6 +44,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.logradouro" for="field_logradouro">Logradouro</label>
                     <input type="text" class="form-control" name="logradouro" id="field_logradouro"
@@ -52,6 +56,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.numero" for="field_numero">Numero</label>
                     <input type="text" class="form-control" name="numero" id="field_numero"
@@ -63,11 +68,13 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.complemento" for="field_complemento">Complemento</label>
                     <input type="text" class="form-control" name="complemento" id="field_complemento"
                            formControlName="complemento"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.bairro" for="field_bairro">Bairro</label>
                     <input type="text" class="form-control" name="bairro" id="field_bairro"
@@ -79,6 +86,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.localidade" for="field_localidade">Localidade</label>
                     <input type="text" class="form-control" name="localidade" id="field_localidade"
@@ -90,6 +98,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.uf" for="field_uf">Uf</label>
                     <input type="text" class="form-control" name="uf" id="field_uf"
@@ -118,7 +127,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.tipo" for="field_tipo">Tipo</label>
                     <select class="form-control" id="field_tipo" name="tipo" formControlName="tipo">
                         <option *ngIf="!editForm.get('tipo')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="tipoAssociadoOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoAssociadoOption" *ngFor="let tipoAssociadoOption of tipos; trackBy: trackById">{{tipoAssociadoOption.id}}</option>
+                        <option [ngValue]="tipoAssociadoOption.id === editForm.get('tipo')!.value?.id ? editForm.get('tipo')!.value : tipoAssociadoOption" *ngFor="let tipoAssociadoOption of tipos; trackBy: trackById">{{ tipoAssociadoOption.id }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('tipo')!.invalid && (editForm.get('tipo')!.dirty || editForm.get('tipo')!.touched)">
@@ -127,11 +136,12 @@
                         This field is required.
                     </small>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associado.usuario" for="field_usuario">Usuario</label>
                     <select class="form-control" id="field_usuario" name="usuario" formControlName="usuario">
                         <option *ngIf="!editForm.get('usuario')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="userOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{userOption.id}}</option>
+                        <option [ngValue]="userOption.id === editForm.get('usuario')!.value?.id ? editForm.get('usuario')!.value : userOption" *ngFor="let userOption of users; trackBy: trackById">{{ userOption.id }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('usuario')!.invalid && (editForm.get('usuario')!.dirty || editForm.get('usuario')!.touched)">
@@ -141,12 +151,14 @@
                     </small>
                 </div>
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

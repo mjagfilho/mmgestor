@@ -4,14 +4,13 @@ import { HttpResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { Observable } from 'rxjs';
-import * as moment from 'moment';
 
 import { IClienteFornecedor, ClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
 import { ClienteFornecedorService } from './cliente-fornecedor.service';
 
 @Component({
   selector: 'jhi-cliente-fornecedor-update',
-  templateUrl: './cliente-fornecedor-update.component.html'
+  templateUrl: './cliente-fornecedor-update.component.html',
 })
 export class ClienteFornecedorUpdateComponent implements OnInit {
   isSaving = false;
@@ -23,7 +22,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
     dtNascimento: [],
     cpf: [
       null,
-      [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern('[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}')]
+      [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern('[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}')],
     ],
     nomeHaras: [null, [Validators.required]],
     localidadeHaras: [null, [Validators.required]],
@@ -34,7 +33,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
     complemento: [],
     bairro: [null, [Validators.required]],
     localidade: [null, [Validators.required]],
-    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]]
+    uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
   });
 
   constructor(
@@ -64,7 +63,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
       complemento: clienteFornecedor.complemento,
       bairro: clienteFornecedor.bairro,
       localidade: clienteFornecedor.localidade,
-      uf: clienteFornecedor.uf
+      uf: clienteFornecedor.uf,
     });
   }
 
@@ -98,7 +97,7 @@ export class ClienteFornecedorUpdateComponent implements OnInit {
       complemento: this.editForm.get(['complemento'])!.value,
       bairro: this.editForm.get(['bairro'])!.value,
       localidade: this.editForm.get(['localidade'])!.value,
-      uf: this.editForm.get(['uf'])!.value
+      uf: this.editForm.get(['uf'])!.value,
     };
   }
 

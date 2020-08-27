@@ -5,7 +5,7 @@ import { ITipoLocal } from 'app/shared/model/tipo-local.model';
 
 @Component({
   selector: 'jhi-tipo-local-detail',
-  templateUrl: './tipo-local-detail.component.html'
+  templateUrl: './tipo-local-detail.component.html',
 })
 export class TipoLocalDetailComponent implements OnInit {
   tipoLocal: ITipoLocal | null = null;
@@ -13,9 +13,7 @@ export class TipoLocalDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ tipoLocal }) => {
-      this.tipoLocal = tipoLocal;
-    });
+    this.activatedRoute.data.subscribe(({ tipoLocal }) => (this.tipoLocal = tipoLocal));
   }
 
   previousState(): void {

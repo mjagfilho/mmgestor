@@ -1,28 +1,31 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="associadosHaras">
-            <h2><span jhiTranslate="mmgestorApp.associadosHaras.detail.title">Associados Haras</span> {{associadosHaras.id}}</h2>
+            <h2><span jhiTranslate="mmgestorApp.associadosHaras.detail.title">Associados Haras</span> {{ associadosHaras.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mmgestorApp.associadosHaras.dataAssociacao">Data Associacao</span></dt>
                 <dd>
-                    <span>{{associadosHaras.dataAssociacao}}</span>
+                    <span>{{ associadosHaras.dataAssociacao }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.associadosHaras.ehAtivo">Eh Ativo</span></dt>
                 <dd>
-                    <span>{{associadosHaras.ehAtivo}}</span>
+                    <span>{{ associadosHaras.ehAtivo }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.associadosHaras.associado">Associado</span></dt>
                 <dd>
                     <div *ngIf="associadosHaras.associado">
-                        <a [routerLink]="['/associado', associadosHaras.associado?.id, 'view']">{{associadosHaras.associado?.id}}</a>
+                        <a [routerLink]="['/associado', associadosHaras.associado?.id, 'view']">{{ associadosHaras.associado?.id }}</a>
                     </div>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.associadosHaras.haras">Haras</span></dt>
                 <dd>
                     <div *ngIf="associadosHaras.haras">
-                        <a [routerLink]="['/haras', associadosHaras.haras?.id, 'view']">{{associadosHaras.haras?.id}}</a>
+                        <a [routerLink]="['/haras', associadosHaras.haras?.id, 'view']">{{ associadosHaras.haras?.id }}</a>
                     </div>
                 </dd>
             </dl>
@@ -30,13 +33,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/associados-haras', associadosHaras.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

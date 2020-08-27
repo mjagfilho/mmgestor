@@ -2,19 +2,21 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-associados-haras-heading" jhiTranslate="mmgestorApp.associadosHaras.home.createOrEditLabel">Create or edit a Associados Haras</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associadosHaras.dataAssociacao" for="field_dataAssociacao">Data Associacao</label>
                     <div class="input-group">
-                        <input id="field_dataAssociacao" type="text" class="form-control" name="dataAssociacao" ngbDatepicker  #dataAssociacaoDp="ngbDatepicker" formControlName="dataAssociacao"/>
+                        <input id="field_dataAssociacao" type="text" class="form-control" name="dataAssociacao" ngbDatepicker #dataAssociacaoDp="ngbDatepicker" formControlName="dataAssociacao"/>
                         <span class="input-group-append">
-                            <button type="button" class="btn btn-secondary" (click)="dataAssociacaoDp.toggle()"><fa-icon [icon]="'calendar-alt'"></fa-icon></button>
+                            <button type="button" class="btn btn-secondary" (click)="dataAssociacaoDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
                         </span>
                     </div>
                     <div *ngIf="editForm.get('dataAssociacao')!.invalid && (editForm.get('dataAssociacao')!.dirty || editForm.get('dataAssociacao')!.touched)">
@@ -24,6 +26,7 @@
                         </small>
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associadosHaras.ehAtivo" for="field_ehAtivo">Eh Ativo</label>
                     <input type="checkbox" class="form-control" name="ehAtivo" id="field_ehAtivo"
@@ -40,7 +43,7 @@
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associadosHaras.associado" for="field_associado">Associado</label>
                     <select class="form-control" id="field_associado" name="associado" formControlName="associado">
                         <option *ngIf="!editForm.get('associado')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="associadoOption.id === editForm.get('associado')!.value?.id ? editForm.get('associado')!.value : associadoOption" *ngFor="let associadoOption of associados; trackBy: trackById">{{associadoOption.id}}</option>
+                        <option [ngValue]="associadoOption.id === editForm.get('associado')!.value?.id ? editForm.get('associado')!.value : associadoOption" *ngFor="let associadoOption of associados; trackBy: trackById">{{ associadoOption.id }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('associado')!.invalid && (editForm.get('associado')!.dirty || editForm.get('associado')!.touched)">
@@ -49,11 +52,12 @@
                         This field is required.
                     </small>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.associadosHaras.haras" for="field_haras">Haras</label>
                     <select class="form-control" id="field_haras" name="haras" formControlName="haras">
                         <option *ngIf="!editForm.get('haras')!.value" [ngValue]="null" selected></option>
-                        <option [ngValue]="harasOption.id === editForm.get('haras')!.value?.id ? editForm.get('haras')!.value : harasOption" *ngFor="let harasOption of haras; trackBy: trackById">{{harasOption.id}}</option>
+                        <option [ngValue]="harasOption.id === editForm.get('haras')!.value?.id ? editForm.get('haras')!.value : harasOption" *ngFor="let harasOption of haras; trackBy: trackById">{{ harasOption.id }}</option>
                     </select>
                 </div>
                 <div *ngIf="editForm.get('haras')!.invalid && (editForm.get('haras')!.dirty || editForm.get('haras')!.touched)">
@@ -63,12 +67,14 @@
                     </small>
                 </div>
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

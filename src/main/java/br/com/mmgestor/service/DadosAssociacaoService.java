@@ -56,7 +56,7 @@ public class DadosAssociacaoService {
 
 
     /**
-    *  Get all the dadosAssociacaos where Animal is {@code null}.
+     *  Get all the dadosAssociacaos where Animal is {@code null}.
      *  @return the list of entities.
      */
     @Transactional(readOnly = true) 

@@ -6,7 +6,7 @@ import { IDadosAssociacao } from 'app/shared/model/dados-associacao.model';
 import { DadosAssociacaoService } from './dados-associacao.service';
 
 @Component({
-  templateUrl: './dados-associacao-delete-dialog.component.html'
+  templateUrl: './dados-associacao-delete-dialog.component.html',
 })
 export class DadosAssociacaoDeleteDialogComponent {
   dadosAssociacao?: IDadosAssociacao;
@@ -17,7 +17,7 @@ export class DadosAssociacaoDeleteDialogComponent {
     protected eventManager: JhiEventManager
   ) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

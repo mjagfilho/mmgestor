@@ -21,7 +21,6 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.net.URI;
 import java.net.URISyntaxException;
-
 import java.util.List;
 import java.util.Optional;
 
@@ -88,9 +87,7 @@ public class ClienteFornecedorResource {
     /**
      * {@code GET  /cliente-fornecedors} : get all the clienteFornecedors.
      *
-
      * @param pageable the pagination information.
-
      * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of clienteFornecedors in body.
      */
     @GetMapping("/cliente-fornecedors")

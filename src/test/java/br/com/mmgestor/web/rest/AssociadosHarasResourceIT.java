@@ -6,27 +6,21 @@ import br.com.mmgestor.domain.Associado;
 import br.com.mmgestor.domain.Haras;
 import br.com.mmgestor.repository.AssociadosHarasRepository;
 import br.com.mmgestor.service.AssociadosHarasService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -36,6 +30,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link AssociadosHarasResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class AssociadosHarasResourceIT {
 
     private static final LocalDate DEFAULT_DATA_ASSOCIACAO = LocalDate.ofEpochDay(0L);
@@ -51,35 +47,12 @@ public class AssociadosHarasResourceIT {
     private AssociadosHarasService associadosHarasService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restAssociadosHarasMockMvc;
 
     private AssociadosHaras associadosHaras;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final AssociadosHarasResource associadosHarasResource = new AssociadosHarasResource(associadosHarasService);
-        this.restAssociadosHarasMockMvc = MockMvcBuilders.standaloneSetup(associadosHarasResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -155,10 +128,9 @@ public class AssociadosHarasResourceIT {
     @Transactional
     public void createAssociadosHaras() throws Exception {
         int databaseSizeBeforeCreate = associadosHarasRepository.findAll().size();
-
         // Create the AssociadosHaras
         restAssociadosHarasMockMvc.perform(post("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associadosHaras)))
             .andExpect(status().isCreated());
 
@@ -180,7 +152,7 @@ public class AssociadosHarasResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restAssociadosHarasMockMvc.perform(post("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associadosHaras)))
             .andExpect(status().isBadRequest());
 
@@ -199,8 +171,9 @@ public class AssociadosHarasResourceIT {
 
         // Create the AssociadosHaras, which fails.
 
+
         restAssociadosHarasMockMvc.perform(post("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associadosHaras)))
             .andExpect(status().isBadRequest());
 
@@ -217,8 +190,9 @@ public class AssociadosHarasResourceIT {
 
         // Create the AssociadosHaras, which fails.
 
+
         restAssociadosHarasMockMvc.perform(post("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associadosHaras)))
             .andExpect(status().isBadRequest());
 
@@ -235,7 +209,7 @@ public class AssociadosHarasResourceIT {
         // Get all the associadosHarasList
         restAssociadosHarasMockMvc.perform(get("/api/associados-haras?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(associadosHaras.getId().intValue())))
             .andExpect(jsonPath("$.[*].dataAssociacao").value(hasItem(DEFAULT_DATA_ASSOCIACAO.toString())))
             .andExpect(jsonPath("$.[*].ehAtivo").value(hasItem(DEFAULT_EH_ATIVO.booleanValue())));
@@ -250,12 +224,11 @@ public class AssociadosHarasResourceIT {
         // Get the associadosHaras
         restAssociadosHarasMockMvc.perform(get("/api/associados-haras/{id}", associadosHaras.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(associadosHaras.getId().intValue()))
             .andExpect(jsonPath("$.dataAssociacao").value(DEFAULT_DATA_ASSOCIACAO.toString()))
             .andExpect(jsonPath("$.ehAtivo").value(DEFAULT_EH_ATIVO.booleanValue()));
     }
-
     @Test
     @Transactional
     public void getNonExistingAssociadosHaras() throws Exception {
@@ -281,7 +254,7 @@ public class AssociadosHarasResourceIT {
             .ehAtivo(UPDATED_EH_ATIVO);
 
         restAssociadosHarasMockMvc.perform(put("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedAssociadosHaras)))
             .andExpect(status().isOk());
 
@@ -298,11 +271,9 @@ public class AssociadosHarasResourceIT {
     public void updateNonExistingAssociadosHaras() throws Exception {
         int databaseSizeBeforeUpdate = associadosHarasRepository.findAll().size();
 
-        // Create the AssociadosHaras
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restAssociadosHarasMockMvc.perform(put("/api/associados-haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(associadosHaras)))
             .andExpect(status().isBadRequest());
 
@@ -321,7 +292,7 @@ public class AssociadosHarasResourceIT {
 
         // Delete the associadosHaras
         restAssociadosHarasMockMvc.perform(delete("/api/associados-haras/{id}", associadosHaras.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

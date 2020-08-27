@@ -1,75 +1,83 @@
 <div>
     <h2 id="page-heading">
         <span jhiTranslate="mmgestorApp.associadosHaras.home.title">Associados Haras</span>
+
         <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-associados-haras" [routerLink]="['/associados-haras/new']">
-            <fa-icon [icon]="'plus'"></fa-icon>
+            <fa-icon icon="plus"></fa-icon>
             <span  jhiTranslate="mmgestorApp.associadosHaras.home.createLabel">
             Create a new Associados Haras
             </span>
         </button>
     </h2>
+
     <jhi-alert-error></jhi-alert-error>
+
     <jhi-alert></jhi-alert>
-    <br/>
-    <div class="alert alert-warning" *ngIf="associadosHaras?.length === 0">
+
+    <div class="alert alert-warning" id="no-result" *ngIf="associadosHaras?.length === 0">
         <span jhiTranslate="mmgestorApp.associadosHaras.home.notFound">No associadosHaras found</span>
     </div>
-    <div class="table-responsive" *ngIf="associadosHaras?.length > 0">
+
+    <div class="table-responsive" id="entities" *ngIf="associadosHaras && associadosHaras.length > 0">
         <table class="table table-striped" aria-describedby="page-heading">
             <thead>
-            <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
-            <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="dataAssociacao"><span jhiTranslate="mmgestorApp.associadosHaras.dataAssociacao">Data Associacao</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="ehAtivo"><span jhiTranslate="mmgestorApp.associadosHaras.ehAtivo">Eh Ativo</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="associado.id"><span jhiTranslate="mmgestorApp.associadosHaras.associado">Associado</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"  jhiSortBy="haras.id"><span jhiTranslate="mmgestorApp.associadosHaras.haras">Haras</span> <fa-icon [icon]="'sort'"></fa-icon></th>
-            <th scope="col"></th>
-            </tr>
+                <tr jhiSort [(predicate)]="predicate" [(ascending)]="ascending" [callback]="loadPage.bind(this)">
+                    <th scope="col"  jhiSortBy="id"><span jhiTranslate="global.field.id">ID</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="dataAssociacao"><span jhiTranslate="mmgestorApp.associadosHaras.dataAssociacao">Data Associacao</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="ehAtivo"><span jhiTranslate="mmgestorApp.associadosHaras.ehAtivo">Eh Ativo</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="associado.id"><span jhiTranslate="mmgestorApp.associadosHaras.associado">Associado</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"  jhiSortBy="haras.id"><span jhiTranslate="mmgestorApp.associadosHaras.haras">Haras</span> <fa-icon icon="sort"></fa-icon></th>
+                    <th scope="col"></th>
+                </tr>
             </thead>
             <tbody>
-            <tr *ngFor="let associadosHaras of associadosHaras ;trackBy: trackId">
-                <td><a [routerLink]="['/associados-haras', associadosHaras.id, 'view' ]">{{associadosHaras.id}}</a></td>
-                <td>{{associadosHaras.dataAssociacao | date:'mediumDate'}}</td>
-                <td>{{associadosHaras.ehAtivo}}</td>
-                <td>
-                    <div *ngIf="associadosHaras.associado">
-                        <a [routerLink]="['/associado', associadosHaras.associado?.id, 'view' ]" >{{associadosHaras.associado?.id}}</a>
-                    </div>
-                </td>
-                <td>
-                    <div *ngIf="associadosHaras.haras">
-                        <a [routerLink]="['/haras', associadosHaras.haras?.id, 'view' ]" >{{associadosHaras.haras?.id}}</a>
-                    </div>
-                </td>
-                <td class="text-right">
-                    <div class="btn-group">
-                        <button type="submit"
-                                [routerLink]="['/associados-haras', associadosHaras.id, 'view' ]"
-                                class="btn btn-info btn-sm">
-                            <fa-icon [icon]="'eye'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
-                        </button>
-                        <button type="submit"
-                                [routerLink]="['/associados-haras', associadosHaras.id, 'edit']"
-                                class="btn btn-primary btn-sm">
-                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
-                        </button>
-                        <button type="submit" (click)="delete(associadosHaras)"
-                                class="btn btn-danger btn-sm">
-                            <fa-icon [icon]="'times'"></fa-icon>
-                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
-                        </button>
-                    </div>
-                </td>
-            </tr>
+                <tr *ngFor="let associadosHaras of associadosHaras ;trackBy: trackId">
+                    <td><a [routerLink]="['/associados-haras', associadosHaras.id, 'view']">{{ associadosHaras.id }}</a></td>
+                    <td>{{ associadosHaras.dataAssociacao | date:'mediumDate' }}</td>
+                    <td>{{ associadosHaras.ehAtivo }}</td>
+                    <td>
+                        <div *ngIf="associadosHaras.associado">
+                            <a [routerLink]="['/associado', associadosHaras.associado?.id, 'view']" >{{ associadosHaras.associado?.id }}</a>
+                        </div>
+                    </td>
+                    <td>
+                        <div *ngIf="associadosHaras.haras">
+                            <a [routerLink]="['/haras', associadosHaras.haras?.id, 'view']" >{{ associadosHaras.haras?.id }}</a>
+                        </div>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group">
+                            <button type="submit"
+                                    [routerLink]="['/associados-haras', associadosHaras.id, 'view']"
+                                    class="btn btn-info btn-sm">
+                                <fa-icon icon="eye"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                            </button>
+
+                            <button type="submit"
+                                    [routerLink]="['/associados-haras', associadosHaras.id, 'edit']"
+                                    class="btn btn-primary btn-sm">
+                                <fa-icon icon="pencil-alt"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                            </button>
+
+                            <button type="submit" (click)="delete(associadosHaras)"
+                                    class="btn btn-danger btn-sm">
+                                <fa-icon icon="times"></fa-icon>
+                                <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
             </tbody>
         </table>
     </div>
-    <div *ngIf="associadosHaras?.length > 0">
+
+    <div *ngIf="associadosHaras && associadosHaras.length > 0">
         <div class="row justify-content-center">
             <jhi-item-count [page]="page" [total]="totalItems" [itemsPerPage]="itemsPerPage"></jhi-item-count>
         </div>
+
         <div class="row justify-content-center">
             <ngb-pagination [collectionSize]="totalItems" [(page)]="ngbPaginationPage" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage($event)"></ngb-pagination>
         </div>

@@ -1,5 +1,4 @@
 import { ITipoLocal } from 'app/shared/model/tipo-local.model';
-import { ILocal } from 'app/shared/model/local.model';
 
 export interface ILocal {
   id?: number;

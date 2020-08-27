@@ -5,7 +5,7 @@ import { IDadosAssociacao } from 'app/shared/model/dados-associacao.model';
 
 @Component({
   selector: 'jhi-dados-associacao-detail',
-  templateUrl: './dados-associacao-detail.component.html'
+  templateUrl: './dados-associacao-detail.component.html',
 })
 export class DadosAssociacaoDetailComponent implements OnInit {
   dadosAssociacao: IDadosAssociacao | null = null;
@@ -13,9 +13,7 @@ export class DadosAssociacaoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ dadosAssociacao }) => {
-      this.dadosAssociacao = dadosAssociacao;
-    });
+    this.activatedRoute.data.subscribe(({ dadosAssociacao }) => (this.dadosAssociacao = dadosAssociacao));
   }
 
   previousState(): void {

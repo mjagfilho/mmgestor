@@ -14,8 +14,8 @@ import { associadosHarasRoute } from './associados-haras.route';
     AssociadosHarasComponent,
     AssociadosHarasDetailComponent,
     AssociadosHarasUpdateComponent,
-    AssociadosHarasDeleteDialogComponent
+    AssociadosHarasDeleteDialogComponent,
   ],
-  entryComponents: [AssociadosHarasDeleteDialogComponent]
+  entryComponents: [AssociadosHarasDeleteDialogComponent],
 })
 export class MmgestorAssociadosHarasModule {}

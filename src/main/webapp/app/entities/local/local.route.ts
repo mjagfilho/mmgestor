@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ILocal, Local } from 'app/shared/model/local.model';
 import { LocalService } from './local.service';
@@ -38,50 +38,47 @@ export const localRoute: Routes = [
   {
     path: '',
     component: LocalComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.local.home.title'
+      pageTitle: 'mmgestorApp.local.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: LocalDetailComponent,
     resolve: {
-      local: LocalResolve
+      local: LocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.local.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.local.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: LocalUpdateComponent,
     resolve: {
-      local: LocalResolve
+      local: LocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.local.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.local.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: LocalUpdateComponent,
     resolve: {
-      local: LocalResolve
+      local: LocalResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.local.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.local.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

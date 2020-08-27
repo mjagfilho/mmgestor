@@ -5,7 +5,7 @@ import { ITipoAssociado } from 'app/shared/model/tipo-associado.model';
 
 @Component({
   selector: 'jhi-tipo-associado-detail',
-  templateUrl: './tipo-associado-detail.component.html'
+  templateUrl: './tipo-associado-detail.component.html',
 })
 export class TipoAssociadoDetailComponent implements OnInit {
   tipoAssociado: ITipoAssociado | null = null;
@@ -13,9 +13,7 @@ export class TipoAssociadoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ tipoAssociado }) => {
-      this.tipoAssociado = tipoAssociado;
-    });
+    this.activatedRoute.data.subscribe(({ tipoAssociado }) => (this.tipoAssociado = tipoAssociado));
   }
 
   previousState(): void {

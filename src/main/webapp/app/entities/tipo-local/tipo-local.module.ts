@@ -11,6 +11,6 @@ import { tipoLocalRoute } from './tipo-local.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(tipoLocalRoute)],
   declarations: [TipoLocalComponent, TipoLocalDetailComponent, TipoLocalUpdateComponent, TipoLocalDeleteDialogComponent],
-  entryComponents: [TipoLocalDeleteDialogComponent]
+  entryComponents: [TipoLocalDeleteDialogComponent],
 })
 export class MmgestorTipoLocalModule {}

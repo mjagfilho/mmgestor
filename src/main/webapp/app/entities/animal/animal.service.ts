@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import * as moment from 'moment';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { DATE_FORMAT } from 'app/shared/constants/input.constants';
 import { SERVER_API_URL } from 'app/app.constants';
 import { createRequestOption } from 'app/shared/util/request-util';
@@ -52,7 +51,7 @@ export class AnimalService {
 
   protected convertDateFromClient(animal: IAnimal): IAnimal {
     const copy: IAnimal = Object.assign({}, animal, {
-      dtNascimento: animal.dtNascimento && animal.dtNascimento.isValid() ? animal.dtNascimento.format(DATE_FORMAT) : undefined
+      dtNascimento: animal.dtNascimento && animal.dtNascimento.isValid() ? animal.dtNascimento.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

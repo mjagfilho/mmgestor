@@ -1,74 +1,77 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="clienteFornecedor">
-            <h2><span jhiTranslate="mmgestorApp.clienteFornecedor.detail.title">Cliente Fornecedor</span> {{clienteFornecedor.id}}</h2>
+            <h2><span jhiTranslate="mmgestorApp.clienteFornecedor.detail.title">Cliente Fornecedor</span> {{ clienteFornecedor.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.nome">Nome</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.nome}}</span>
+                    <span>{{ clienteFornecedor.nome }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.dtNascimento">Dt Nascimento</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.dtNascimento}}</span>
+                    <span>{{ clienteFornecedor.dtNascimento }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.cpf">Cpf</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.cpf}}</span>
+                    <span>{{ clienteFornecedor.cpf }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.nomeHaras">Nome Haras</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.nomeHaras}}</span>
+                    <span>{{ clienteFornecedor.nomeHaras }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.localidadeHaras">Localidade Haras</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.localidadeHaras}}</span>
+                    <span>{{ clienteFornecedor.localidadeHaras }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.ufHaras">Uf Haras</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.ufHaras}}</span>
+                    <span>{{ clienteFornecedor.ufHaras }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.cep">Cep</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.cep}}</span>
+                    <span>{{ clienteFornecedor.cep }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.logradouro">Logradouro</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.logradouro}}</span>
+                    <span>{{ clienteFornecedor.logradouro }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.numero">Numero</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.numero}}</span>
+                    <span>{{ clienteFornecedor.numero }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.complemento">Complemento</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.complemento}}</span>
+                    <span>{{ clienteFornecedor.complemento }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.bairro">Bairro</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.bairro}}</span>
+                    <span>{{ clienteFornecedor.bairro }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.localidade">Localidade</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.localidade}}</span>
+                    <span>{{ clienteFornecedor.localidade }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.clienteFornecedor.uf">Uf</span></dt>
                 <dd>
-                    <span>{{clienteFornecedor.uf}}</span>
+                    <span>{{ clienteFornecedor.uf }}</span>
                 </dd>
             </dl>
 
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/cliente-fornecedor', clienteFornecedor.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

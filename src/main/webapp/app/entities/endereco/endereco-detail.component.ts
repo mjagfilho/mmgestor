@@ -5,7 +5,7 @@ import { IEndereco } from 'app/shared/model/endereco.model';
 
 @Component({
   selector: 'jhi-endereco-detail',
-  templateUrl: './endereco-detail.component.html'
+  templateUrl: './endereco-detail.component.html',
 })
 export class EnderecoDetailComponent implements OnInit {
   endereco: IEndereco | null = null;
@@ -13,9 +13,7 @@ export class EnderecoDetailComponent implements OnInit {
   constructor(protected activatedRoute: ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.activatedRoute.data.subscribe(({ endereco }) => {
-      this.endereco = endereco;
-    });
+    this.activatedRoute.data.subscribe(({ endereco }) => (this.endereco = endereco));
   }
 
   previousState(): void {

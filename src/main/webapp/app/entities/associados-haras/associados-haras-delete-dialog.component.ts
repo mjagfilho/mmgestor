@@ -6,7 +6,7 @@ import { IAssociadosHaras } from 'app/shared/model/associados-haras.model';
 import { AssociadosHarasService } from './associados-haras.service';
 
 @Component({
-  templateUrl: './associados-haras-delete-dialog.component.html'
+  templateUrl: './associados-haras-delete-dialog.component.html',
 })
 export class AssociadosHarasDeleteDialogComponent {
   associadosHaras?: IAssociadosHaras;
@@ -17,7 +17,7 @@ export class AssociadosHarasDeleteDialogComponent {
     protected eventManager: JhiEventManager
   ) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 

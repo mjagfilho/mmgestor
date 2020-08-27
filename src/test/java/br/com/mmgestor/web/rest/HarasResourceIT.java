@@ -5,25 +5,19 @@ import br.com.mmgestor.domain.Haras;
 import br.com.mmgestor.domain.Associado;
 import br.com.mmgestor.repository.HarasRepository;
 import br.com.mmgestor.service.HarasService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -33,6 +27,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link HarasResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class HarasResourceIT {
 
     private static final String DEFAULT_NOME = "AAAAAAAAAA";
@@ -51,35 +47,12 @@ public class HarasResourceIT {
     private HarasService harasService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restHarasMockMvc;
 
     private Haras haras;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final HarasResource harasResource = new HarasResource(harasService);
-        this.restHarasMockMvc = MockMvcBuilders.standaloneSetup(harasResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -137,10 +110,9 @@ public class HarasResourceIT {
     @Transactional
     public void createHaras() throws Exception {
         int databaseSizeBeforeCreate = harasRepository.findAll().size();
-
         // Create the Haras
         restHarasMockMvc.perform(post("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isCreated());
 
@@ -163,7 +135,7 @@ public class HarasResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restHarasMockMvc.perform(post("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isBadRequest());
 
@@ -182,8 +154,9 @@ public class HarasResourceIT {
 
         // Create the Haras, which fails.
 
+
         restHarasMockMvc.perform(post("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isBadRequest());
 
@@ -200,8 +173,9 @@ public class HarasResourceIT {
 
         // Create the Haras, which fails.
 
+
         restHarasMockMvc.perform(post("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isBadRequest());
 
@@ -218,8 +192,9 @@ public class HarasResourceIT {
 
         // Create the Haras, which fails.
 
+
         restHarasMockMvc.perform(post("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isBadRequest());
 
@@ -236,7 +211,7 @@ public class HarasResourceIT {
         // Get all the harasList
         restHarasMockMvc.perform(get("/api/haras?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(haras.getId().intValue())))
             .andExpect(jsonPath("$.[*].nome").value(hasItem(DEFAULT_NOME)))
             .andExpect(jsonPath("$.[*].localidade").value(hasItem(DEFAULT_LOCALIDADE)))
@@ -252,13 +227,12 @@ public class HarasResourceIT {
         // Get the haras
         restHarasMockMvc.perform(get("/api/haras/{id}", haras.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(haras.getId().intValue()))
             .andExpect(jsonPath("$.nome").value(DEFAULT_NOME))
             .andExpect(jsonPath("$.localidade").value(DEFAULT_LOCALIDADE))
             .andExpect(jsonPath("$.uf").value(DEFAULT_UF));
     }
-
     @Test
     @Transactional
     public void getNonExistingHaras() throws Exception {
@@ -285,7 +259,7 @@ public class HarasResourceIT {
             .uf(UPDATED_UF);
 
         restHarasMockMvc.perform(put("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedHaras)))
             .andExpect(status().isOk());
 
@@ -303,11 +277,9 @@ public class HarasResourceIT {
     public void updateNonExistingHaras() throws Exception {
         int databaseSizeBeforeUpdate = harasRepository.findAll().size();
 
-        // Create the Haras
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restHarasMockMvc.perform(put("/api/haras")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(haras)))
             .andExpect(status().isBadRequest());
 
@@ -326,7 +298,7 @@ public class HarasResourceIT {
 
         // Delete the haras
         restHarasMockMvc.perform(delete("/api/haras/{id}", haras.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item
