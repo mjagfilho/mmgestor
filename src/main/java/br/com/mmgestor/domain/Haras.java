@@ -1,4 +1,5 @@
 package br.com.mmgestor.domain;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
@@ -36,10 +37,10 @@ public class Haras implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("haras")
+    @JsonIgnoreProperties(value = "haras", allowSetters = true)
     private Associado responsavel;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -99,7 +100,7 @@ public class Haras implements Serializable {
     public void setResponsavel(Associado associado) {
         this.responsavel = associado;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -117,6 +118,7 @@ public class Haras implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Haras{" +

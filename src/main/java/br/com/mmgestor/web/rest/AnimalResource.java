@@ -55,7 +55,9 @@ public class AnimalResource {
      * {@code POST  /animals} : Create a new animal.
      *
      * @param animal the animal to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new animal, or with status {@code 400 (Bad Request)} if the animal has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new animal, or with status {@code 400 (Bad Request)} if the
+     *         animal has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/animals")
@@ -65,18 +67,21 @@ public class AnimalResource {
             throw new BadRequestAlertException("A new animal cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Animal result = animalService.save(animal);
-        return ResponseEntity.created(new URI("/api/animals/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/animals/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /animals} : Updates an existing animal.
      *
      * @param animal the animal to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated animal,
-     * or with status {@code 400 (Bad Request)} if the animal is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the animal couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated animal, or with status {@code 400 (Bad Request)} if the
+     *         animal is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the animal couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/animals")
@@ -86,24 +91,24 @@ public class AnimalResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Animal result = animalService.save(animal);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, animal.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, animal.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /animals} : get all the animals.
      *
-
      * @param pageable the pagination information.
-
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of animals in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of animals in body.
      */
     @GetMapping("/animals")
     public ResponseEntity<List<Animal>> getAllAnimals(Pageable pageable) {
         log.debug("REST request to get a page of Animals");
         Page<Animal> page = animalService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -111,7 +116,8 @@ public class AnimalResource {
      * {@code GET  /animals/:id} : get the "id" animal.
      *
      * @param id the id of the animal to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the animal, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the animal, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/animals/{id}")
     public ResponseEntity<Animal> getAnimal(@PathVariable Long id) {
@@ -130,6 +136,8 @@ public class AnimalResource {
     public ResponseEntity<Void> deleteAnimal(@PathVariable Long id) {
         log.debug("REST request to delete Animal : {}", id);
         animalService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

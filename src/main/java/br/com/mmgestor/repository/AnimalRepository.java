@@ -10,5 +10,4 @@ import br.com.mmgestor.domain.Animal;
  */
 @Repository
 public interface AnimalRepository extends JpaRepository<Animal, Long> {
-
 }

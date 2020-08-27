@@ -55,7 +55,9 @@ public class LocalResource {
      * {@code POST  /locals} : Create a new local.
      *
      * @param local the local to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new local, or with status {@code 400 (Bad Request)} if the local has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new local, or with status {@code 400 (Bad Request)} if the
+     *         local has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/locals")
@@ -65,18 +67,20 @@ public class LocalResource {
             throw new BadRequestAlertException("A new local cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Local result = localService.save(local);
-        return ResponseEntity.created(new URI("/api/locals/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/locals/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /locals} : Updates an existing local.
      *
      * @param local the local to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated local,
-     * or with status {@code 400 (Bad Request)} if the local is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the local couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated local, or with status {@code 400 (Bad Request)} if the
+     *         local is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the local couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/locals")
@@ -86,22 +90,24 @@ public class LocalResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Local result = localService.save(local);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, local.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, local.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /locals} : get all the locals.
      *
      * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of locals in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of locals in body.
      */
     @GetMapping("/locals")
     public ResponseEntity<List<Local>> getAllLocals(Pageable pageable) {
         log.debug("REST request to get a page of Locals");
         Page<Local> page = localService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -109,7 +115,8 @@ public class LocalResource {
      * {@code GET  /locals/:id} : get the "id" local.
      *
      * @param id the id of the local to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the local, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the local, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/locals/{id}")
     public ResponseEntity<Local> getLocal(@PathVariable Long id) {
@@ -128,6 +135,8 @@ public class LocalResource {
     public ResponseEntity<Void> deleteLocal(@PathVariable Long id) {
         log.debug("REST request to delete Local : {}", id);
         localService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

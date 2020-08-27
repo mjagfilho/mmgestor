@@ -55,7 +55,9 @@ public class HarasResource {
      * {@code POST  /haras} : Create a new haras.
      *
      * @param haras the haras to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new haras, or with status {@code 400 (Bad Request)} if the haras has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new haras, or with status {@code 400 (Bad Request)} if the
+     *         haras has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/haras")
@@ -65,18 +67,20 @@ public class HarasResource {
             throw new BadRequestAlertException("A new haras cannot already have an ID", ENTITY_NAME, "idexists");
         }
         Haras result = harasService.save(haras);
-        return ResponseEntity.created(new URI("/api/haras/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/haras/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /haras} : Updates an existing haras.
      *
      * @param haras the haras to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated haras,
-     * or with status {@code 400 (Bad Request)} if the haras is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the haras couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated haras, or with status {@code 400 (Bad Request)} if the
+     *         haras is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the haras couldn't be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/haras")
@@ -86,24 +90,24 @@ public class HarasResource {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         Haras result = harasService.save(haras);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, haras.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, haras.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /haras} : get all the haras.
      *
-
      * @param pageable the pagination information.
-
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of haras in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of haras in body.
      */
     @GetMapping("/haras")
     public ResponseEntity<List<Haras>> getAllHaras(Pageable pageable) {
         log.debug("REST request to get a page of Haras");
         Page<Haras> page = harasService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -111,7 +115,8 @@ public class HarasResource {
      * {@code GET  /haras/:id} : get the "id" haras.
      *
      * @param id the id of the haras to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the haras, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the haras, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/haras/{id}")
     public ResponseEntity<Haras> getHaras(@PathVariable Long id) {
@@ -130,6 +135,8 @@ public class HarasResource {
     public ResponseEntity<Void> deleteHaras(@PathVariable Long id) {
         log.debug("REST request to delete Haras : {}", id);
         harasService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

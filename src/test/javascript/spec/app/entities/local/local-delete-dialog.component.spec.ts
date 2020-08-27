@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
-        declarations: [LocalDeleteDialogComponent]
+        declarations: [LocalDeleteDialogComponent],
       })
         .overrideTemplate(LocalDeleteDialogComponent, '')
         .compileComponents();

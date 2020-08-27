@@ -1,34 +1,37 @@
 <div class="row justify-content-center">
     <div class="col-8">
         <div *ngIf="animal">
-            <h2><span jhiTranslate="mmgestorApp.animal.detail.title">Animal</span> {{animal.id}}</h2>
+            <h2><span jhiTranslate="mmgestorApp.animal.detail.title">Animal</span> {{ animal.id }}</h2>
+
             <hr>
+
             <jhi-alert-error></jhi-alert-error>
+
             <dl class="row-md jh-entity-details">
                 <dt><span jhiTranslate="mmgestorApp.animal.nome">Nome</span></dt>
                 <dd>
-                    <span>{{animal.nome}}</span>
+                    <span>{{ animal.nome }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.animal.dtNascimento">Dt Nascimento</span></dt>
                 <dd>
-                    <span>{{animal.dtNascimento}}</span>
+                    <span>{{ animal.dtNascimento }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.animal.sexo">Sexo</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'mmgestorApp.Sexo.' + animal.sexo}}">{{animal.sexo}}</span>
+                    <span jhiTranslate="{{ 'mmgestorApp.Sexo.' + animal.sexo }}">{{ animal.sexo }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.animal.pelagem">Pelagem</span></dt>
                 <dd>
-                    <span jhiTranslate="{{'mmgestorApp.Pelagem.' + animal.pelagem}}">{{animal.pelagem}}</span>
+                    <span jhiTranslate="{{ 'mmgestorApp.Pelagem.' + animal.pelagem }}">{{ animal.pelagem }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.animal.ehVivo">Eh Vivo</span></dt>
                 <dd>
-                    <span>{{animal.ehVivo}}</span>
+                    <span>{{ animal.ehVivo }}</span>
                 </dd>
                 <dt><span jhiTranslate="mmgestorApp.animal.dadosAssociacao">Dados Associacao</span></dt>
                 <dd>
                     <div *ngIf="animal.dadosAssociacao">
-                        <a [routerLink]="['/dados-associacao', animal.dadosAssociacao?.id, 'view']">{{animal.dadosAssociacao?.id}}</a>
+                        <a [routerLink]="['/dados-associacao', animal.dadosAssociacao?.id, 'view']">{{ animal.dadosAssociacao?.id }}</a>
                     </div>
                 </dd>
             </dl>
@@ -36,13 +39,13 @@
             <button type="submit"
                     (click)="previousState()"
                     class="btn btn-info">
-                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+                <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
             </button>
 
             <button type="button"
                     [routerLink]="['/animal', animal.id, 'edit']"
                     class="btn btn-primary">
-                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+                <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
             </button>
         </div>
     </div>

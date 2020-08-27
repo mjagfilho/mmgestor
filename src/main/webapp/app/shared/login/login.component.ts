@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { Router } from '@angular/router';
@@ -8,7 +8,7 @@ import { CPF_MASK } from 'app/shared/constants/input.constants';
 
 @Component({
   selector: 'jhi-login-modal',
-  templateUrl: './login.component.html'
+  templateUrl: './login.component.html',
 })
 export class LoginModalComponent implements AfterViewInit {
   @ViewChild('username', { static: false })
@@ -20,20 +20,14 @@ export class LoginModalComponent implements AfterViewInit {
   loginForm = this.fb.group({
     username: [''],
     password: [''],
-    rememberMe: [false]
+    rememberMe: [false],
   });
 
-  constructor(
-    private loginService: LoginService,
-    private renderer: Renderer,
-    private router: Router,
-    public activeModal: NgbActiveModal,
-    private fb: FormBuilder
-  ) {}
+  constructor(private loginService: LoginService, private router: Router, public activeModal: NgbActiveModal, private fb: FormBuilder) {}
 
   ngAfterViewInit(): void {
     if (this.username) {
-      this.renderer.invokeElementMethod(this.username.nativeElement, 'focus', []);
+      this.username.nativeElement.focus();
     }
   }
 
@@ -41,7 +35,7 @@ export class LoginModalComponent implements AfterViewInit {
     this.authenticationError = false;
     this.loginForm.patchValue({
       username: '',
-      password: ''
+      password: '',
     });
     this.activeModal.dismiss('cancel');
   }
@@ -51,7 +45,7 @@ export class LoginModalComponent implements AfterViewInit {
       .login({
         username: this.loginForm.get('username')!.value,
         password: this.loginForm.get('password')!.value,
-        rememberMe: this.loginForm.get('rememberMe')!.value
+        rememberMe: this.loginForm.get('rememberMe')!.value,
       })
       .subscribe(
         () => {

@@ -55,53 +55,62 @@ public class AssociadosHarasResource {
      * {@code POST  /associados-haras} : Create a new associadosHaras.
      *
      * @param associadosHaras the associadosHaras to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new associadosHaras, or with status {@code 400 (Bad Request)} if the associadosHaras has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new associadosHaras, or with status
+     *         {@code 400 (Bad Request)} if the associadosHaras has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/associados-haras")
-    public ResponseEntity<AssociadosHaras> createAssociadosHaras(@Valid @RequestBody AssociadosHaras associadosHaras) throws URISyntaxException {
+    public ResponseEntity<AssociadosHaras> createAssociadosHaras(@Valid @RequestBody AssociadosHaras associadosHaras)
+            throws URISyntaxException {
         log.debug("REST request to save AssociadosHaras : {}", associadosHaras);
         if (associadosHaras.getId() != null) {
-            throw new BadRequestAlertException("A new associadosHaras cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new associadosHaras cannot already have an ID", ENTITY_NAME,
+                    "idexists");
         }
         AssociadosHaras result = associadosHarasService.save(associadosHaras);
-        return ResponseEntity.created(new URI("/api/associados-haras/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/associados-haras/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /associados-haras} : Updates an existing associadosHaras.
      *
      * @param associadosHaras the associadosHaras to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated associadosHaras,
-     * or with status {@code 400 (Bad Request)} if the associadosHaras is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the associadosHaras couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated associadosHaras, or with status {@code 400 (Bad Request)}
+     *         if the associadosHaras is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the associadosHaras couldn't
+     *         be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/associados-haras")
-    public ResponseEntity<AssociadosHaras> updateAssociadosHaras(@Valid @RequestBody AssociadosHaras associadosHaras) throws URISyntaxException {
+    public ResponseEntity<AssociadosHaras> updateAssociadosHaras(@Valid @RequestBody AssociadosHaras associadosHaras)
+            throws URISyntaxException {
         log.debug("REST request to update AssociadosHaras : {}", associadosHaras);
         if (associadosHaras.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         AssociadosHaras result = associadosHarasService.save(associadosHaras);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, associadosHaras.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+                associadosHaras.getId().toString())).body(result);
     }
 
     /**
      * {@code GET  /associados-haras} : get all the associadosHaras.
      *
      * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of associadosHaras in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of associadosHaras in body.
      */
     @GetMapping("/associados-haras")
     public ResponseEntity<List<AssociadosHaras>> getAllAssociadosHaras(Pageable pageable) {
         log.debug("REST request to get a page of AssociadosHaras");
         Page<AssociadosHaras> page = associadosHarasService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -109,7 +118,8 @@ public class AssociadosHarasResource {
      * {@code GET  /associados-haras/:id} : get the "id" associadosHaras.
      *
      * @param id the id of the associadosHaras to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the associadosHaras, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the associadosHaras, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/associados-haras/{id}")
     public ResponseEntity<AssociadosHaras> getAssociadosHaras(@PathVariable Long id) {
@@ -128,6 +138,8 @@ public class AssociadosHarasResource {
     public ResponseEntity<Void> deleteAssociadosHaras(@PathVariable Long id) {
         log.debug("REST request to delete AssociadosHaras : {}", id);
         associadosHarasService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

@@ -12,11 +12,10 @@ import { AnimalService } from './animal.service';
 
 @Component({
   selector: 'jhi-animal-update',
-  templateUrl: './animal-update.component.html'
+  templateUrl: './animal-update.component.html',
 })
 export class AnimalUpdateComponent implements OnInit {
   isSaving = false;
-
   dadosassociacaos: IDadosAssociacao[] = [];
   dtNascimentoDp: any;
 
@@ -27,7 +26,7 @@ export class AnimalUpdateComponent implements OnInit {
     sexo: [null, [Validators.required]],
     pelagem: [null, [Validators.required]],
     ehVivo: [null, [Validators.required]],
-    dadosAssociacao: []
+    dadosAssociacao: [],
   });
 
   constructor(
@@ -45,7 +44,7 @@ export class AnimalUpdateComponent implements OnInit {
         .query({ filter: 'animal-is-null' })
         .pipe(
           map((res: HttpResponse<IDadosAssociacao[]>) => {
-            return res.body ? res.body : [];
+            return res.body || [];
           })
         )
         .subscribe((resBody: IDadosAssociacao[]) => {
@@ -59,9 +58,7 @@ export class AnimalUpdateComponent implements OnInit {
                   return subRes.body ? [subRes.body].concat(resBody) : resBody;
                 })
               )
-              .subscribe((concatRes: IDadosAssociacao[]) => {
-                this.dadosassociacaos = concatRes;
-              });
+              .subscribe((concatRes: IDadosAssociacao[]) => (this.dadosassociacaos = concatRes));
           }
         });
     });
@@ -75,7 +72,7 @@ export class AnimalUpdateComponent implements OnInit {
       sexo: animal.sexo,
       pelagem: animal.pelagem,
       ehVivo: animal.ehVivo,
-      dadosAssociacao: animal.dadosAssociacao
+      dadosAssociacao: animal.dadosAssociacao,
     });
   }
 
@@ -102,7 +99,7 @@ export class AnimalUpdateComponent implements OnInit {
       sexo: this.editForm.get(['sexo'])!.value,
       pelagem: this.editForm.get(['pelagem'])!.value,
       ehVivo: this.editForm.get(['ehVivo'])!.value,
-      dadosAssociacao: this.editForm.get(['dadosAssociacao'])!.value
+      dadosAssociacao: this.editForm.get(['dadosAssociacao'])!.value,
     };
   }
 

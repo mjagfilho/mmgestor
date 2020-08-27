@@ -6,7 +6,7 @@ import { ILocal } from 'app/shared/model/local.model';
 import { LocalService } from './local.service';
 
 @Component({
-  templateUrl: './local-delete-dialog.component.html'
+  templateUrl: './local-delete-dialog.component.html',
 })
 export class LocalDeleteDialogComponent {
   local?: ILocal;

@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a Endereco', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -60,7 +60,7 @@ describe('Service Tests', () => {
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
             uf: 'BBBBBB',
-            numero: 'BBBBBB'
+            numero: 'BBBBBB',
           },
           elemDefault
         );
@@ -83,7 +83,7 @@ describe('Service Tests', () => {
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
             uf: 'BBBBBB',
-            numero: 'BBBBBB'
+            numero: 'BBBBBB',
           },
           elemDefault
         );

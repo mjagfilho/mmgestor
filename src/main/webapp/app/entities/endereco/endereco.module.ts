@@ -11,6 +11,6 @@ import { enderecoRoute } from './endereco.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(enderecoRoute)],
   declarations: [EnderecoComponent, EnderecoDetailComponent, EnderecoUpdateComponent, EnderecoDeleteDialogComponent],
-  entryComponents: [EnderecoDeleteDialogComponent]
+  entryComponents: [EnderecoDeleteDialogComponent],
 })
 export class MmgestorEnderecoModule {}

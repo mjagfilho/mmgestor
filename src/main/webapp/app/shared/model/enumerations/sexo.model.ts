@@ -1,4 +1,5 @@
 export const enum Sexo {
-  MACHO,
-  FEMEA
+  MACHO = 'MACHO',
+
+  FEMEA = 'FEMEA',
 }

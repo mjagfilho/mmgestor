@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IHaras, Haras } from 'app/shared/model/haras.model';
 import { HarasService } from './haras.service';
@@ -38,50 +38,47 @@ export const harasRoute: Routes = [
   {
     path: '',
     component: HarasComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.haras.home.title'
+      pageTitle: 'mmgestorApp.haras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: HarasDetailComponent,
     resolve: {
-      haras: HarasResolve
+      haras: HarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.haras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.haras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: HarasUpdateComponent,
     resolve: {
-      haras: HarasResolve
+      haras: HarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.haras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.haras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: HarasUpdateComponent,
     resolve: {
-      haras: HarasResolve
+      haras: HarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.haras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.haras.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

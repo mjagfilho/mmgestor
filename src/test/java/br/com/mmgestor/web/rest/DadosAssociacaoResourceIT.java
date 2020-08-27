@@ -1,6 +1,5 @@
 package br.com.mmgestor.web.rest;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
@@ -17,27 +16,25 @@ import javax.persistence.EntityManager;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
 
 import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.DadosAssociacao;
 import br.com.mmgestor.repository.DadosAssociacaoRepository;
 import br.com.mmgestor.service.DadosAssociacaoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 /**
  * Integration tests for the {@link DadosAssociacaoResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class DadosAssociacaoResourceIT {
 
     private static final String DEFAULT_CRIADOR = "AAAAAAAAAA";
@@ -68,35 +65,12 @@ public class DadosAssociacaoResourceIT {
     private DadosAssociacaoService dadosAssociacaoService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restDadosAssociacaoMockMvc;
 
     private DadosAssociacao dadosAssociacao;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final DadosAssociacaoResource dadosAssociacaoResource = new DadosAssociacaoResource(dadosAssociacaoService);
-        this.restDadosAssociacaoMockMvc = MockMvcBuilders.standaloneSetup(dadosAssociacaoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -142,10 +116,9 @@ public class DadosAssociacaoResourceIT {
     @Transactional
     public void createDadosAssociacao() throws Exception {
         int databaseSizeBeforeCreate = dadosAssociacaoRepository.findAll().size();
-
         // Create the DadosAssociacao
         restDadosAssociacaoMockMvc.perform(post("/api/dados-associacaos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dadosAssociacao)))
             .andExpect(status().isCreated());
 
@@ -172,7 +145,7 @@ public class DadosAssociacaoResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restDadosAssociacaoMockMvc.perform(post("/api/dados-associacaos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dadosAssociacao)))
             .andExpect(status().isBadRequest());
 
@@ -191,7 +164,7 @@ public class DadosAssociacaoResourceIT {
         // Get all the dadosAssociacaoList
         restDadosAssociacaoMockMvc.perform(get("/api/dados-associacaos?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(dadosAssociacao.getId().intValue())))
             .andExpect(jsonPath("$.[*].criador").value(hasItem(DEFAULT_CRIADOR)))
             .andExpect(jsonPath("$.[*].proprietario").value(hasItem(DEFAULT_PROPRIETARIO)))
@@ -211,7 +184,7 @@ public class DadosAssociacaoResourceIT {
         // Get the dadosAssociacao
         restDadosAssociacaoMockMvc.perform(get("/api/dados-associacaos/{id}", dadosAssociacao.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(dadosAssociacao.getId().intValue()))
             .andExpect(jsonPath("$.criador").value(DEFAULT_CRIADOR))
             .andExpect(jsonPath("$.proprietario").value(DEFAULT_PROPRIETARIO))
@@ -221,7 +194,6 @@ public class DadosAssociacaoResourceIT {
             .andExpect(jsonPath("$.chip").value(DEFAULT_CHIP))
             .andExpect(jsonPath("$.ehBloqueado").value(DEFAULT_EH_BLOQUEADO.booleanValue()));
     }
-
     @Test
     @Transactional
     public void getNonExistingDadosAssociacao() throws Exception {
@@ -252,7 +224,7 @@ public class DadosAssociacaoResourceIT {
             .ehBloqueado(UPDATED_EH_BLOQUEADO);
 
         restDadosAssociacaoMockMvc.perform(put("/api/dados-associacaos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedDadosAssociacao)))
             .andExpect(status().isOk());
 
@@ -274,11 +246,9 @@ public class DadosAssociacaoResourceIT {
     public void updateNonExistingDadosAssociacao() throws Exception {
         int databaseSizeBeforeUpdate = dadosAssociacaoRepository.findAll().size();
 
-        // Create the DadosAssociacao
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restDadosAssociacaoMockMvc.perform(put("/api/dados-associacaos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(dadosAssociacao)))
             .andExpect(status().isBadRequest());
 
@@ -297,7 +267,7 @@ public class DadosAssociacaoResourceIT {
 
         // Delete the dadosAssociacao
         restDadosAssociacaoMockMvc.perform(delete("/api/dados-associacaos/{id}", dadosAssociacao.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { ITipoAssociado, TipoAssociado } from 'app/shared/model/tipo-associado.model';
 import { TipoAssociadoService } from './tipo-associado.service';
@@ -38,50 +38,47 @@ export const tipoAssociadoRoute: Routes = [
   {
     path: '',
     component: TipoAssociadoComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.tipoAssociado.home.title'
+      pageTitle: 'mmgestorApp.tipoAssociado.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: TipoAssociadoDetailComponent,
     resolve: {
-      tipoAssociado: TipoAssociadoResolve
+      tipoAssociado: TipoAssociadoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoAssociado.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoAssociado.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: TipoAssociadoUpdateComponent,
     resolve: {
-      tipoAssociado: TipoAssociadoResolve
+      tipoAssociado: TipoAssociadoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoAssociado.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoAssociado.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: TipoAssociadoUpdateComponent,
     resolve: {
-      tipoAssociado: TipoAssociadoResolve
+      tipoAssociado: TipoAssociadoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.tipoAssociado.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.tipoAssociado.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

@@ -5,7 +5,7 @@ import { IAssociado } from 'app/shared/model/associado.model';
 
 @Component({
   selector: 'jhi-associado-detail',
-  templateUrl: './associado-detail.component.html'
+  templateUrl: './associado-detail.component.html',
 })
 export class AssociadoDetailComponent implements OnInit {
   associado: IAssociado | null = null;

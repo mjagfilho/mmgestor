@@ -54,7 +54,7 @@ export class AssociadosHarasService {
       dataAssociacao:
         associadosHaras.dataAssociacao && associadosHaras.dataAssociacao.isValid()
           ? associadosHaras.dataAssociacao.format(DATE_FORMAT)
-          : undefined
+          : undefined,
     });
     return copy;
   }

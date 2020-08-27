@@ -20,7 +20,7 @@ describe('Component Tests', () => {
     beforeEach(() => {
       TestBed.configureTestingModule({
         imports: [MmgestorTestModule],
-        declarations: [AssociadosHarasDeleteDialogComponent]
+        declarations: [AssociadosHarasDeleteDialogComponent],
       })
         .overrideTemplate(AssociadosHarasDeleteDialogComponent, '')
         .compileComponents();

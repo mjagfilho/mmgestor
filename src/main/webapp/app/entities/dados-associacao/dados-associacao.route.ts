@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IDadosAssociacao, DadosAssociacao } from 'app/shared/model/dados-associacao.model';
 import { DadosAssociacaoService } from './dados-associacao.service';
@@ -38,50 +38,47 @@ export const dadosAssociacaoRoute: Routes = [
   {
     path: '',
     component: DadosAssociacaoComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.dadosAssociacao.home.title'
+      pageTitle: 'mmgestorApp.dadosAssociacao.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: DadosAssociacaoDetailComponent,
     resolve: {
-      dadosAssociacao: DadosAssociacaoResolve
+      dadosAssociacao: DadosAssociacaoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.dadosAssociacao.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.dadosAssociacao.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: DadosAssociacaoUpdateComponent,
     resolve: {
-      dadosAssociacao: DadosAssociacaoResolve
+      dadosAssociacao: DadosAssociacaoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.dadosAssociacao.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.dadosAssociacao.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: DadosAssociacaoUpdateComponent,
     resolve: {
-      dadosAssociacao: DadosAssociacaoResolve
+      dadosAssociacao: DadosAssociacaoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.dadosAssociacao.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.dadosAssociacao.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

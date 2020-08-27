@@ -11,6 +11,6 @@ import { harasRoute } from './haras.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(harasRoute)],
   declarations: [HarasComponent, HarasDetailComponent, HarasUpdateComponent, HarasDeleteDialogComponent],
-  entryComponents: [HarasDeleteDialogComponent]
+  entryComponents: [HarasDeleteDialogComponent],
 })
 export class MmgestorHarasModule {}

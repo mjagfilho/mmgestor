@@ -15,7 +15,7 @@ type SelectableEntity = ITipoLocal | ILocal;
 
 @Component({
   selector: 'jhi-local-update',
-  templateUrl: './local-update.component.html'
+  templateUrl: './local-update.component.html',
 })
 export class LocalUpdateComponent implements OnInit {
   isSaving = false;
@@ -35,7 +35,7 @@ export class LocalUpdateComponent implements OnInit {
     localidade: [null, [Validators.required]],
     uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
     tipo: [null, Validators.required],
-    pai: []
+    pai: [],
   });
 
   constructor(
@@ -89,7 +89,7 @@ export class LocalUpdateComponent implements OnInit {
       localidade: local.localidade,
       uf: local.uf,
       tipo: local.tipo,
-      pai: local.pai
+      pai: local.pai,
     });
   }
 
@@ -122,7 +122,7 @@ export class LocalUpdateComponent implements OnInit {
       localidade: this.editForm.get(['localidade'])!.value,
       uf: this.editForm.get(['uf'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      pai: this.editForm.get(['pai'])!.value
+      pai: this.editForm.get(['pai'])!.value,
     };
   }
 

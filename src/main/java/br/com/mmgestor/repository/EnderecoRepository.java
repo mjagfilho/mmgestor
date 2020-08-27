@@ -10,5 +10,4 @@ import br.com.mmgestor.domain.Endereco;
  */
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Long> {
-
 }

@@ -10,7 +10,7 @@ import { DadosAssociacaoService } from './dados-associacao.service';
 
 @Component({
   selector: 'jhi-dados-associacao-update',
-  templateUrl: './dados-associacao-update.component.html'
+  templateUrl: './dados-associacao-update.component.html',
 })
 export class DadosAssociacaoUpdateComponent implements OnInit {
   isSaving = false;
@@ -23,7 +23,7 @@ export class DadosAssociacaoUpdateComponent implements OnInit {
     registro: [null, []],
     exameDNA: [],
     chip: [null, []],
-    ehBloqueado: []
+    ehBloqueado: [],
   });
 
   constructor(
@@ -47,7 +47,7 @@ export class DadosAssociacaoUpdateComponent implements OnInit {
       registro: dadosAssociacao.registro,
       exameDNA: dadosAssociacao.exameDNA,
       chip: dadosAssociacao.chip,
-      ehBloqueado: dadosAssociacao.ehBloqueado
+      ehBloqueado: dadosAssociacao.ehBloqueado,
     });
   }
 
@@ -75,7 +75,7 @@ export class DadosAssociacaoUpdateComponent implements OnInit {
       registro: this.editForm.get(['registro'])!.value,
       exameDNA: this.editForm.get(['exameDNA'])!.value,
       chip: this.editForm.get(['chip'])!.value,
-      ehBloqueado: this.editForm.get(['ehBloqueado'])!.value
+      ehBloqueado: this.editForm.get(['ehBloqueado'])!.value,
     };
   }
 

@@ -55,53 +55,62 @@ public class TipoAssociadoResource {
      * {@code POST  /tipo-associados} : Create a new tipoAssociado.
      *
      * @param tipoAssociado the tipoAssociado to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new tipoAssociado, or with status {@code 400 (Bad Request)} if the tipoAssociado has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new tipoAssociado, or with status {@code 400 (Bad Request)}
+     *         if the tipoAssociado has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/tipo-associados")
-    public ResponseEntity<TipoAssociado> createTipoAssociado(@Valid @RequestBody TipoAssociado tipoAssociado) throws URISyntaxException {
+    public ResponseEntity<TipoAssociado> createTipoAssociado(@Valid @RequestBody TipoAssociado tipoAssociado)
+            throws URISyntaxException {
         log.debug("REST request to save TipoAssociado : {}", tipoAssociado);
         if (tipoAssociado.getId() != null) {
-            throw new BadRequestAlertException("A new tipoAssociado cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new tipoAssociado cannot already have an ID", ENTITY_NAME,
+                    "idexists");
         }
         TipoAssociado result = tipoAssociadoService.save(tipoAssociado);
-        return ResponseEntity.created(new URI("/api/tipo-associados/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/tipo-associados/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /tipo-associados} : Updates an existing tipoAssociado.
      *
      * @param tipoAssociado the tipoAssociado to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated tipoAssociado,
-     * or with status {@code 400 (Bad Request)} if the tipoAssociado is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the tipoAssociado couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated tipoAssociado, or with status {@code 400 (Bad Request)}
+     *         if the tipoAssociado is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the tipoAssociado couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/tipo-associados")
-    public ResponseEntity<TipoAssociado> updateTipoAssociado(@Valid @RequestBody TipoAssociado tipoAssociado) throws URISyntaxException {
+    public ResponseEntity<TipoAssociado> updateTipoAssociado(@Valid @RequestBody TipoAssociado tipoAssociado)
+            throws URISyntaxException {
         log.debug("REST request to update TipoAssociado : {}", tipoAssociado);
         if (tipoAssociado.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         TipoAssociado result = tipoAssociadoService.save(tipoAssociado);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, tipoAssociado.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+                tipoAssociado.getId().toString())).body(result);
     }
 
     /**
      * {@code GET  /tipo-associados} : get all the tipoAssociados.
      *
      * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of tipoAssociados in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of tipoAssociados in body.
      */
     @GetMapping("/tipo-associados")
     public ResponseEntity<List<TipoAssociado>> getAllTipoAssociados(Pageable pageable) {
         log.debug("REST request to get a page of TipoAssociados");
         Page<TipoAssociado> page = tipoAssociadoService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -109,7 +118,8 @@ public class TipoAssociadoResource {
      * {@code GET  /tipo-associados/:id} : get the "id" tipoAssociado.
      *
      * @param id the id of the tipoAssociado to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the tipoAssociado, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the tipoAssociado, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/tipo-associados/{id}")
     public ResponseEntity<TipoAssociado> getTipoAssociado(@PathVariable Long id) {
@@ -128,6 +138,8 @@ public class TipoAssociadoResource {
     public ResponseEntity<Void> deleteTipoAssociado(@PathVariable Long id) {
         log.debug("REST request to delete TipoAssociado : {}", id);
         tipoAssociadoService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

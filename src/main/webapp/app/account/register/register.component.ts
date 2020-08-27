@@ -1,4 +1,4 @@
-import { Component, AfterViewInit, Renderer, ElementRef, ViewChild } from '@angular/core';
+import { Component, AfterViewInit, ElementRef, ViewChild } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormBuilder, Validators } from '@angular/forms';
 import { JhiLanguageService } from 'ng-jhipster';
@@ -10,7 +10,7 @@ import { CPF_MASK } from 'app/shared/constants/input.constants';
 
 @Component({
   selector: 'jhi-register',
-  templateUrl: './register.component.html'
+  templateUrl: './register.component.html',
 })
 export class RegisterComponent implements AfterViewInit {
   @ViewChild('login', { static: false })
@@ -27,24 +27,28 @@ export class RegisterComponent implements AfterViewInit {
   registerForm = this.fb.group({
     login: [
       '',
-      [Validators.required, Validators.minLength(14), Validators.maxLength(14), Validators.pattern('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$')]
+      [
+        Validators.required,
+        Validators.minLength(14),
+        Validators.maxLength(14),
+        Validators.pattern('^[0-9]{3}.[0-9]{3}.[0-9]{3}-[0-9]{2}$'),
+      ],
     ],
     email: ['', [Validators.required, Validators.minLength(5), Validators.maxLength(254), Validators.email]],
     password: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]]
+    confirmPassword: ['', [Validators.required, Validators.minLength(4), Validators.maxLength(50)]],
   });
 
   constructor(
     private languageService: JhiLanguageService,
     private loginModalService: LoginModalService,
     private registerService: RegisterService,
-    private renderer: Renderer,
     private fb: FormBuilder
   ) {}
 
   ngAfterViewInit(): void {
     if (this.login) {
-      this.renderer.invokeElementMethod(this.login.nativeElement, 'focus', []);
+      this.login.nativeElement.focus();
     }
   }
 

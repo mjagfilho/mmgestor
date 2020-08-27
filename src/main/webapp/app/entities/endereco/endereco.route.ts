@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IEndereco, Endereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from './endereco.service';
@@ -38,50 +38,47 @@ export const enderecoRoute: Routes = [
   {
     path: '',
     component: EnderecoComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.endereco.home.title'
+      pageTitle: 'mmgestorApp.endereco.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: EnderecoDetailComponent,
     resolve: {
-      endereco: EnderecoResolve
+      endereco: EnderecoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.endereco.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.endereco.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: EnderecoUpdateComponent,
     resolve: {
-      endereco: EnderecoResolve
+      endereco: EnderecoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.endereco.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.endereco.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: EnderecoUpdateComponent,
     resolve: {
-      endereco: EnderecoResolve
+      endereco: EnderecoResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.endereco.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.endereco.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

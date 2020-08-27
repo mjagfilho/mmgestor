@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a Local', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -63,7 +63,7 @@ describe('Service Tests', () => {
             complemento: 'BBBBBB',
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
-            uf: 'BBBBBB'
+            uf: 'BBBBBB',
           },
           elemDefault
         );
@@ -89,7 +89,7 @@ describe('Service Tests', () => {
             complemento: 'BBBBBB',
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
-            uf: 'BBBBBB'
+            uf: 'BBBBBB',
           },
           elemDefault
         );

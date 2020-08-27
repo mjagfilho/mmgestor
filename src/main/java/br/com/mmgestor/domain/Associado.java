@@ -65,7 +65,7 @@ public class Associado implements Serializable {
     @JoinColumn(unique = true)
     private User usuario;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -203,7 +203,7 @@ public class Associado implements Serializable {
     public void setUsuario(User user) {
         this.usuario = user;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -221,6 +221,7 @@ public class Associado implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "Associado{" +

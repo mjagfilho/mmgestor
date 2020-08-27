@@ -55,55 +55,62 @@ public class TipoLocalResource {
      * {@code POST  /tipo-locals} : Create a new tipoLocal.
      *
      * @param tipoLocal the tipoLocal to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new tipoLocal, or with status {@code 400 (Bad Request)} if the tipoLocal has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new tipoLocal, or with status {@code 400 (Bad Request)} if
+     *         the tipoLocal has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/tipo-locals")
-    public ResponseEntity<TipoLocal> createTipoLocal(@Valid @RequestBody TipoLocal tipoLocal) throws URISyntaxException {
+    public ResponseEntity<TipoLocal> createTipoLocal(@Valid @RequestBody TipoLocal tipoLocal)
+            throws URISyntaxException {
         log.debug("REST request to save TipoLocal : {}", tipoLocal);
         if (tipoLocal.getId() != null) {
             throw new BadRequestAlertException("A new tipoLocal cannot already have an ID", ENTITY_NAME, "idexists");
         }
         TipoLocal result = tipoLocalService.save(tipoLocal);
-        return ResponseEntity.created(new URI("/api/tipo-locals/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/tipo-locals/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /tipo-locals} : Updates an existing tipoLocal.
      *
      * @param tipoLocal the tipoLocal to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated tipoLocal,
-     * or with status {@code 400 (Bad Request)} if the tipoLocal is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the tipoLocal couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated tipoLocal, or with status {@code 400 (Bad Request)} if
+     *         the tipoLocal is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the tipoLocal couldn't be
+     *         updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/tipo-locals")
-    public ResponseEntity<TipoLocal> updateTipoLocal(@Valid @RequestBody TipoLocal tipoLocal) throws URISyntaxException {
+    public ResponseEntity<TipoLocal> updateTipoLocal(@Valid @RequestBody TipoLocal tipoLocal)
+            throws URISyntaxException {
         log.debug("REST request to update TipoLocal : {}", tipoLocal);
         if (tipoLocal.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         TipoLocal result = tipoLocalService.save(tipoLocal);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, tipoLocal.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(
+                HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, tipoLocal.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code GET  /tipo-locals} : get all the tipoLocals.
      *
-
      * @param pageable the pagination information.
-
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of tipoLocals in body.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of tipoLocals in body.
      */
     @GetMapping("/tipo-locals")
     public ResponseEntity<List<TipoLocal>> getAllTipoLocals(Pageable pageable) {
         log.debug("REST request to get a page of TipoLocals");
         Page<TipoLocal> page = tipoLocalService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -111,7 +118,8 @@ public class TipoLocalResource {
      * {@code GET  /tipo-locals/:id} : get the "id" tipoLocal.
      *
      * @param id the id of the tipoLocal to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the tipoLocal, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the tipoLocal, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/tipo-locals/{id}")
     public ResponseEntity<TipoLocal> getTipoLocal(@PathVariable Long id) {
@@ -130,6 +138,8 @@ public class TipoLocalResource {
     public ResponseEntity<Void> deleteTipoLocal(@PathVariable Long id) {
         log.debug("REST request to delete TipoLocal : {}", id);
         tipoLocalService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

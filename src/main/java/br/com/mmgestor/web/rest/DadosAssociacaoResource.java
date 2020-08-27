@@ -57,61 +57,68 @@ public class DadosAssociacaoResource {
      * {@code POST  /dados-associacaos} : Create a new dadosAssociacao.
      *
      * @param dadosAssociacao the dadosAssociacao to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new dadosAssociacao, or with status {@code 400 (Bad Request)} if the dadosAssociacao has already an ID.
+     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with
+     *         body the new dadosAssociacao, or with status
+     *         {@code 400 (Bad Request)} if the dadosAssociacao has already an ID.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PostMapping("/dados-associacaos")
-    public ResponseEntity<DadosAssociacao> createDadosAssociacao(@Valid @RequestBody DadosAssociacao dadosAssociacao) throws URISyntaxException {
+    public ResponseEntity<DadosAssociacao> createDadosAssociacao(@Valid @RequestBody DadosAssociacao dadosAssociacao)
+            throws URISyntaxException {
         log.debug("REST request to save DadosAssociacao : {}", dadosAssociacao);
         if (dadosAssociacao.getId() != null) {
-            throw new BadRequestAlertException("A new dadosAssociacao cannot already have an ID", ENTITY_NAME, "idexists");
+            throw new BadRequestAlertException("A new dadosAssociacao cannot already have an ID", ENTITY_NAME,
+                    "idexists");
         }
         DadosAssociacao result = dadosAssociacaoService.save(dadosAssociacao);
-        return ResponseEntity.created(new URI("/api/dados-associacaos/" + result.getId()))
-            .headers(HeaderUtil.createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
-            .body(result);
+        return ResponseEntity
+                .created(new URI("/api/dados-associacaos/" + result.getId())).headers(HeaderUtil
+                        .createEntityCreationAlert(applicationName, true, ENTITY_NAME, result.getId().toString()))
+                .body(result);
     }
 
     /**
      * {@code PUT  /dados-associacaos} : Updates an existing dadosAssociacao.
      *
      * @param dadosAssociacao the dadosAssociacao to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated dadosAssociacao,
-     * or with status {@code 400 (Bad Request)} if the dadosAssociacao is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the dadosAssociacao couldn't be updated.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the updated dadosAssociacao, or with status {@code 400 (Bad Request)}
+     *         if the dadosAssociacao is not valid, or with status
+     *         {@code 500 (Internal Server Error)} if the dadosAssociacao couldn't
+     *         be updated.
      * @throws URISyntaxException if the Location URI syntax is incorrect.
      */
     @PutMapping("/dados-associacaos")
-    public ResponseEntity<DadosAssociacao> updateDadosAssociacao(@Valid @RequestBody DadosAssociacao dadosAssociacao) throws URISyntaxException {
+    public ResponseEntity<DadosAssociacao> updateDadosAssociacao(@Valid @RequestBody DadosAssociacao dadosAssociacao)
+            throws URISyntaxException {
         log.debug("REST request to update DadosAssociacao : {}", dadosAssociacao);
         if (dadosAssociacao.getId() == null) {
             throw new BadRequestAlertException("Invalid id", ENTITY_NAME, "idnull");
         }
         DadosAssociacao result = dadosAssociacaoService.save(dadosAssociacao);
-        return ResponseEntity.ok()
-            .headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME, dadosAssociacao.getId().toString()))
-            .body(result);
+        return ResponseEntity.ok().headers(HeaderUtil.createEntityUpdateAlert(applicationName, true, ENTITY_NAME,
+                dadosAssociacao.getId().toString())).body(result);
     }
 
     /**
      * {@code GET  /dados-associacaos} : get all the dadosAssociacaos.
      *
-
      * @param pageable the pagination information.
-
-     * @param filter the filter of the request.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of dadosAssociacaos in body.
+     * @param filter   the filter of the request.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list
+     *         of dadosAssociacaos in body.
      */
     @GetMapping("/dados-associacaos")
-    public ResponseEntity<List<DadosAssociacao>> getAllDadosAssociacaos(Pageable pageable, @RequestParam(required = false) String filter) {
+    public ResponseEntity<List<DadosAssociacao>> getAllDadosAssociacaos(Pageable pageable,
+            @RequestParam(required = false) String filter) {
         if ("animal-is-null".equals(filter)) {
             log.debug("REST request to get all DadosAssociacaos where animal is null");
-            return new ResponseEntity<>(dadosAssociacaoService.findAllWhereAnimalIsNull(),
-                    HttpStatus.OK);
+            return new ResponseEntity<>(dadosAssociacaoService.findAllWhereAnimalIsNull(), HttpStatus.OK);
         }
         log.debug("REST request to get a page of DadosAssociacaos");
         Page<DadosAssociacao> page = dadosAssociacaoService.findAll(pageable);
-        HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        HttpHeaders headers = PaginationUtil
+                .generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
         return ResponseEntity.ok().headers(headers).body(page.getContent());
     }
 
@@ -119,7 +126,8 @@ public class DadosAssociacaoResource {
      * {@code GET  /dados-associacaos/:id} : get the "id" dadosAssociacao.
      *
      * @param id the id of the dadosAssociacao to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the dadosAssociacao, or with status {@code 404 (Not Found)}.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body
+     *         the dadosAssociacao, or with status {@code 404 (Not Found)}.
      */
     @GetMapping("/dados-associacaos/{id}")
     public ResponseEntity<DadosAssociacao> getDadosAssociacao(@PathVariable Long id) {
@@ -138,6 +146,8 @@ public class DadosAssociacaoResource {
     public ResponseEntity<Void> deleteDadosAssociacao(@PathVariable Long id) {
         log.debug("REST request to delete DadosAssociacao : {}", id);
         dadosAssociacaoService.delete(id);
-        return ResponseEntity.noContent().headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString())).build();
+        return ResponseEntity.noContent()
+                .headers(HeaderUtil.createEntityDeletionAlert(applicationName, true, ENTITY_NAME, id.toString()))
+                .build();
     }
 }

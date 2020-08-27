@@ -32,15 +32,15 @@ public class AssociadosHaras implements Serializable {
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("associadosHaras")
+    @JsonIgnoreProperties(value = "associadosHaras", allowSetters = true)
     private Associado associado;
 
     @ManyToOne(optional = false)
     @NotNull
-    @JsonIgnoreProperties("associadosHaras")
+    @JsonIgnoreProperties(value = "associadosHaras", allowSetters = true)
     private Haras haras;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -100,7 +100,7 @@ public class AssociadosHaras implements Serializable {
     public void setHaras(Haras haras) {
         this.haras = haras;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
 
     @Override
     public boolean equals(Object o) {
@@ -118,6 +118,7 @@ public class AssociadosHaras implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
         return "AssociadosHaras{" +

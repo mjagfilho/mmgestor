@@ -5,7 +5,7 @@ import { ILocal } from 'app/shared/model/local.model';
 
 @Component({
   selector: 'jhi-local-detail',
-  templateUrl: './local-detail.component.html'
+  templateUrl: './local-detail.component.html',
 })
 export class LocalDetailComponent implements OnInit {
   local: ILocal | null = null;

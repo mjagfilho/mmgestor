@@ -14,8 +14,8 @@ import { clienteFornecedorRoute } from './cliente-fornecedor.route';
     ClienteFornecedorComponent,
     ClienteFornecedorDetailComponent,
     ClienteFornecedorUpdateComponent,
-    ClienteFornecedorDeleteDialogComponent
+    ClienteFornecedorDeleteDialogComponent,
   ],
-  entryComponents: [ClienteFornecedorDeleteDialogComponent]
+  entryComponents: [ClienteFornecedorDeleteDialogComponent],
 })
 export class MmgestorClienteFornecedorModule {}

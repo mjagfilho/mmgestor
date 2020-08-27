@@ -16,7 +16,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -31,7 +31,7 @@ describe('Service Tests', () => {
       it('should find an element', () => {
         const returnedFromService = Object.assign(
           {
-            dtNascimento: currentDate.format(DATE_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
@@ -47,14 +47,14 @@ describe('Service Tests', () => {
         const returnedFromService = Object.assign(
           {
             id: 0,
-            dtNascimento: currentDate.format(DATE_FORMAT)
+            dtNascimento: currentDate.format(DATE_FORMAT),
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dtNascimento: currentDate
+            dtNascimento: currentDate,
           },
           returnedFromService
         );
@@ -76,14 +76,14 @@ describe('Service Tests', () => {
             complemento: 'BBBBBB',
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
-            uf: 'BBBBBB'
+            uf: 'BBBBBB',
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dtNascimento: currentDate
+            dtNascimento: currentDate,
           },
           returnedFromService
         );
@@ -105,14 +105,14 @@ describe('Service Tests', () => {
             complemento: 'BBBBBB',
             bairro: 'BBBBBB',
             localidade: 'BBBBBB',
-            uf: 'BBBBBB'
+            uf: 'BBBBBB',
           },
           elemDefault
         );
 
         const expected = Object.assign(
           {
-            dtNascimento: currentDate
+            dtNascimento: currentDate,
           },
           returnedFromService
         );

@@ -4,25 +4,19 @@ import br.com.mmgestor.MmgestorApp;
 import br.com.mmgestor.domain.Endereco;
 import br.com.mmgestor.repository.EnderecoRepository;
 import br.com.mmgestor.service.EnderecoService;
-import br.com.mmgestor.web.rest.errors.ExceptionTranslator;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.data.web.PageableHandlerMethodArgumentResolver;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
+import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.validation.Validator;
-
 import javax.persistence.EntityManager;
 import java.util.List;
 
-import static br.com.mmgestor.web.rest.TestUtil.createFormattingConversionService;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -32,6 +26,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * Integration tests for the {@link EnderecoResource} REST controller.
  */
 @SpringBootTest(classes = MmgestorApp.class)
+@AutoConfigureMockMvc
+@WithMockUser
 public class EnderecoResourceIT {
 
     private static final String DEFAULT_CEP = "84567-225";
@@ -62,35 +58,12 @@ public class EnderecoResourceIT {
     private EnderecoService enderecoService;
 
     @Autowired
-    private MappingJackson2HttpMessageConverter jacksonMessageConverter;
-
-    @Autowired
-    private PageableHandlerMethodArgumentResolver pageableArgumentResolver;
-
-    @Autowired
-    private ExceptionTranslator exceptionTranslator;
-
-    @Autowired
     private EntityManager em;
 
     @Autowired
-    private Validator validator;
-
     private MockMvc restEnderecoMockMvc;
 
     private Endereco endereco;
-
-    @BeforeEach
-    public void setup() {
-        MockitoAnnotations.initMocks(this);
-        final EnderecoResource enderecoResource = new EnderecoResource(enderecoService);
-        this.restEnderecoMockMvc = MockMvcBuilders.standaloneSetup(enderecoResource)
-            .setCustomArgumentResolvers(pageableArgumentResolver)
-            .setControllerAdvice(exceptionTranslator)
-            .setConversionService(createFormattingConversionService())
-            .setMessageConverters(jacksonMessageConverter)
-            .setValidator(validator).build();
-    }
 
     /**
      * Create an entity for this test.
@@ -136,10 +109,9 @@ public class EnderecoResourceIT {
     @Transactional
     public void createEndereco() throws Exception {
         int databaseSizeBeforeCreate = enderecoRepository.findAll().size();
-
         // Create the Endereco
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isCreated());
 
@@ -166,7 +138,7 @@ public class EnderecoResourceIT {
 
         // An entity with an existing ID cannot be created, so this API call must fail
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -185,8 +157,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -203,8 +176,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -221,8 +195,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -239,8 +214,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -257,8 +233,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -275,8 +252,9 @@ public class EnderecoResourceIT {
 
         // Create the Endereco, which fails.
 
+
         restEnderecoMockMvc.perform(post("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -293,7 +271,7 @@ public class EnderecoResourceIT {
         // Get all the enderecoList
         restEnderecoMockMvc.perform(get("/api/enderecos?sort=id,desc"))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.[*].id").value(hasItem(endereco.getId().intValue())))
             .andExpect(jsonPath("$.[*].cep").value(hasItem(DEFAULT_CEP)))
             .andExpect(jsonPath("$.[*].logradouro").value(hasItem(DEFAULT_LOGRADOURO)))
@@ -313,7 +291,7 @@ public class EnderecoResourceIT {
         // Get the endereco
         restEnderecoMockMvc.perform(get("/api/enderecos/{id}", endereco.getId()))
             .andExpect(status().isOk())
-            .andExpect(content().contentType(MediaType.APPLICATION_JSON_UTF8_VALUE))
+            .andExpect(content().contentType(MediaType.APPLICATION_JSON_VALUE))
             .andExpect(jsonPath("$.id").value(endereco.getId().intValue()))
             .andExpect(jsonPath("$.cep").value(DEFAULT_CEP))
             .andExpect(jsonPath("$.logradouro").value(DEFAULT_LOGRADOURO))
@@ -323,7 +301,6 @@ public class EnderecoResourceIT {
             .andExpect(jsonPath("$.uf").value(DEFAULT_UF))
             .andExpect(jsonPath("$.numero").value(DEFAULT_NUMERO));
     }
-
     @Test
     @Transactional
     public void getNonExistingEndereco() throws Exception {
@@ -354,7 +331,7 @@ public class EnderecoResourceIT {
             .numero(UPDATED_NUMERO);
 
         restEnderecoMockMvc.perform(put("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(updatedEndereco)))
             .andExpect(status().isOk());
 
@@ -376,11 +353,9 @@ public class EnderecoResourceIT {
     public void updateNonExistingEndereco() throws Exception {
         int databaseSizeBeforeUpdate = enderecoRepository.findAll().size();
 
-        // Create the Endereco
-
         // If the entity doesn't have an ID, it will throw BadRequestAlertException
         restEnderecoMockMvc.perform(put("/api/enderecos")
-            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .contentType(MediaType.APPLICATION_JSON)
             .content(TestUtil.convertObjectToJsonBytes(endereco)))
             .andExpect(status().isBadRequest());
 
@@ -399,7 +374,7 @@ public class EnderecoResourceIT {
 
         // Delete the endereco
         restEnderecoMockMvc.perform(delete("/api/enderecos/{id}", endereco.getId())
-            .accept(TestUtil.APPLICATION_JSON_UTF8))
+            .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isNoContent());
 
         // Validate the database contains one less item

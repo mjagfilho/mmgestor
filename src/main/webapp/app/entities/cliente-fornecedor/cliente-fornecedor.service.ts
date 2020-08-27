@@ -54,7 +54,7 @@ export class ClienteFornecedorService {
       dtNascimento:
         clienteFornecedor.dtNascimento && clienteFornecedor.dtNascimento.isValid()
           ? clienteFornecedor.dtNascimento.format(DATE_FORMAT)
-          : undefined
+          : undefined,
     });
     return copy;
   }

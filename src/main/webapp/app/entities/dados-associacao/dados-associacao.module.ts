@@ -14,8 +14,8 @@ import { dadosAssociacaoRoute } from './dados-associacao.route';
     DadosAssociacaoComponent,
     DadosAssociacaoDetailComponent,
     DadosAssociacaoUpdateComponent,
-    DadosAssociacaoDeleteDialogComponent
+    DadosAssociacaoDeleteDialogComponent,
   ],
-  entryComponents: [DadosAssociacaoDeleteDialogComponent]
+  entryComponents: [DadosAssociacaoDeleteDialogComponent],
 })
 export class MmgestorDadosAssociacaoModule {}

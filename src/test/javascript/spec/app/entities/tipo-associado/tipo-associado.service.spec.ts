@@ -13,7 +13,7 @@ describe('Service Tests', () => {
 
     beforeEach(() => {
       TestBed.configureTestingModule({
-        imports: [HttpClientTestingModule]
+        imports: [HttpClientTestingModule],
       });
       expectedResult = null;
       injector = getTestBed();
@@ -37,7 +37,7 @@ describe('Service Tests', () => {
       it('should create a TipoAssociado', () => {
         const returnedFromService = Object.assign(
           {
-            id: 0
+            id: 0,
           },
           elemDefault
         );
@@ -59,7 +59,7 @@ describe('Service Tests', () => {
             ehAdministrador: true,
             ehFinanceiro: true,
             ehOperacional: true,
-            ehVeterinario: true
+            ehVeterinario: true,
           },
           elemDefault
         );
@@ -81,7 +81,7 @@ describe('Service Tests', () => {
             ehAdministrador: true,
             ehFinanceiro: true,
             ehOperacional: true,
-            ehVeterinario: true
+            ehVeterinario: true,
           },
           elemDefault
         );

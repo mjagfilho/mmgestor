@@ -17,7 +17,7 @@ type SelectableEntity = ITipoAssociado | IUser;
 
 @Component({
   selector: 'jhi-associado-update',
-  templateUrl: './associado-update.component.html'
+  templateUrl: './associado-update.component.html',
 })
 export class AssociadoUpdateComponent implements OnInit {
   isSaving = false;
@@ -36,7 +36,7 @@ export class AssociadoUpdateComponent implements OnInit {
     localidade: [null, [Validators.required]],
     uf: [null, [Validators.required, Validators.minLength(2), Validators.maxLength(2), Validators.pattern('[A-Z]{2}')]],
     tipo: [null, Validators.required],
-    usuario: [null, Validators.required]
+    usuario: [null, Validators.required],
   });
 
   constructor(
@@ -89,7 +89,7 @@ export class AssociadoUpdateComponent implements OnInit {
       localidade: associado.localidade,
       uf: associado.uf,
       tipo: associado.tipo,
-      usuario: associado.usuario
+      usuario: associado.usuario,
     });
   }
 
@@ -120,7 +120,7 @@ export class AssociadoUpdateComponent implements OnInit {
       localidade: this.editForm.get(['localidade'])!.value,
       uf: this.editForm.get(['uf'])!.value,
       tipo: this.editForm.get(['tipo'])!.value,
-      usuario: this.editForm.get(['usuario'])!.value
+      usuario: this.editForm.get(['usuario'])!.value,
     };
   }
 

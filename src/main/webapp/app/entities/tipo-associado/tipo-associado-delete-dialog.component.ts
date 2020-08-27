@@ -6,7 +6,7 @@ import { ITipoAssociado } from 'app/shared/model/tipo-associado.model';
 import { TipoAssociadoService } from './tipo-associado.service';
 
 @Component({
-  templateUrl: './tipo-associado-delete-dialog.component.html'
+  templateUrl: './tipo-associado-delete-dialog.component.html',
 })
 export class TipoAssociadoDeleteDialogComponent {
   tipoAssociado?: ITipoAssociado;

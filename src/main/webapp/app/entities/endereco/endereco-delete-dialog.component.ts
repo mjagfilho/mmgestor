@@ -6,7 +6,7 @@ import { IEndereco } from 'app/shared/model/endereco.model';
 import { EnderecoService } from './endereco.service';
 
 @Component({
-  templateUrl: './endereco-delete-dialog.component.html'
+  templateUrl: './endereco-delete-dialog.component.html',
 })
 export class EnderecoDeleteDialogComponent {
   endereco?: IEndereco;

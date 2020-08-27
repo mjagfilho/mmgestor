@@ -5,7 +5,7 @@ import { IClienteFornecedor } from 'app/shared/model/cliente-fornecedor.model';
 
 @Component({
   selector: 'jhi-cliente-fornecedor-detail',
-  templateUrl: './cliente-fornecedor-detail.component.html'
+  templateUrl: './cliente-fornecedor-detail.component.html',
 })
 export class ClienteFornecedorDetailComponent implements OnInit {
   clienteFornecedor: IClienteFornecedor | null = null;

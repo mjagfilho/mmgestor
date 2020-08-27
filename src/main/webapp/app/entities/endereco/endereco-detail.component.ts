@@ -5,7 +5,7 @@ import { IEndereco } from 'app/shared/model/endereco.model';
 
 @Component({
   selector: 'jhi-endereco-detail',
-  templateUrl: './endereco-detail.component.html'
+  templateUrl: './endereco-detail.component.html',
 })
 export class EnderecoDetailComponent implements OnInit {
   endereco: IEndereco | null = null;

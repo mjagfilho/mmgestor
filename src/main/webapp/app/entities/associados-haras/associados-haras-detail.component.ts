@@ -5,7 +5,7 @@ import { IAssociadosHaras } from 'app/shared/model/associados-haras.model';
 
 @Component({
   selector: 'jhi-associados-haras-detail',
-  templateUrl: './associados-haras-detail.component.html'
+  templateUrl: './associados-haras-detail.component.html',
 })
 export class AssociadosHarasDetailComponent implements OnInit {
   associadosHaras: IAssociadosHaras | null = null;

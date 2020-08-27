@@ -16,7 +16,7 @@ type SelectableEntity = IAssociado | IHaras;
 
 @Component({
   selector: 'jhi-associados-haras-update',
-  templateUrl: './associados-haras-update.component.html'
+  templateUrl: './associados-haras-update.component.html',
 })
 export class AssociadosHarasUpdateComponent implements OnInit {
   isSaving = false;
@@ -29,7 +29,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
     dataAssociacao: [null, [Validators.required]],
     ehAtivo: [null, [Validators.required]],
     associado: [null, Validators.required],
-    haras: [null, Validators.required]
+    haras: [null, Validators.required],
   });
 
   constructor(
@@ -56,7 +56,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
       dataAssociacao: associadosHaras.dataAssociacao,
       ehAtivo: associadosHaras.ehAtivo,
       associado: associadosHaras.associado,
-      haras: associadosHaras.haras
+      haras: associadosHaras.haras,
     });
   }
 
@@ -81,7 +81,7 @@ export class AssociadosHarasUpdateComponent implements OnInit {
       dataAssociacao: this.editForm.get(['dataAssociacao'])!.value,
       ehAtivo: this.editForm.get(['ehAtivo'])!.value,
       associado: this.editForm.get(['associado'])!.value,
-      haras: this.editForm.get(['haras'])!.value
+      haras: this.editForm.get(['haras'])!.value,
     };
   }
 

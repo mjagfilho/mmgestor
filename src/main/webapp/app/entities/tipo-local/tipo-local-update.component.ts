@@ -10,7 +10,7 @@ import { TipoLocalService } from './tipo-local.service';
 
 @Component({
   selector: 'jhi-tipo-local-update',
-  templateUrl: './tipo-local-update.component.html'
+  templateUrl: './tipo-local-update.component.html',
 })
 export class TipoLocalUpdateComponent implements OnInit {
   isSaving = false;
@@ -18,7 +18,7 @@ export class TipoLocalUpdateComponent implements OnInit {
   editForm = this.fb.group({
     id: [],
     nome: [null, [Validators.required]],
-    descricao: []
+    descricao: [],
   });
 
   constructor(protected tipoLocalService: TipoLocalService, protected activatedRoute: ActivatedRoute, private fb: FormBuilder) {}
@@ -33,7 +33,7 @@ export class TipoLocalUpdateComponent implements OnInit {
     this.editForm.patchValue({
       id: tipoLocal.id,
       nome: tipoLocal.nome,
-      descricao: tipoLocal.descricao
+      descricao: tipoLocal.descricao,
     });
   }
 
@@ -56,7 +56,7 @@ export class TipoLocalUpdateComponent implements OnInit {
       ...new TipoLocal(),
       id: this.editForm.get(['id'])!.value,
       nome: this.editForm.get(['nome'])!.value,
-      descricao: this.editForm.get(['descricao'])!.value
+      descricao: this.editForm.get(['descricao'])!.value,
     };
   }
 

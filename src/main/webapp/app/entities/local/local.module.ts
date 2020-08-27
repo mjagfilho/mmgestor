@@ -11,6 +11,6 @@ import { localRoute } from './local.route';
 @NgModule({
   imports: [MmgestorSharedModule, RouterModule.forChild(localRoute)],
   declarations: [LocalComponent, LocalDetailComponent, LocalUpdateComponent, LocalDeleteDialogComponent],
-  entryComponents: [LocalDeleteDialogComponent]
+  entryComponents: [LocalDeleteDialogComponent],
 })
 export class MmgestorLocalModule {}

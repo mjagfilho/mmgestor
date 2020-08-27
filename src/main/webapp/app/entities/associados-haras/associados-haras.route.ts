@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpResponse } from '@angular/common/http';
 import { Resolve, ActivatedRouteSnapshot, Routes, Router } from '@angular/router';
-import { JhiResolvePagingParams } from 'ng-jhipster';
 import { Observable, of, EMPTY } from 'rxjs';
 import { flatMap } from 'rxjs/operators';
 
+import { Authority } from 'app/shared/constants/authority.constants';
 import { UserRouteAccessService } from 'app/core/auth/user-route-access-service';
 import { IAssociadosHaras, AssociadosHaras } from 'app/shared/model/associados-haras.model';
 import { AssociadosHarasService } from './associados-haras.service';
@@ -38,50 +38,47 @@ export const associadosHarasRoute: Routes = [
   {
     path: '',
     component: AssociadosHarasComponent,
-    resolve: {
-      pagingParams: JhiResolvePagingParams
-    },
     data: {
-      authorities: ['ROLE_USER'],
+      authorities: [Authority.USER],
       defaultSort: 'id,asc',
-      pageTitle: 'mmgestorApp.associadosHaras.home.title'
+      pageTitle: 'mmgestorApp.associadosHaras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/view',
     component: AssociadosHarasDetailComponent,
     resolve: {
-      associadosHaras: AssociadosHarasResolve
+      associadosHaras: AssociadosHarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.associadosHaras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.associadosHaras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: 'new',
     component: AssociadosHarasUpdateComponent,
     resolve: {
-      associadosHaras: AssociadosHarasResolve
+      associadosHaras: AssociadosHarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.associadosHaras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.associadosHaras.home.title',
     },
-    canActivate: [UserRouteAccessService]
+    canActivate: [UserRouteAccessService],
   },
   {
     path: ':id/edit',
     component: AssociadosHarasUpdateComponent,
     resolve: {
-      associadosHaras: AssociadosHarasResolve
+      associadosHaras: AssociadosHarasResolve,
     },
     data: {
-      authorities: ['ROLE_USER'],
-      pageTitle: 'mmgestorApp.associadosHaras.home.title'
+      authorities: [Authority.USER],
+      pageTitle: 'mmgestorApp.associadosHaras.home.title',
     },
-    canActivate: [UserRouteAccessService]
-  }
+    canActivate: [UserRouteAccessService],
+  },
 ];

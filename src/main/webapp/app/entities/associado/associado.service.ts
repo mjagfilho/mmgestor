@@ -51,7 +51,7 @@ export class AssociadoService {
 
   protected convertDateFromClient(associado: IAssociado): IAssociado {
     const copy: IAssociado = Object.assign({}, associado, {
-      dtNascimento: associado.dtNascimento && associado.dtNascimento.isValid() ? associado.dtNascimento.format(DATE_FORMAT) : undefined
+      dtNascimento: associado.dtNascimento && associado.dtNascimento.isValid() ? associado.dtNascimento.format(DATE_FORMAT) : undefined,
     });
     return copy;
   }

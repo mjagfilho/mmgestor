@@ -10,5 +10,4 @@ import br.com.mmgestor.domain.Haras;
  */
 @Repository
 public interface HarasRepository extends JpaRepository<Haras, Long> {
-
 }

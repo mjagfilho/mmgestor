@@ -2,28 +2,33 @@
     <div class="col-8">
         <form name="editForm" role="form" novalidate (ngSubmit)="save()" [formGroup]="editForm">
             <h2 id="jhi-dados-associacao-heading" jhiTranslate="mmgestorApp.dadosAssociacao.home.createOrEditLabel">Create or edit a Dados Associacao</h2>
+
             <div>
                 <jhi-alert-error></jhi-alert-error>
+
                 <div class="form-group" [hidden]="!editForm.get('id')!.value">
                     <label for="id" jhiTranslate="global.field.id">ID</label>
-                    <input type="text" class="form-control" id="id" name="id" formControlName="id"
-                        readonly />
+                    <input type="text" class="form-control" id="id" name="id" formControlName="id" readonly />
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.criador" for="field_criador">Criador</label>
                     <input type="text" class="form-control" name="criador" id="field_criador"
                            formControlName="criador"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.proprietario" for="field_proprietario">Proprietario</label>
                     <input type="text" class="form-control" name="proprietario" id="field_proprietario"
                            formControlName="proprietario"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.livro" for="field_livro">Livro</label>
                     <input type="text" class="form-control" name="livro" id="field_livro"
                            formControlName="livro"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.registro" for="field_registro">Registro</label>
                     <input type="text" class="form-control" name="registro" id="field_registro"
@@ -31,11 +36,13 @@
                     <div *ngIf="editForm.get('registro')!.invalid && (editForm.get('registro')!.dirty || editForm.get('registro')!.touched)">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.exameDNA" for="field_exameDNA">Exame DNA</label>
                     <input type="text" class="form-control" name="exameDNA" id="field_exameDNA"
                            formControlName="exameDNA"/>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.chip" for="field_chip">Chip</label>
                     <input type="text" class="form-control" name="chip" id="field_chip"
@@ -43,19 +50,21 @@
                     <div *ngIf="editForm.get('chip')!.invalid && (editForm.get('chip')!.dirty || editForm.get('chip')!.touched)">
                     </div>
                 </div>
+
                 <div class="form-group">
                     <label class="form-control-label" jhiTranslate="mmgestorApp.dadosAssociacao.ehBloqueado" for="field_ehBloqueado">Eh Bloqueado</label>
                     <input type="checkbox" class="form-control" name="ehBloqueado" id="field_ehBloqueado"
                            formControlName="ehBloqueado"/>
                 </div>
-
             </div>
+
             <div>
-                <button type="button" id="cancel-save" class="btn btn-secondary"  (click)="previousState()">
-                    <fa-icon [icon]="'ban'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+                <button type="button" id="cancel-save" class="btn btn-secondary" (click)="previousState()">
+                    <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
                 </button>
+
                 <button type="submit" id="save-entity" [disabled]="editForm.invalid || isSaving" class="btn btn-primary">
-                    <fa-icon [icon]="'save'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+                    <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
                 </button>
             </div>
         </form>

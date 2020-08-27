@@ -36,13 +36,11 @@ public class DadosAssociacao implements Serializable {
     @Column(name = "livro")
     private String livro;
 
-
     @Column(name = "registro", unique = true)
     private String registro;
 
     @Column(name = "exame_dna")
     private String exameDNA;
-
 
     @Column(name = "chip", unique = true)
     private String chip;
@@ -54,7 +52,7 @@ public class DadosAssociacao implements Serializable {
     @JsonIgnore
     private Animal animal;
 
-    // jhipster-needle-entity-add-field - JHipster will add fields here, do not remove
+    // jhipster-needle-entity-add-field - JHipster will add fields here
     public Long getId() {
         return id;
     }
@@ -166,7 +164,8 @@ public class DadosAssociacao implements Serializable {
     public void setAnimal(Animal animal) {
         this.animal = animal;
     }
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here, do not remove
+    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and
+    // setters here
 
     @Override
     public boolean equals(Object o) {
@@ -184,17 +183,12 @@ public class DadosAssociacao implements Serializable {
         return 31;
     }
 
+    // prettier-ignore
     @Override
     public String toString() {
-        return "DadosAssociacao{" +
-            "id=" + getId() +
-            ", criador='" + getCriador() + "'" +
-            ", proprietario='" + getProprietario() + "'" +
-            ", livro='" + getLivro() + "'" +
-            ", registro='" + getRegistro() + "'" +
-            ", exameDNA='" + getExameDNA() + "'" +
-            ", chip='" + getChip() + "'" +
-            ", ehBloqueado='" + isEhBloqueado() + "'" +
-            "}";
+        return "DadosAssociacao{" + "id=" + getId() + ", criador='" + getCriador() + "'" + ", proprietario='"
+                + getProprietario() + "'" + ", livro='" + getLivro() + "'" + ", registro='" + getRegistro() + "'"
+                + ", exameDNA='" + getExameDNA() + "'" + ", chip='" + getChip() + "'" + ", ehBloqueado='"
+                + isEhBloqueado() + "'" + "}";
     }
 }

@@ -6,14 +6,14 @@ import { ITipoLocal } from 'app/shared/model/tipo-local.model';
 import { TipoLocalService } from './tipo-local.service';
 
 @Component({
-  templateUrl: './tipo-local-delete-dialog.component.html'
+  templateUrl: './tipo-local-delete-dialog.component.html',
 })
 export class TipoLocalDeleteDialogComponent {
   tipoLocal?: ITipoLocal;
 
   constructor(protected tipoLocalService: TipoLocalService, public activeModal: NgbActiveModal, protected eventManager: JhiEventManager) {}
 
-  clear(): void {
+  cancel(): void {
     this.activeModal.dismiss();
   }
 
