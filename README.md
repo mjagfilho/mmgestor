@@ -159,6 +159,7 @@ To build the final jar and optimize the mmgestor application for production, run
 ```
 
 ./mvnw -Pprod clean verify
+./mvnw -Pprod clean package -DskipTests
 
 ```
 
